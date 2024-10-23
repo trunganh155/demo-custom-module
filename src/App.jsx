@@ -305,7 +305,7 @@ function App() {
 
     const glftLoader = new GLTFLoader();
     // glftLoader.load('./public/glb/TA_DEMO2.glb', (gltfScene) => {
-    glftLoader.load('./public/glb/scene2.glb', (gltfScene) => {
+    glftLoader.load('/glb/scene2.glb', (gltfScene) => {
       // glftLoader.load('./public/glb/TA.glb', (gltfScene) => {
 
       gltfScene.scene.position.set(0, 0, 0);
@@ -639,7 +639,7 @@ function App() {
         />
 
         <img
-          src="./public/images/LT2H.png"
+          src="/images/LT2H.png"
           alt=""
           style={{ width: 100, height: 100 }}
         />
