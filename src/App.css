@@ -47,8 +47,10 @@ button {
   top: 50px;
   z-index: 1000;
   padding: 8px;
-
   background-color: beige;
+
+  height: 90vh;
+  overflow: auto;
 }
 
 h5 {

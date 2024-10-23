@@ -402,6 +402,13 @@ function App() {
     fixChan,
     fixBiaTrai,
     fixBiaPhai,
+    DDTNoc,
+    DDTDay,
+    DDTHau,
+    DDTBiaTrai,
+    DDTBiaPhai,
+    DDTCTruoc,
+    DDTCSau,
     gltfUuid,
   ]);
 
@@ -540,6 +547,17 @@ function App() {
           <option value={1}>Nóc Phủ Bì</option>
         </select>
         <br />
+        <label htmlFor="DDTNoc">Độ dày tấm nóc (mm): </label>
+        <input
+          type="number"
+          name="DDTNoc"
+          id="DDTNoc"
+          defaultValue={DDTNoc * 1000}
+          onChange={(e) => {
+            setDDTNoc(Number(e.target.value) / 1000);
+          }}
+        />
+        <br />
         <label htmlFor="fixNoc">Tăng/giảm nóc (mm): </label>
         <input
           type="number"
@@ -559,6 +577,17 @@ function App() {
           <option value={3}>Trùm Phải Lọt Trái</option>
         </select>
         <br />
+        <label htmlFor="DDTDay">Độ dày tấm đáy (mm): </label>
+        <input
+          type="number"
+          name="DDTDay"
+          id="DDTDay"
+          defaultValue={DDTDay * 1000}
+          onChange={(e) => {
+            setDDTDay(Number(e.target.value) / 1000);
+          }}
+        />
+        <br />
         <label htmlFor="fixDay">Tăng/giảm đáy (mm): </label>
         <input
           type="number"
@@ -576,6 +605,17 @@ function App() {
           <option value={1}>Hậu Phủ Bì Lọt Nóc</option>
           <option value={2}>Hậu Âm Tủ</option>
         </select>
+        <br />
+        <label htmlFor="DDTHau">Độ dày tấm hậu (mm): </label>
+        <input
+          type="number"
+          name="DDTHau"
+          id="DDTHau"
+          defaultValue={DDTHau * 1000}
+          onChange={(e) => {
+            setDDTHau(Number(e.target.value) / 1000);
+          }}
+        />
         {optionHau === 2 && (
           <div>
             <label htmlFor="luiHau">Lùi Hậu (mm): </label>
@@ -603,7 +643,29 @@ function App() {
           }}
         />
         <br />
-        <label htmlFor="fixChan">Tăng/giảm chân (mm): </label>
+        <label htmlFor="DDTCTruoc">Độ dày tấm chân trước (mm): </label>
+        <input
+          type="number"
+          name="DDTCTruoc"
+          id="DDTCTruoc"
+          defaultValue={DDTCTruoc * 1000}
+          onChange={(e) => {
+            setDDTCTruoc(Number(e.target.value) / 1000);
+          }}
+        />
+        <br />
+        <label htmlFor="DDTCSau">Độ dày tấm chân sau (mm): </label>
+        <input
+          type="number"
+          name="DDTCSau"
+          id="DDTCSau"
+          defaultValue={DDTCSau * 1000}
+          onChange={(e) => {
+            setDDTCSau(Number(e.target.value) / 1000);
+          }}
+        />
+        <br />
+        <label htmlFor="fixChan">Tăng/giảm chân trước (mm): </label>
         <input
           type="number"
           name="fixChan"
@@ -625,6 +687,17 @@ function App() {
             setFixBiaTrai(Number(e.target.value) / 1000);
           }}
         />
+        <br />
+        <label htmlFor="DDTBiaTrai">Độ dày tấm bìa trái (mm): </label>
+        <input
+          type="number"
+          name="DDTBiaTrai"
+          id="DDTBiaTrai"
+          defaultValue={DDTBiaTrai * 1000}
+          onChange={(e) => {
+            setDDTBiaTrai(Number(e.target.value) / 1000);
+          }}
+        />
 
         <h5>Bìa Phải:</h5>
         <label htmlFor="fixBiaPhai">Tăng/giảm bìa phải (mm): </label>
@@ -637,12 +710,17 @@ function App() {
             setFixBiaPhai(Number(e.target.value) / 1000);
           }}
         />
-
-        {/* <img
-          src="/images/LT2H.png"
-          alt=""
-          style={{ width: 100, height: 100 }}
-        /> */}
+        <br />
+        <label htmlFor="DDTBiaPhai">Độ dày tấm bìa phải (mm): </label>
+        <input
+          type="number"
+          name="DDTBiaPhai"
+          id="DDTBiaPhai"
+          defaultValue={DDTBiaPhai * 1000}
+          onChange={(e) => {
+            setDDTBiaPhai(Number(e.target.value) / 1000);
+          }}
+        />
 
         {/* <input
           type="checkbox"
