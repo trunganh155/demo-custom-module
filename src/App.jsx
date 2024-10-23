@@ -380,7 +380,7 @@ function App() {
 
       setTimeout(() => {
         handleResetBox();
-      }, 100);
+      }, 10);
     }
   }, [
     display,
