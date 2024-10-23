@@ -638,11 +638,11 @@ function App() {
           }}
         />
 
-        <img
+        {/* <img
           src="/images/LT2H.png"
           alt=""
           style={{ width: 100, height: 100 }}
-        />
+        /> */}
 
         {/* <input
           type="checkbox"
