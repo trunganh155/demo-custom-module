@@ -304,9 +304,9 @@ function App() {
     // display.scene.add(boxMesh);
 
     const glftLoader = new GLTFLoader();
-    // glftLoader.load('./assets/glb/TA_DEMO2.glb', (gltfScene) => {
-    glftLoader.load('./assets/glb/scene2.glb', (gltfScene) => {
-      // glftLoader.load('./assets/glb/TA.glb', (gltfScene) => {
+    // glftLoader.load('./public/glb/TA_DEMO2.glb', (gltfScene) => {
+    glftLoader.load('./public/glb/scene2.glb', (gltfScene) => {
+      // glftLoader.load('./public/glb/TA.glb', (gltfScene) => {
 
       gltfScene.scene.position.set(0, 0, 0);
 
@@ -639,7 +639,7 @@ function App() {
         />
 
         <img
-          src="./assets/images/LT2H.png"
+          src="./public/images/LT2H.png"
           alt=""
           style={{ width: 100, height: 100 }}
         />
