@@ -13,11 +13,6 @@ let listBox = [];
 
 let truBia = 0.01;
 
-const luiDay = 0;
-const luiCua = 0.019;
-const luiBia = 0.019;
-const luiChan = 0;
-
 function App() {
   const [width, setWidth] = useState(1.5);
   const [height, setHeight] = useState(2);
@@ -61,7 +56,6 @@ function App() {
       day.position.x = DDTHau * -1;
     } else {
       //Hau LL
-      // day.position.x = 0 * -1;
       day.position.x = (DDTHau + luiHau) * -1;
     }
 
@@ -74,8 +68,8 @@ function App() {
         : DDTBiaTrai);
     const lenX =
       (optionHau === 0 || optionHau === 1
-        ? depth - DDTHau - luiDay
-        : depth - DDTHau - luiDay - luiHau) + (fixDay >= 0 ? 0 : fixDay);
+        ? depth - DDTHau
+        : depth - DDTHau - luiHau) + (fixDay >= 0 ? 0 : fixDay);
     const lenY = DDTDay;
 
     day.scale.set(1, 1, 1);
@@ -644,7 +638,13 @@ function App() {
           }}
         />
 
-        <input
+        <img
+          src="./assets/images/LT2H.png"
+          alt=""
+          style={{ width: 100, height: 100 }}
+        />
+
+        {/* <input
           type="checkbox"
           name="showLine"
           id=""
@@ -653,7 +653,7 @@ function App() {
           onChange={() => {
             setShowLine(!showLine);
           }}
-        />
+        /> */}
       </div>
 
       <canvas id="myThreeJsCanvas" />
