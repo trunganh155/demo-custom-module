@@ -507,9 +507,10 @@ function App() {
   return (
     <div>
       <div className="container-option">
-        <h5>Kích thước:</h5>
+        <h5 className="header">Kích thước:</h5>
         <label htmlFor="width">Dài (mm): </label>
         <input
+          className="input"
           type="number"
           name="width"
           id="width"
@@ -521,6 +522,7 @@ function App() {
         <br />
         <label htmlFor="height">Cao (mm): </label>
         <input
+          className="input"
           type="number"
           name="height"
           id="height"
@@ -532,6 +534,7 @@ function App() {
         <br />
         <label htmlFor="depth">Sâu (mm): </label>
         <input
+          className="input"
           type="number"
           name="depth"
           id="depth"
@@ -541,7 +544,7 @@ function App() {
           }}
         />
 
-        <h5>Nóc:</h5>
+        <h5 className="header">Nóc:</h5>
         <select onChange={(e) => setOptionNoc(Number(e.target.value))}>
           <option value={0}>Nóc Lọt Lòng</option>
           <option value={1}>Nóc Phủ Bì</option>
@@ -549,6 +552,7 @@ function App() {
         <br />
         <label htmlFor="DDTNoc">Độ dày tấm nóc (mm): </label>
         <input
+          className="input"
           type="number"
           name="DDTNoc"
           id="DDTNoc"
@@ -560,6 +564,7 @@ function App() {
         <br />
         <label htmlFor="fixNoc">Tăng/giảm nóc (mm): </label>
         <input
+          className="input"
           type="number"
           name="fixNoc"
           id="fixNoc"
@@ -569,7 +574,7 @@ function App() {
           }}
         />
 
-        <h5>Đáy:</h5>
+        <h5 className="header">Đáy:</h5>
         <select onChange={(e) => setOptionDay(Number(e.target.value))}>
           <option value={0}>Lọt Trong 2 Hông</option>
           <option value={1}>Trùm 2 Hông</option>
@@ -579,6 +584,7 @@ function App() {
         <br />
         <label htmlFor="DDTDay">Độ dày tấm đáy (mm): </label>
         <input
+          className="input"
           type="number"
           name="DDTDay"
           id="DDTDay"
@@ -590,6 +596,7 @@ function App() {
         <br />
         <label htmlFor="fixDay">Tăng/giảm đáy (mm): </label>
         <input
+          className="input"
           type="number"
           name="fixDay"
           id="fixDay"
@@ -599,7 +606,7 @@ function App() {
           }}
         />
 
-        <h5>Hậu:</h5>
+        <h5 className="header">Hậu:</h5>
         <select onChange={(e) => setOptionHau(Number(e.target.value))}>
           <option value={0}>Hậu Phủ Bì Phủ Nóc</option>
           <option value={1}>Hậu Phủ Bì Lọt Nóc</option>
@@ -608,6 +615,7 @@ function App() {
         <br />
         <label htmlFor="DDTHau">Độ dày tấm hậu (mm): </label>
         <input
+          className="input"
           type="number"
           name="DDTHau"
           id="DDTHau"
@@ -631,9 +639,10 @@ function App() {
           </div>
         )}
 
-        <h5>Chân:</h5>
+        <h5 className="header">Chân:</h5>
         <label htmlFor="caoChan">Chiều cao chân tủ (mm): </label>
         <input
+          className="input"
           type="number"
           name="caoChan"
           id="caoChan"
@@ -645,6 +654,7 @@ function App() {
         <br />
         <label htmlFor="DDTCTruoc">Độ dày tấm chân trước (mm): </label>
         <input
+          className="input"
           type="number"
           name="DDTCTruoc"
           id="DDTCTruoc"
@@ -656,6 +666,7 @@ function App() {
         <br />
         <label htmlFor="DDTCSau">Độ dày tấm chân sau (mm): </label>
         <input
+          className="input"
           type="number"
           name="DDTCSau"
           id="DDTCSau"
@@ -667,6 +678,7 @@ function App() {
         <br />
         <label htmlFor="fixChan">Tăng/giảm chân trước (mm): </label>
         <input
+          className="input"
           type="number"
           name="fixChan"
           id="fixChan"
@@ -676,20 +688,10 @@ function App() {
           }}
         />
 
-        <h5>Bìa Trái:</h5>
-        <label htmlFor="fixBiaTrai">Tăng/giảm bìa trái (mm): </label>
-        <input
-          type="number"
-          name="fixBiaTrai"
-          id="fixBiaTrai"
-          defaultValue={fixBiaTrai * 1000}
-          onChange={(e) => {
-            setFixBiaTrai(Number(e.target.value) / 1000);
-          }}
-        />
-        <br />
+        <h5 className="header">Bìa Trái:</h5>
         <label htmlFor="DDTBiaTrai">Độ dày tấm bìa trái (mm): </label>
         <input
+          className="input"
           type="number"
           name="DDTBiaTrai"
           id="DDTBiaTrai"
@@ -698,27 +700,41 @@ function App() {
             setDDTBiaTrai(Number(e.target.value) / 1000);
           }}
         />
-
-        <h5>Bìa Phải:</h5>
-        <label htmlFor="fixBiaPhai">Tăng/giảm bìa phải (mm): </label>
+        <br />
+        <label htmlFor="fixBiaTrai">Tăng/giảm bìa trái (mm): </label>
         <input
+          className="input"
           type="number"
-          name="fixBiaPhai"
-          id="fixBiaPhai"
-          defaultValue={fixBiaPhai * 1000}
+          name="fixBiaTrai"
+          id="fixBiaTrai"
+          defaultValue={fixBiaTrai * 1000}
           onChange={(e) => {
-            setFixBiaPhai(Number(e.target.value) / 1000);
+            setFixBiaTrai(Number(e.target.value) / 1000);
           }}
         />
-        <br />
+
+        <h5 className="header">Bìa Phải:</h5>
         <label htmlFor="DDTBiaPhai">Độ dày tấm bìa phải (mm): </label>
         <input
+          className="input"
           type="number"
           name="DDTBiaPhai"
           id="DDTBiaPhai"
           defaultValue={DDTBiaPhai * 1000}
           onChange={(e) => {
             setDDTBiaPhai(Number(e.target.value) / 1000);
+          }}
+        />
+        <br />
+        <label htmlFor="fixBiaPhai">Tăng/giảm bìa phải (mm): </label>
+        <input
+          className="input"
+          type="number"
+          name="fixBiaPhai"
+          id="fixBiaPhai"
+          defaultValue={fixBiaPhai * 1000}
+          onChange={(e) => {
+            setFixBiaPhai(Number(e.target.value) / 1000);
           }}
         />
 
