@@ -17,10 +17,11 @@ function App() {
   const [width, setWidth] = useState(1.5);
   const [height, setHeight] = useState(2);
   const [depth, setDepth] = useState(0.56);
+
   const [luiHau, setLuiHau] = useState(0.01);
+  const [luiChan, setLuiChan] = useState(0);
   const [caoChan, setCaoChan] = useState(0.1);
 
-  // const [optionCua, setOptionCua] = useState(0);
   const [optionDay, setOptionDay] = useState(0);
   const [optionNoc, setOptionNoc] = useState(0);
   const [optionHau, setOptionHau] = useState(0);
@@ -38,7 +39,6 @@ function App() {
   const [fixBiaTrai, setFixBiaTrai] = useState(0);
   const [fixBiaPhai, setFixBiaPhai] = useState(0);
   const [fixDay, setFixDay] = useState(0);
-  const [fixChan, setFixChan] = useState(0);
 
   const [showLine, setShowLine] = useState(false);
 
@@ -200,11 +200,7 @@ function App() {
       cTruoc.position.z = 0;
     }
     cTruoc.position.x =
-      (depth -
-        DDTCTruoc +
-        (fixDay >= 0 ? 0 : fixDay) +
-        (fixChan >= 0 ? 0 : fixChan)) *
-      -1;
+      (depth - DDTCTruoc - luiChan + (fixDay >= 0 ? 0 : fixDay)) * -1;
     cTruoc.position.y = 0;
 
     const lenZ =
@@ -399,7 +395,7 @@ function App() {
     caoChan,
     fixNoc,
     fixDay,
-    fixChan,
+    luiChan,
     fixBiaTrai,
     fixBiaPhai,
     DDTNoc,
@@ -640,18 +636,6 @@ function App() {
         )}
 
         <h5 className="header">Chân:</h5>
-        <label htmlFor="caoChan">Chiều cao chân tủ (mm): </label>
-        <input
-          className="input"
-          type="number"
-          name="caoChan"
-          id="caoChan"
-          defaultValue={caoChan * 1000}
-          onChange={(e) => {
-            setCaoChan(Number(e.target.value) / 1000);
-          }}
-        />
-        <br />
         <label htmlFor="DDTCTruoc">Độ dày tấm chân trước (mm): </label>
         <input
           className="input"
@@ -676,15 +660,27 @@ function App() {
           }}
         />
         <br />
-        <label htmlFor="fixChan">Tăng/giảm chân trước (mm): </label>
+        <label htmlFor="caoChan">Chiều cao chân tủ (mm): </label>
         <input
           className="input"
           type="number"
-          name="fixChan"
-          id="fixChan"
-          defaultValue={fixChan * 1000}
+          name="caoChan"
+          id="caoChan"
+          defaultValue={caoChan * 1000}
           onChange={(e) => {
-            setFixChan(Number(e.target.value) / 1000);
+            setCaoChan(Number(e.target.value) / 1000);
+          }}
+        />
+        <br />
+        <label htmlFor="luiChan">Lùi chân trước (mm): </label>
+        <input
+          className="input"
+          type="number"
+          name="luiChan"
+          id="luiChan"
+          defaultValue={luiChan * 1000}
+          onChange={(e) => {
+            setLuiChan(Number(e.target.value) / 1000);
           }}
         />
 
