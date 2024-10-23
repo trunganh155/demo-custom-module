@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -305,7 +305,7 @@ function App() {
 
     const glftLoader = new GLTFLoader();
     // glftLoader.load('./public/glb/TA_DEMO2.glb', (gltfScene) => {
-    glftLoader.load('public/glb/scene2.glb', (gltfScene) => {
+    glftLoader.load('./public/glb/scene2.glb', (gltfScene) => {
       // glftLoader.load('./public/glb/TA.glb', (gltfScene) => {
 
       gltfScene.scene.position.set(0, 0, 0);
