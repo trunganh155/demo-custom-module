@@ -43,7 +43,8 @@ function App() {
   const [fixBiaPhai, setFixBiaPhai] = useState(0);
   const [fixDay, setFixDay] = useState(0);
 
-  const [showLine, setShowLine] = useState(false);
+  const [visibleBT, setVisibleBT] = useState(true);
+  const [visibleBP, setVisibleBP] = useState(true);
 
   const settingDay = (day) => {
     if (optionDay === 0 || optionDay === 3) {
@@ -436,7 +437,6 @@ function App() {
       settingChanSau(cSau);
       settingNoc(noc);
       settingHau(hau);
-      setShowLine(false);
 
       setTimeout(() => {
         handleResetBox();
@@ -517,12 +517,12 @@ function App() {
     });
   };
 
-  const handleHide = (name) => {
+  const handleHide = (name, visible) => {
     const md = display.scene.getObjectByProperty('uuid', gltfUuid);
 
     const mesh = md.getObjectByName(name);
 
-    mesh.visible = false;
+    mesh.visible = visible;
   };
 
   return (
@@ -566,7 +566,6 @@ function App() {
             }}
           />
         </div>
-
         <h5 className="header">Nóc:</h5>
         <div>
           <select onChange={(e) => setOptionNoc(Number(e.target.value))}>
@@ -598,7 +597,6 @@ function App() {
             }}
           />
         </div>
-
         <h5 className="header">Đáy:</h5>
         <div>
           <select onChange={(e) => setOptionDay(Number(e.target.value))}>
@@ -637,7 +635,6 @@ function App() {
             }}
           />
         </div>
-
         <h5 className="header">Hậu:</h5>
         <div>
           <select onChange={(e) => setOptionHau(Number(e.target.value))}>
@@ -683,7 +680,6 @@ function App() {
             </div>
           )}
         </div>
-
         <h5 className="header">Chân:</h5>
         <div>
           <label htmlFor="DDTCTruoc">Độ dày tấm chân trước (mm): </label>
@@ -698,6 +694,7 @@ function App() {
             }}
           />
           <br />
+
           <label htmlFor="DDTCSau">Độ dày tấm chân sau (mm): </label>
           <input
             className="input"
@@ -710,6 +707,7 @@ function App() {
             }}
           />
           <br />
+
           <label htmlFor="caoChan">Chiều cao chân tủ (mm): </label>
           <input
             className="input"
@@ -722,6 +720,7 @@ function App() {
             }}
           />
           <br />
+
           <label htmlFor="luiChan">Lùi chân trước (mm): </label>
           <input
             className="input"
@@ -734,17 +733,22 @@ function App() {
             }}
           />
         </div>
-
         <h5 className="header">Bìa Trái:</h5>
+
         <div>
+          <label htmlFor="HideBiaTrai">Ẩn/hiện: </label>
           <input
             type="checkbox"
             name="showLine"
-            id=""
+            id="HideBiaTrai"
+            checked={visibleBT}
             onChange={() => {
-              handleHide('BIA-TRAI');
+              handleHide('BIA-TRAI', !visibleBT);
+              setVisibleBT(!visibleBT);
             }}
           />
+          <br />
+
           <label htmlFor="DDTBiaTrai">Độ dày tấm bìa trái (mm): </label>
           <input
             className="input"
@@ -757,6 +761,7 @@ function App() {
             }}
           />
           <br />
+
           <label htmlFor="fixBiaTrai">Tăng/giảm bìa trái (mm): </label>
           <input
             className="input"
@@ -772,6 +777,19 @@ function App() {
 
         <h5 className="header">Bìa Phải:</h5>
         <div>
+          <label htmlFor="HideBiaPhai">Ẩn/hiện: </label>
+          <input
+            type="checkbox"
+            name="showLine"
+            id="HideBiaPhai"
+            checked={visibleBP}
+            onChange={() => {
+              handleHide('BIA-PHAI', !visibleBP);
+              setVisibleBP(!visibleBP);
+            }}
+          />
+          <br />
+
           <label htmlFor="DDTBiaPhai">Độ dày tấm bìa phải (mm): </label>
           <input
             className="input"
@@ -784,6 +802,7 @@ function App() {
             }}
           />
           <br />
+
           <label htmlFor="fixBiaPhai">Tăng/giảm bìa phải (mm): </label>
           <input
             className="input"
