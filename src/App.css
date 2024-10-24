@@ -63,5 +63,13 @@ button {
   background-color: transparent;
   border: 1px solid #dfdfdf;
   border-radius: 5px;
-  
+  margin: 2px 0;
+}
+
+.select {
+  padding: 2px 8px;
+  background-color: transparent;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  margin: 2px 0;
 }

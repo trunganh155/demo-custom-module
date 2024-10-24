@@ -568,7 +568,10 @@ function App() {
         </div>
         <h5 className="header">Nóc:</h5>
         <div>
-          <select onChange={(e) => setOptionNoc(Number(e.target.value))}>
+          <select
+            className="select"
+            onChange={(e) => setOptionNoc(Number(e.target.value))}
+          >
             <option value={0}>Nóc Lọt Lòng</option>
             <option value={1}>Nóc Phủ Bì</option>
           </select>
@@ -599,14 +602,20 @@ function App() {
         </div>
         <h5 className="header">Đáy:</h5>
         <div>
-          <select onChange={(e) => setOptionDay(Number(e.target.value))}>
+          <select
+            className="select"
+            onChange={(e) => setOptionDay(Number(e.target.value))}
+          >
             <option value={0}>Lọt Trong 2 Hông</option>
             <option value={1}>Trùm 2 Hông</option>
             <option value={2}>Trùm Trái Lọt Phải</option>
             <option value={3}>Trùm Phải Lọt Trái</option>
           </select>
           <br />
-          <select onChange={(e) => setOptionSauDay(Number(e.target.value))}>
+          <select
+            className="select"
+            onChange={(e) => setOptionSauDay(Number(e.target.value))}
+          >
             <option value={0}>Đáy Theo Hậu</option>
             <option value={1}>Đáy Theo Bìa</option>
           </select>
@@ -637,7 +646,10 @@ function App() {
         </div>
         <h5 className="header">Hậu:</h5>
         <div>
-          <select onChange={(e) => setOptionHau(Number(e.target.value))}>
+          <select
+            className="select"
+            onChange={(e) => setOptionHau(Number(e.target.value))}
+          >
             <option value={0}>Hậu Phủ Bì Phủ Nóc</option>
             <option value={1}>Hậu Phủ Bì Lọt Nóc</option>
             <option value={2}>Hậu Âm Tủ</option>
