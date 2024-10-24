@@ -64,6 +64,7 @@ button {
   border: 1px solid #dfdfdf;
   border-radius: 5px;
   margin: 2px 0;
+  font-size: 14px;
 }
 
 .select {
@@ -72,4 +73,9 @@ button {
   border: 1px solid #dfdfdf;
   border-radius: 5px;
   margin: 2px 0;
+  font-size: 14px;
+}
+
+.label {
+  font-size: 14px;
 }

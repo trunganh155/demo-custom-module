@@ -48,6 +48,7 @@ export default class SceneInit {
     });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     // this.renderer.shadowMap.enabled = true;
+
     document.body.appendChild(this.renderer.domElement);
 
     this.clock = new THREE.Clock();
@@ -62,13 +63,23 @@ export default class SceneInit {
 
     // directional light - parallel sun rays
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    // this.directionalLight.castShadow = true;
-    this.directionalLight.position.set(8, 16, 16);
+    this.directionalLight.castShadow = true;
+    this.directionalLight.position.set(16, 32, 64);
+    this.directionalLight.shadow.bias = -0.00001;
+    this.directionalLight.shadow.normalBias = 0.1;
+    this.directionalLight.shadow.mapSize.width = 128;
+    this.directionalLight.shadow.mapSize.height = 128;
+
     this.scene.add(this.directionalLight);
 
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    // this.directionalLight.castShadow = true;
-    this.directionalLight.position.set(-8, -16, -16);
+    this.directionalLight.castShadow = true;
+    this.directionalLight.position.set(-16, -32, -64);
+    this.directionalLight.shadow.bias = -0.00001;
+    this.directionalLight.shadow.normalBias = 0.1;
+    this.directionalLight.shadow.mapSize.width = 128;
+    this.directionalLight.shadow.mapSize.height = 128;
+
     this.scene.add(this.directionalLight);
 
     const axesHelper = new THREE.AxesHelper(5);

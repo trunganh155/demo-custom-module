@@ -354,24 +354,17 @@ function App() {
     display.initialize();
     display.animate();
 
-    // inital scene
-    // const boxGeometry = new THREE.BoxGeometry(2, 2, 2);
-    // const boxMaterial = new THREE.MeshNormalMaterial();
-    // const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
-    // display.scene.add(boxMesh);
-
     const glftLoader = new GLTFLoader();
-    // glftLoader.load('./public/glb/TA_DEMO2.glb', (gltfScene) => {
+
     glftLoader.load('/glb/scene2.glb', (gltfScene) => {
-      // glftLoader.load('./public/glb/TA.glb', (gltfScene) => {
-
       gltfScene.scene.position.set(0, 0, 0);
-
       gltfScene.scene.traverse((child) => {
         if (child.isMesh) {
           const randomColor = Math.random() * 0xffffff;
           // Gán màu cho vật liệu của mesh
           // child.material.color.set(randomColor);
+          // child.castShadow = true;
+          // child.receiveShadow = true;
           child.material.roughness = 0.8;
           child.material.metalness = 0.4;
         }
@@ -530,7 +523,9 @@ function App() {
       <div className="container-option">
         <h5 className="header">Kích thước:</h5>
         <div>
-          <label htmlFor="width">Dài (mm): </label>
+          <label className="label" htmlFor="width">
+            Dài (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -542,7 +537,9 @@ function App() {
             }}
           />
           <br />
-          <label htmlFor="height">Cao (mm): </label>
+          <label className="label" htmlFor="height">
+            Cao (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -554,7 +551,9 @@ function App() {
             }}
           />
           <br />
-          <label htmlFor="depth">Sâu (mm): </label>
+          <label className="label" htmlFor="depth">
+            Sâu (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -566,6 +565,7 @@ function App() {
             }}
           />
         </div>
+
         <h5 className="header">Nóc:</h5>
         <div>
           <select
@@ -576,7 +576,9 @@ function App() {
             <option value={1}>Nóc Phủ Bì</option>
           </select>
           <br />
-          <label htmlFor="DDTNoc">Độ dày tấm nóc (mm): </label>
+          <label className="label" htmlFor="DDTNoc">
+            Độ dày tấm nóc (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -588,7 +590,9 @@ function App() {
             }}
           />
           <br />
-          <label htmlFor="fixNoc">Tăng/giảm nóc (mm): </label>
+          <label className="label" htmlFor="fixNoc">
+            Tăng/giảm nóc (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -600,6 +604,7 @@ function App() {
             }}
           />
         </div>
+
         <h5 className="header">Đáy:</h5>
         <div>
           <select
@@ -620,7 +625,9 @@ function App() {
             <option value={1}>Đáy Theo Bìa</option>
           </select>
           <br />
-          <label htmlFor="DDTDay">Độ dày tấm đáy (mm): </label>
+          <label className="label" htmlFor="DDTDay">
+            Độ dày tấm đáy (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -632,7 +639,9 @@ function App() {
             }}
           />
           <br />
-          <label htmlFor="fixDay">Tăng/giảm đáy (mm): </label>
+          <label className="label" htmlFor="fixDay">
+            Tăng/giảm đáy (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -644,6 +653,7 @@ function App() {
             }}
           />
         </div>
+
         <h5 className="header">Hậu:</h5>
         <div>
           <select
@@ -655,7 +665,9 @@ function App() {
             <option value={2}>Hậu Âm Tủ</option>
           </select>
           <br />
-          <label htmlFor="DDTHau">Độ dày tấm hậu (mm): </label>
+          <label className="label" htmlFor="DDTHau">
+            Độ dày tấm hậu (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -668,7 +680,9 @@ function App() {
           />
           {optionHau === 2 && (
             <div>
-              <label htmlFor="luiHau">Lùi Hậu (mm): </label>
+              <label className="label" htmlFor="luiHau">
+                Lùi Hậu (mm):
+              </label>
               <input
                 className="input"
                 type="number"
@@ -680,7 +694,9 @@ function App() {
                 }}
               />
               <br />
-              <label htmlFor="ngamHau">Ngậm Hậu (mm): </label>
+              <label className="label" htmlFor="ngamHau">
+                Ngậm Hậu (mm):
+              </label>
               <input
                 className="input"
                 type="number"
@@ -694,9 +710,12 @@ function App() {
             </div>
           )}
         </div>
+
         <h5 className="header">Chân:</h5>
         <div>
-          <label htmlFor="DDTCTruoc">Độ dày tấm chân trước (mm): </label>
+          <label className="label" htmlFor="DDTCTruoc">
+            Độ dày tấm chân trước (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -709,7 +728,9 @@ function App() {
           />
           <br />
 
-          <label htmlFor="DDTCSau">Độ dày tấm chân sau (mm): </label>
+          <label className="label" htmlFor="DDTCSau">
+            Độ dày tấm chân sau (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -722,7 +743,9 @@ function App() {
           />
           <br />
 
-          <label htmlFor="caoChan">Chiều cao chân tủ (mm): </label>
+          <label className="label" htmlFor="caoChan">
+            Chiều cao chân tủ (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -735,7 +758,9 @@ function App() {
           />
           <br />
 
-          <label htmlFor="luiChan">Lùi chân trước (mm): </label>
+          <label className="label" htmlFor="luiChan">
+            Lùi chân trước (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -747,10 +772,12 @@ function App() {
             }}
           />
         </div>
-        <h5 className="header">Bìa Trái:</h5>
 
+        <h5 className="header">Bìa Trái:</h5>
         <div>
-          <label htmlFor="HideBiaTrai">Ẩn/hiện: </label>
+          <label className="label" htmlFor="HideBiaTrai">
+            Ẩn/hiện:
+          </label>
           <input
             type="checkbox"
             name="showLine"
@@ -763,7 +790,9 @@ function App() {
           />
           <br />
 
-          <label htmlFor="DDTBiaTrai">Độ dày tấm bìa trái (mm): </label>
+          <label className="label" htmlFor="DDTBiaTrai">
+            Độ dày tấm bìa trái (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -776,7 +805,9 @@ function App() {
           />
           <br />
 
-          <label htmlFor="fixBiaTrai">Tăng/giảm bìa trái (mm): </label>
+          <label className="label" htmlFor="fixBiaTrai">
+            Tăng/giảm bìa trái (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -791,7 +822,9 @@ function App() {
 
         <h5 className="header">Bìa Phải:</h5>
         <div>
-          <label htmlFor="HideBiaPhai">Ẩn/hiện: </label>
+          <label className="label" htmlFor="HideBiaPhai">
+            Ẩn/hiện:
+          </label>
           <input
             type="checkbox"
             name="showLine"
@@ -804,7 +837,9 @@ function App() {
           />
           <br />
 
-          <label htmlFor="DDTBiaPhai">Độ dày tấm bìa phải (mm): </label>
+          <label className="label" htmlFor="DDTBiaPhai">
+            Độ dày tấm bìa phải (mm):
+          </label>
           <input
             className="input"
             type="number"
@@ -817,7 +852,9 @@ function App() {
           />
           <br />
 
-          <label htmlFor="fixBiaPhai">Tăng/giảm bìa phải (mm): </label>
+          <label className="label" htmlFor="fixBiaPhai">
+            Tăng/giảm bìa phải (mm):
+          </label>
           <input
             className="input"
             type="number"
