@@ -30,7 +30,7 @@ export default class SceneInit {
     this.camera = new THREE.PerspectiveCamera(
       this.fov,
       window.innerWidth / window.innerHeight,
-      1,
+      0.005,
       1000
     );
     this.camera.position.x = 3;
@@ -63,12 +63,12 @@ export default class SceneInit {
     // directional light - parallel sun rays
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     // this.directionalLight.castShadow = true;
-    this.directionalLight.position.set(16, 32, 64);
+    this.directionalLight.position.set(8, 16, 16);
     this.scene.add(this.directionalLight);
 
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     // this.directionalLight.castShadow = true;
-    this.directionalLight.position.set(-16, -32, -64);
+    this.directionalLight.position.set(-8, -16, -16);
     this.scene.add(this.directionalLight);
 
     const axesHelper = new THREE.AxesHelper(5);
