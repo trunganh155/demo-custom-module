@@ -47,7 +47,7 @@ button {
   top: 50px;
   z-index: 1000;
   padding: 8px;
-  background-color: beige;
+  background-color: #fefdfa;
 
   height: 90vh;
   overflow: auto;
@@ -60,4 +60,8 @@ button {
 
 .input {
   padding: 2px 8px;
+  background-color: transparent;
+  border: 1px solid #dfdfdf;
+  border-radius: 5px;
+  
 }
