@@ -670,6 +670,7 @@ function App() {
             <div>
               <label htmlFor="luiHau">Lùi Hậu (mm): </label>
               <input
+                className="input"
                 type="number"
                 name="luiHau"
                 id="luiHau"
@@ -681,6 +682,7 @@ function App() {
               <br />
               <label htmlFor="ngamHau">Ngậm Hậu (mm): </label>
               <input
+                className="input"
                 type="number"
                 name="ngamHau"
                 id="ngamHau"
