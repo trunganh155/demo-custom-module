@@ -49,34 +49,34 @@ function App() {
   const settingDay = (day) => {
     if (optionDay === 0 || optionDay === 3) {
       //Day lot
-      day.position.z = DDTBiaTrai;
+      day.position.z = DDTBiaTrai * -1;
     } else {
       //Day trum
-      day.position.z = 0;
+      day.position.z = 0 * -1;
     }
     day.position.y = caoChan;
     // if (optionHau === 0 || optionHau === 1) {
     //   //Hau PB
-    //   day.position.x = DDTHau * -1;
+    //   day.position.x = DDTHau ;
     // } else {
     //   //Hau LL
-    //   day.position.x = (DDTHau + luiHau) * -1;
+    //   day.position.x = (DDTHau + luiHau) ;
     // }
 
     if (optionSauDay === 0) {
       //Day theo hau
       if (optionHau === 0 || optionHau === 1) {
         //Hau PB
-        day.position.x = DDTHau * -1;
+        day.position.x = DDTHau;
       } else {
         //Hau LL
-        day.position.x = (DDTHau + luiHau) * -1;
+        day.position.x = DDTHau + luiHau;
       }
     } else {
       //Day theo bia
       if (optionHau === 0 || optionHau === 1) {
         //Hau PB
-        day.position.x = DDTHau * -1;
+        day.position.x = DDTHau;
       } else {
         //Hau LL
         day.position.x = 0;
@@ -117,15 +117,15 @@ function App() {
 
   const settingHau = (hau) => {
     if (optionHau === 0 || optionHau === 1) {
-      hau.position.z = 0;
+      hau.position.z = 0 * -1;
     } else {
       // hau.position.z = truBia;
-      hau.position.z = DDTBiaTrai - ngamHau;
+      hau.position.z = (DDTBiaTrai - ngamHau) * -1;
     }
     if (optionHau === 0 || optionHau === 1) {
-      hau.position.x = 0 * -1;
+      hau.position.x = 0;
     } else {
-      hau.position.x = luiHau * -1;
+      hau.position.x = luiHau;
     }
     // if (optionHau === 0 || optionHau === 1) {
     //   hau.position.y = caoChan;
@@ -180,11 +180,11 @@ function App() {
   };
 
   const settingBiaTrai = (bTrai) => {
-    bTrai.position.z = 0;
+    bTrai.position.z = 0 * -1;
     if (optionHau === 0 || optionHau === 1) {
-      bTrai.position.x = DDTHau * -1;
+      bTrai.position.x = DDTHau;
     } else {
-      bTrai.position.x = 0 * -1;
+      bTrai.position.x = 0;
     }
     if (optionDay === 0 || optionDay === 3) {
       bTrai.position.y = 0;
@@ -217,11 +217,11 @@ function App() {
   };
 
   const settingBiaPhai = (bPhai) => {
-    bPhai.position.z = width - DDTBiaPhai;
+    bPhai.position.z = (width - DDTBiaPhai) * -1;
     if (optionHau === 0 || optionHau === 1) {
-      bPhai.position.x = DDTHau * -1;
+      bPhai.position.x = DDTHau;
     } else {
-      bPhai.position.x = 0 * -1;
+      bPhai.position.x = 0;
     }
     if (optionDay === 0 || optionDay === 2) {
       bPhai.position.y = 0;
@@ -255,12 +255,12 @@ function App() {
 
   const settingChanTruoc = (cTruoc) => {
     if (optionDay === 0 || optionDay === 3) {
-      cTruoc.position.z = DDTBiaTrai;
+      cTruoc.position.z = DDTBiaTrai * -1;
     } else {
-      cTruoc.position.z = 0;
+      cTruoc.position.z = 0 * -1;
     }
     cTruoc.position.x =
-      (depth - DDTCTruoc - luiChan + (fixDay >= 0 ? 0 : fixDay)) * -1;
+      depth - DDTCTruoc - luiChan + (fixDay >= 0 ? 0 : fixDay);
     cTruoc.position.y = 0;
 
     const lenZ =
@@ -287,12 +287,12 @@ function App() {
 
   const settingChanSau = (cSau) => {
     if (optionDay === 0 || optionDay === 3) {
-      cSau.position.z = DDTBiaTrai;
+      cSau.position.z = DDTBiaTrai * -1;
     } else {
-      cSau.position.z = 0;
+      cSau.position.z = 0 * -1;
     }
-    cSau.position.x = (optionHau === 2 ? luiHau + DDTHau + 0.05 : 0.08) * -1;
-    // cSau.position.x = 0.08 * -1;
+    cSau.position.x = optionHau === 2 ? luiHau + DDTHau + 0.05 : 0.08;
+    // cSau.position.x = 0.08 ;
     cSau.position.y = 0;
 
     const lenZ =
@@ -320,17 +320,17 @@ function App() {
   const settingNoc = (noc) => {
     if (optionNoc === 0) {
       //LL
-      noc.position.z = DDTBiaTrai;
+      noc.position.z = DDTBiaTrai * -1;
     } else {
       //PB
-      noc.position.z = 0;
+      noc.position.z = 0 * -1;
     }
     if (optionHau === 0) {
-      noc.position.x = DDTHau * -1;
+      noc.position.x = DDTHau;
     } else if (optionHau === 1) {
-      noc.position.x = 0 * -1;
+      noc.position.x = 0;
     } else {
-      noc.position.x = 0 * -1;
+      noc.position.x = 0;
     }
     noc.position.y = height - DDTNoc;
 
@@ -356,7 +356,7 @@ function App() {
 
     const glftLoader = new GLTFLoader();
 
-    glftLoader.load('/glb/scene2.glb', (gltfScene) => {
+    glftLoader.load('/glb/TA.glb', (gltfScene) => {
       gltfScene.scene.position.set(0, 0, 0);
       gltfScene.scene.traverse((child) => {
         if (child.isMesh) {
@@ -423,13 +423,13 @@ function App() {
       });
       listBox = [];
 
-      settingDay(day);
-      settingBiaTrai(bTrai);
-      settingBiaPhai(bPhai);
-      settingChanTruoc(cTruoc);
-      settingChanSau(cSau);
-      settingNoc(noc);
-      settingHau(hau);
+      day && settingDay(day);
+      bTrai && settingBiaTrai(bTrai);
+      bPhai && settingBiaPhai(bPhai);
+      cTruoc && settingChanTruoc(cTruoc);
+      cSau && settingChanSau(cSau);
+      noc && settingNoc(noc);
+      hau && settingHau(hau);
 
       setTimeout(() => {
         handleResetBox();
