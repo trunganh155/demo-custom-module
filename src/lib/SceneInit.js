@@ -2,6 +2,12 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import Stats from 'three/examples/jsm/libs/stats.module';
 
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
+import { CustomOutlinePass } from './CustomOutline';
+
 export default class SceneInit {
   constructor(canvasId) {
     // NOTE: Core components to initialize Three.js app.
@@ -23,6 +29,11 @@ export default class SceneInit {
     // NOTE: Lighting is basically required.
     this.ambientLight = undefined;
     this.directionalLight = undefined;
+
+    //NOTE: Outline
+    this.composer = undefined;
+    this.effectFXAA = undefined;
+    this.outlinePass = undefined;
   }
 
   initialize() {
@@ -55,6 +66,39 @@ export default class SceneInit {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.stats = Stats();
     document.body.appendChild(this.stats.dom);
+
+    ////////////////////////////////////////////////////
+    // const renderTarget = new THREE.WebGLRenderTarget(
+    //   window.innerWidth,
+    //   window.innerHeight,
+    //   {
+    //     samples: 4,
+    //     powerPreference: 'high-performance',
+    //     //   depthTexture: depthTexture,
+    //     //   depthBuffer: true,
+    //   }
+    // );
+    // // this.composer = new EffectComposer(this.renderer, renderTarget);
+    // this.composer = new EffectComposer(this.renderer);
+    // const pass = new RenderPass(this.scene, this.camera);
+    // this.composer.addPass(pass);
+
+    // // Outline pass.
+    // const customOutline = new CustomOutlinePass(
+    //   new THREE.Vector2(window.innerWidth, window.innerHeight),
+    //   this.scene,
+    //   this.camera
+    // );
+    // this.composer.addPass(customOutline);
+
+    // // Antialias pass.
+    // const effectFXAA = new ShaderPass(FXAAShader);
+    // effectFXAA.uniforms['resolution'].value.set(
+    //   1 / window.innerWidth,
+    //   1 / window.innerHeight
+    // );
+    // this.composer.addPass(effectFXAA);
+    ////////////////////////////////////////////////////
 
     // ambient light which is for the whole scene
     this.ambientLight = new THREE.AmbientLight(0xffffff, 1);
@@ -107,6 +151,7 @@ export default class SceneInit {
     this.render();
     this.stats.update();
     this.controls.update();
+    // this.composer.render();
   }
 
   render() {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 import SceneInit from './lib/SceneInit';
 
@@ -355,8 +356,11 @@ function App() {
     display.animate();
 
     const glftLoader = new GLTFLoader();
+    const textureLoader = new THREE.TextureLoader();
 
+    // glftLoader.load('/glb/day.glb', (gltfScene) => {
     glftLoader.load('/glb/TA.glb', (gltfScene) => {
+      gltfScene.scene.scale.set(1, 1, 1);
       gltfScene.scene.position.set(0, 0, 0);
       gltfScene.scene.traverse((child) => {
         if (child.isMesh) {
@@ -370,6 +374,26 @@ function App() {
         }
       });
 
+      textureLoader.load('/images/TEXTURE.png', (newTexture) => {
+        newTexture.offset.set(1, 1);
+        newTexture.wrapS = newTexture.wrapT = THREE.MirroredRepeatWrapping;
+        newTexture.repeat.set(1, 1);
+        // newTexture.repeat.set(module.scale.z, 1);
+
+        newTexture.mapping = THREE.UVMapping;
+
+        gltfScene.scene.traverse((node) => {
+          if (node.isMesh) {
+            const materials = Array.isArray(node.material)
+              ? node.material
+              : [node.material];
+            materials.forEach((material) => {
+              material.map = newTexture;
+            });
+          }
+        });
+      });
+
       setGltfUuid(gltfScene.scene.uuid);
 
       display.scene.add(gltfScene.scene);
@@ -379,27 +403,23 @@ function App() {
     const raycaster = new THREE.Raycaster();
 
     const onMouseMove = (event) => {
-      // calculate pointer position in normalized device coordinates
-      // (-1 to +1) for both components
       pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
       pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
       raycaster.setFromCamera(pointer, display.camera);
       const intersects = raycaster.intersectObjects(display.scene.children);
 
-      // for (let i = 0; i < intersects.length; i++) {
-      //   console.log(intersects);
-      // }
-
       // change color of objects intersecting the raycaster
-      // for (let i = 0; i < intersects.length; i++) {
-      //   intersects[i].object.material.color.set(0xff0000);
-      // }
+      if (intersects.length !== 0) {
+        for (let i = 0; i < intersects.length; i++) {
+          intersects[i].object.material.color.set(0xff0000);
+        }
+      }
 
       // change color of the closest object intersecting the raycaster
-      if (intersects.length > 0) {
-        intersects[0].object.material.color.set(0xff0000);
-      }
+      // if (intersects.length > 0) {
+      //   intersects[0].object.material.color.set(0xff0000);
+      // }
     };
 
     // window.addEventListener('mousemove', onMouseMove);
@@ -430,6 +450,62 @@ function App() {
       cSau && settingChanSau(cSau);
       noc && settingNoc(noc);
       hau && settingHau(hau);
+
+      ///
+      const day1 = md.getObjectByName('DAY1');
+      const day2 = md.getObjectByName('DAY2');
+      const day3 = md.getObjectByName('DAY3');
+
+      const size1x = 0.56;
+      const size2x = 0.3;
+      const size3x = 0.56;
+
+      const size1z = 0.3;
+      const size2z = 0.3;
+      const size3z = 0.3;
+
+      const cotx = 0.1;
+      const cotz = 0.25;
+
+      const cotdz = 0.55;
+
+      if (day1 && day2 && day3) {
+        day1.scale.set(depth / size1x, 1, cotdz / size1z);
+        day1.position.x = 0;
+        day1.position.z = 0 * -1;
+
+        day2.scale.set((depth - cotx) / size2x, 1, cotz / size2z);
+        day2.position.x = cotx;
+        day2.position.z = cotdz * -1;
+
+        day3.scale.set(depth / size3x, 1, (width - cotdz - cotz) / size3z);
+        day3.position.x = 0;
+        day3.position.z = (cotdz + cotz) * -1;
+      }
+      ////
+
+      const textureLoader = new THREE.TextureLoader();
+      textureLoader.load('/images/TEXTURE.png', (newTexture) => {
+        md.traverse((node) => {
+          if (node.isMesh) {
+            const materials = Array.isArray(node.material)
+              ? node.material
+              : [node.material];
+
+            newTexture.offset.set(1, 1);
+            newTexture.wrapS = newTexture.wrapT = THREE.MirroredRepeatWrapping;
+            newTexture.repeat.set(
+              node?.parent?.scale?.x || 1,
+              node?.parent?.scale?.y || 1
+            );
+            newTexture.mapping = THREE.UVMapping;
+
+            materials.forEach((material) => {
+              material.map = newTexture;
+            });
+          }
+        });
+      });
 
       setTimeout(() => {
         handleResetBox();
@@ -463,6 +539,45 @@ function App() {
   ]);
 
   const handleResetBox = () => {
+    const md = display.scene.getObjectByProperty('uuid', gltfUuid);
+
+    md.traverse((child) => {
+      if (
+        child.isMesh &&
+        child.scale.x !== 0 &&
+        child.scale.y !== 0 &&
+        child.scale.z !== 0
+      ) {
+        // Tạo Box3 để xác định kích thước của mesh
+        const box = new THREE.Box3().setFromObject(child);
+        // Tính toán kích thước và vị trí của khung
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+        // Tạo geometry cho khung
+        const geometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+        // Tạo edges từ geometry
+        const edges = new THREE.EdgesGeometry(geometry);
+        // Tạo màu ngẫu nhiên cho khung viền
+        const material = new THREE.LineBasicMaterial({ color: 0x000000 });
+        // const material = new THREE.LineBasicMaterial({
+        //   color: 0xffffff,
+        //   depthWrite: false,
+        // });
+        // Tạo LineSegments cho khung viền
+        const boundingBoxEdges = new THREE.LineSegments(edges, material);
+        // Đặt vị trí cho khung sao cho nó nằm khớp với mesh
+        boundingBoxEdges.position.copy(center);
+
+        listBox.push(boundingBoxEdges);
+        // Thêm khung vào scene
+        display.scene.add(boundingBoxEdges);
+      }
+    });
+  };
+
+  const handleResetBox2 = () => {
     const md = display.scene.getObjectByProperty('uuid', gltfUuid);
 
     const day = md.getObjectByName('DAY');
