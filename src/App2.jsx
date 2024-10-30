@@ -197,16 +197,19 @@ function App2() {
       //Day theo hau
       if (optionHau === 0 || optionHau === 1) {
         //Hau PB
-        day2.position.x = dayCot + DDTHau;
+        // day2.position.x = dayCot + DDTHau;
+        day2.position.x = dayCot + DDTBiaTrai;
       } else {
         //Hau LL
-        day2.position.x = dayCot + DDTHau + luiHau;
+        // day2.position.x = dayCot + DDTHau + luiHau;
+        day2.position.x = dayCot + DDTBiaTrai + luiHau;
       }
     } else {
       //Day theo bia
       if (optionHau === 0 || optionHau === 1) {
         //Hau PB
-        day2.position.x = DDTHau;
+        // day2.position.x = DDTHau;
+        day2.position.x = DDTBiaTrai;
       } else {
         //Hau LL
         day2.position.x = 0;
@@ -221,13 +224,21 @@ function App2() {
         ? 0
         : DDTBiaTrai);
 
+    // const lenX =
+    //   (optionSauDay === 0
+    //     ? optionHau === 0 || optionHau === 1
+    //       ? depth - dayCot - DDTHau
+    //       : depth - dayCot - DDTHau - luiHau
+    //     : optionHau === 0 || optionHau === 1
+    //     ? depth - dayCot - DDTHau
+    //     : depth - dayCot) + (fixDay >= 0 ? 0 : fixDay);
     const lenX =
       (optionSauDay === 0
         ? optionHau === 0 || optionHau === 1
-          ? depth - dayCot - DDTHau
-          : depth - dayCot - DDTHau - luiHau
+          ? depth - dayCot - DDTBiaTrai
+          : depth - dayCot - DDTBiaTrai - luiHau
         : optionHau === 0 || optionHau === 1
-        ? depth - dayCot - DDTHau
+        ? depth - dayCot - DDTBiaTrai
         : depth - dayCot) + (fixDay >= 0 ? 0 : fixDay);
 
     const lenY = DDTDay;
@@ -439,35 +450,38 @@ function App2() {
       hau2.position.x = dayCot + luiHau;
     }
 
-    if (optionHau === 0 || optionHau === 1) {
-      //Day PB
-      hau2.position.y = caoChan;
-    } else {
-      //Day LL
-      if (optionSauDay === 0) {
-        //Day theo hau
-        hau2.position.y = 0;
-      } else {
-        //Day theo bia
-        hau2.position.y = caoChan + 0.5 * DDTDay;
-      }
-    }
+    // if (optionHau === 0 || optionHau === 1) {
+    //   //Day PB
+    //   hau2.position.y = caoChan;
+    // } else {
+    //   //Day LL
+    //   if (optionSauDay === 0) {
+    //     //Day theo hau
+    //     hau2.position.y = 0;
+    //   } else {
+    //     //Day theo bia
+    //     hau2.position.y = caoChan + 0.5 * DDTDay;
+    //   }
+    // }
+    hau2.position.y = 0;
 
     const lenZ =
       optionHau === 0 || optionHau === 1
         ? rongCot + DDTBiaTrai + DDTBiaPhai
         : rongCot + DDTBiaTrai + DDTBiaPhai;
 
-    const lenX = DDTHau;
+    // const lenX = DDTHau;
+    const lenX = DDTBiaTrai;
 
-    const lenY =
-      optionHau === 0
-        ? height - caoChan
-        : optionHau === 1
-        ? height - caoChan - DDTNoc
-        : optionSauDay === 0
-        ? height - truBia
-        : height - caoChan - 0.5 * DDTNoc - 0.5 * DDTDay;
+    // const lenY =
+    //   optionHau === 0
+    //     ? height - caoChan
+    //     : optionHau === 1
+    //     ? height - caoChan - DDTNoc
+    //     : optionSauDay === 0
+    //     ? height - truBia
+    //     : height - caoChan - 0.5 * DDTNoc - 0.5 * DDTDay;
+    const lenY = height;
 
     hau2.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau2);
