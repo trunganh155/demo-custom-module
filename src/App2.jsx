@@ -896,8 +896,7 @@ function App2() {
     const glftLoader = new GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
 
-    // glftLoader.load('/glb/day.glb', (gltfScene) => {
-    // glftLoader.load('/glb/TA.glb', (gltfScene) => {
+    // glftLoader.load('/glb/box.glb', (gltfScene) => {
     glftLoader.load('/glb/TA-KHUYET.glb', (gltfScene) => {
       gltfScene.scene.scale.set(1, 1, 1);
       gltfScene.scene.position.set(0, 0, 0);
@@ -967,7 +966,7 @@ function App2() {
   useEffect(() => {
     if (display && gltfUuid) {
       const md = display.scene.getObjectByProperty('uuid', gltfUuid);
-      md.position.set(-depth / 2, -height / 2, width / 2);
+      // md.position.set(-depth / 2, -height / 2, width / 2);
 
       const day1 = md.getObjectByName('DAY1');
       const day2 = md.getObjectByName('DAY2');
@@ -1083,34 +1082,63 @@ function App2() {
         child.scale.y !== 0 &&
         child.scale.z !== 0
       ) {
-        // Tạo Box3 để xác định kích thước của mesh
-        const box = new THREE.Box3().setFromObject(child);
-        // Tính toán kích thước và vị trí của khung
-        const size = new THREE.Vector3();
-        box.getSize(size);
-        const center = new THREE.Vector3();
-        box.getCenter(center);
-        // Tạo geometry cho khung
-        const geometry = new THREE.BoxGeometry(size.x, size.y, size.z);
-        // Tạo edges từ geometry
-        const edges = new THREE.EdgesGeometry(geometry);
-        // Tạo màu ngẫu nhiên cho khung viền
+        // Scale the geometry based on the parent scale
+        const scaledGeometry = child.geometry.clone();
+        scaledGeometry.scale(child.scale.x, child.scale.y, child.scale.z);
+
+        // Create edges from the scaled geometry
+        const edges = new THREE.EdgesGeometry(scaledGeometry);
         const material = new THREE.LineBasicMaterial({ color: 0x000000 });
-        // const material = new THREE.LineBasicMaterial({
-        //   color: 0xffffff,
-        //   depthWrite: false,
-        // });
-        // Tạo LineSegments cho khung viền
+
+        // Create LineSegments for the bounding box edges
         const boundingBoxEdges = new THREE.LineSegments(edges, material);
-        // Đặt vị trí cho khung sao cho nó nằm khớp với mesh
-        boundingBoxEdges.position.copy(center);
+        // Position the bounding box edges to match the mesh
+        boundingBoxEdges.position.copy(child.position);
 
         listBox.push(boundingBoxEdges);
-        // Thêm khung vào scene
+        // Add the bounding box to the scene
         display.scene.add(boundingBoxEdges);
       }
     });
   };
+
+  // const handleResetBox = () => {
+  //   const md = display.scene.getObjectByProperty('uuid', gltfUuid);
+
+  //   md.traverse((child) => {
+  //     if (
+  //       child.isMesh &&
+  //       child.scale.x !== 0 &&
+  //       child.scale.y !== 0 &&
+  //       child.scale.z !== 0
+  //     ) {
+  //       // Tạo Box3 để xác định kích thước của mesh
+  //       const box = new THREE.Box3().setFromObject(child);
+  //       // Tính toán kích thước và vị trí của khung
+  //       const size = new THREE.Vector3();
+  //       box.getSize(size);
+  //       const center = new THREE.Vector3();
+  //       box.getCenter(center);
+  //       // Tạo geometry cho khung
+  //       const geometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+  //       // Tạo edges từ geometry
+  //       const edges = new THREE.EdgesGeometry(child.geometry);
+  //       // Tạo màu ngẫu nhiên cho khung viền
+  //       // const material = new THREE.LineBasicMaterial({ color: 0x000000 });
+  //       const material = new THREE.LineBasicMaterial({ color: 0xffffff });
+
+  //       // Tạo LineSegments cho khung viền
+  //       const boundingBoxEdges = new THREE.LineSegments(edges, material);
+  //       // Đặt vị trí cho khung sao cho nó nằm khớp với mesh
+  //       // boundingBoxEdges.position.copy(center);
+  //       boundingBoxEdges.position.copy(child.position);
+
+  //       listBox.push(boundingBoxEdges);
+  //       // Thêm khung vào scene
+  //       display.scene.add(boundingBoxEdges);
+  //     }
+  //   });
+  // };
 
   const handleHide = (name, visible) => {
     const md = display.scene.getObjectByProperty('uuid', gltfUuid);

@@ -358,7 +358,7 @@ function App() {
     const glftLoader = new GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
 
-    // glftLoader.load('/glb/day.glb', (gltfScene) => {
+    // glftLoader.load('/glb/box.glb', (gltfScene) => {
     glftLoader.load('/glb/TA.glb', (gltfScene) => {
       gltfScene.scene.scale.set(1, 1, 1);
       gltfScene.scene.position.set(0, 0, 0);
