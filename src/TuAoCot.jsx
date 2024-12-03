@@ -40,6 +40,7 @@ function App2() {
   const [DDTCSau, setDDTCSau] = useState(0.017);
 
   const [KCCot, setKCCot] = useState(0.4);
+  // const [KCCot, setKCCot] = useState(0);
   const [dayCot, setDayCot] = useState(0.15);
   const [rongCot, setRongCot] = useState(0.3);
 
@@ -98,25 +99,34 @@ function App2() {
     const sizeDay = new THREE.Vector3();
     boundingBoxDay.getSize(sizeDay);
 
-    day1.scale.x = lenX / sizeDay.x;
-    day1.scale.y = lenY / sizeDay.y;
-    day1.scale.z = lenZ / sizeDay.z;
+    if (KCCot <= DDTBiaTrai) {
+      day1.scale.x = 0;
+      day1.scale.y = 0;
+      day1.scale.z = 0;
+    } else {
+      day1.scale.x = lenX / sizeDay.x;
+      day1.scale.y = lenY / sizeDay.y;
+      day1.scale.z = lenZ / sizeDay.z;
+    }
   };
 
   const settingDay2 = (day2) => {
-    day2.position.z = (KCCot - DDTBiaTrai) * -1;
+    day2.position.z =
+      KCCot > DDTBiaTrai ? (KCCot - DDTBiaTrai) * -1 : -DDTBiaTrai;
 
     day2.position.y = caoChan;
 
     day2.position.x = dayCot + DDTBiaTrai;
 
     const lenZ =
-      rongCot +
-      (optionDay === 0
-        ? DDTBiaTrai + DDTBiaPhai
-        : optionDay === 1
-        ? 0
-        : DDTBiaTrai);
+      KCCot > DDTBiaTrai
+        ? rongCot +
+          (optionDay === 0
+            ? DDTBiaTrai + DDTBiaPhai
+            : optionDay === 1
+            ? 0
+            : DDTBiaTrai)
+        : rongCot;
 
     const lenX = depth - dayCot - DDTBiaTrai + (fixDay >= 0 ? -fixDay : 0);
 
@@ -214,10 +224,6 @@ function App2() {
       }
     }
 
-    // const lenZ =
-    //   optionHau === 0 || optionHau === 1
-    //     ? width
-    //     : width - DDTBiaTrai - DDTBiaPhai + 2 * ngamHau;
     const lenZ =
       optionHau === 0 || optionHau === 1
         ? KCCot
@@ -239,9 +245,15 @@ function App2() {
     const sizeHau = new THREE.Vector3();
     boundingBoxHau.getSize(sizeHau);
 
-    hau1.scale.x = lenX / sizeHau.x;
-    hau1.scale.y = lenY / sizeHau.y;
-    hau1.scale.z = lenZ / sizeHau.z;
+    if (KCCot <= DDTBiaTrai) {
+      hau1.scale.x = 0;
+      hau1.scale.y = 0;
+      hau1.scale.z = 0;
+    } else {
+      hau1.scale.x = lenX / sizeHau.x;
+      hau1.scale.y = lenY / sizeHau.y;
+      hau1.scale.z = lenZ / sizeHau.z;
+    }
   };
 
   const settingHau2 = (hau2) => {
@@ -322,23 +334,23 @@ function App2() {
   const settingBia1 = (bia1) => {
     bia1.position.z = 0 * -1;
 
-    if (optionHau === 0 || optionHau === 1) {
-      bia1.position.x = DDTHau;
-    } else {
-      bia1.position.x = 0;
-    }
+    bia1.position.x =
+      KCCot > DDTBiaTrai
+        ? optionHau === 0 || optionHau === 1
+          ? DDTHau
+          : 0
+        : dayCot + DDTBiaTrai;
 
-    if (optionDay === 0 || optionDay === 3) {
-      bia1.position.y = 0;
-    } else {
-      bia1.position.y = caoChan + DDTDay;
-    }
+    bia1.position.y = optionDay === 0 || optionDay === 3 ? 0 : caoChan + DDTDay;
 
     const lenZ = DDTBiaTrai;
 
     const lenX =
-      (optionHau === 0 || optionHau === 1 ? depth - DDTHau : depth) +
-      (fixBiaTrai >= 0 ? -fixBiaTrai : 0);
+      (KCCot > DDTBiaTrai
+        ? optionHau === 0 || optionHau === 1
+          ? depth - DDTHau
+          : depth
+        : depth - dayCot - DDTBiaTrai) + (fixBiaTrai >= 0 ? -fixBiaTrai : 0);
 
     const lenY =
       optionDay === 1 || optionDay === 2
@@ -362,21 +374,14 @@ function App2() {
   const settingBia2 = (bia2) => {
     bia2.position.z = (KCCot - DDTBiaTrai) * -1;
 
-    if (optionHau === 0 || optionHau === 1) {
-      bia2.position.x = DDTHau;
-    } else {
-      bia2.position.x = 0;
-    }
+    bia2.position.x = optionHau === 0 || optionHau === 1 ? DDTHau : 0;
 
-    if (optionDay === 0 || optionDay === 3) {
-      bia2.position.y = 0;
-    } else {
-      bia2.position.y = caoChan + DDTDay;
-    }
+    bia2.position.y = optionDay === 0 || optionDay === 3 ? 0 : caoChan + DDTDay;
 
     const lenZ = DDTBiaTrai;
 
     const lenX = optionHau === 0 || optionHau === 1 ? dayCot - DDTHau : dayCot;
+
     const lenY =
       optionDay === 1 || optionDay === 2
         ? optionNoc === 0
@@ -391,9 +396,15 @@ function App2() {
     const sizeBiaTrai = new THREE.Vector3();
     boundingBoxBia2.getSize(sizeBiaTrai);
 
-    bia2.scale.x = lenX / sizeBiaTrai.x;
-    bia2.scale.y = lenY / sizeBiaTrai.y;
-    bia2.scale.z = lenZ / sizeBiaTrai.z;
+    if (KCCot <= DDTBiaTrai) {
+      bia2.scale.x = 0;
+      bia2.scale.y = 0;
+      bia2.scale.z = 0;
+    } else {
+      bia2.scale.x = lenX / sizeBiaTrai.x;
+      bia2.scale.y = lenY / sizeBiaTrai.y;
+      bia2.scale.z = lenZ / sizeBiaTrai.z;
+    }
   };
 
   const settingBia3 = (bia3) => {
@@ -572,9 +583,15 @@ function App2() {
     const sizeNoc = new THREE.Vector3();
     boundingBoxNoc.getSize(sizeNoc);
 
-    noc1.scale.x = lenX / sizeNoc.x;
-    noc1.scale.y = lenY / sizeNoc.y;
-    noc1.scale.z = lenZ / sizeNoc.z;
+    if (KCCot <= DDTBiaTrai) {
+      noc1.scale.x = 0;
+      noc1.scale.y = 0;
+      noc1.scale.z = 0;
+    } else {
+      noc1.scale.x = lenX / sizeNoc.x;
+      noc1.scale.y = lenY / sizeNoc.y;
+      noc1.scale.z = lenZ / sizeNoc.z;
+    }
   };
 
   const settingNoc2 = (noc2) => {
