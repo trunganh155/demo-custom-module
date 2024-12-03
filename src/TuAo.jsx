@@ -12,8 +12,6 @@ let display;
 
 let listBox = [];
 
-let truBia = 0.01;
-
 function App() {
   const [gltfUuid, setGltfUuid] = useState(null);
 
@@ -48,41 +46,19 @@ function App() {
   const [visibleBP, setVisibleBP] = useState(true);
 
   const settingDay = (day) => {
-    if (optionDay === 0 || optionDay === 3) {
-      //Day lot
-      day.position.z = DDTBiaTrai * -1;
-    } else {
-      //Day trum
-      day.position.z = 0 * -1;
-    }
-    day.position.y = caoChan;
-    // if (optionHau === 0 || optionHau === 1) {
-    //   //Hau PB
-    //   day.position.x = DDTHau ;
-    // } else {
-    //   //Hau LL
-    //   day.position.x = (DDTHau + luiHau) ;
-    // }
+    day.position.z =
+      optionDay === 0 || optionDay === 3 ? DDTBiaTrai * -1 : 0 * -1;
 
-    if (optionSauDay === 0) {
-      //Day theo hau
-      if (optionHau === 0 || optionHau === 1) {
-        //Hau PB
-        day.position.x = DDTHau;
-      } else {
-        //Hau LL
-        day.position.x = DDTHau + luiHau;
-      }
-    } else {
-      //Day theo bia
-      if (optionHau === 0 || optionHau === 1) {
-        //Hau PB
-        day.position.x = DDTHau;
-      } else {
-        //Hau LL
-        day.position.x = 0;
-      }
-    }
+    day.position.y = caoChan;
+
+    day.position.x =
+      optionSauDay === 0
+        ? optionHau === 0 || optionHau === 1
+          ? DDTHau
+          : DDTHau + luiHau
+        : optionHau === 0 || optionHau === 1
+        ? DDTHau
+        : 0;
 
     const lenZ =
       width -
@@ -91,10 +67,6 @@ function App() {
         : optionDay === 1
         ? 0
         : DDTBiaTrai);
-    // const lenX =
-    //   (optionHau === 0 || optionHau === 1
-    //     ? depth - DDTHau
-    //     : depth - DDTHau - luiHau) + (fixDay >= 0 ? 0 : fixDay);
 
     const lenX =
       (optionSauDay === 0
@@ -103,7 +75,8 @@ function App() {
           : depth - DDTHau - luiHau
         : optionHau === 0 || optionHau === 1
         ? depth - DDTHau
-        : depth) + (fixDay >= 0 ? 0 : fixDay);
+        : depth) + (fixDay >= 0 ? -fixDay : 0);
+
     const lenY = DDTDay;
 
     day.scale.set(1, 1, 1);
@@ -117,60 +90,35 @@ function App() {
   };
 
   const settingHau = (hau) => {
-    if (optionHau === 0 || optionHau === 1) {
-      hau.position.z = 0 * -1;
-    } else {
-      // hau.position.z = truBia;
-      hau.position.z = (DDTBiaTrai - ngamHau) * -1;
-    }
-    if (optionHau === 0 || optionHau === 1) {
-      hau.position.x = 0;
-    } else {
-      hau.position.x = luiHau;
-    }
-    // if (optionHau === 0 || optionHau === 1) {
-    //   hau.position.y = caoChan;
-    // } else {
-    //   hau.position.y = 0;
-    // }
+    hau.position.z =
+      optionHau === 0 || optionHau === 1 ? 0 * -1 : (DDTBiaTrai - ngamHau) * -1;
 
-    if (optionHau === 0 || optionHau === 1) {
-      //Day PB
-      hau.position.y = caoChan;
-    } else {
-      //Day LL
-      if (optionSauDay === 0) {
-        //Day theo hau
-        hau.position.y = 0;
-      } else {
-        //Day theo bia
-        hau.position.y = caoChan + 0.5 * DDTDay;
-      }
-    }
+    hau.position.y =
+      optionHau === 0 || optionHau === 1
+        ? caoChan
+        : optionSauDay === 0
+        ? 0
+        : caoChan + DDTDay - ngamHau;
 
-    hau.scale.set(1, 1, 1);
-    // const lenZ =
-    //   optionHau === 0 || optionHau === 1 ? width : width - truBia * 2;
+    hau.position.x = optionHau === 0 || optionHau === 1 ? 0 : luiHau;
+
     const lenZ =
       optionHau === 0 || optionHau === 1
         ? width
         : width - DDTBiaTrai - DDTBiaPhai + 2 * ngamHau;
+
     const lenX = DDTHau;
-    // const lenY =
-    //   optionHau === 0
-    //     ? height - caoChan
-    //     : optionHau === 1
-    //     ? height - caoChan - DDTNoc
-    //     : height - truBia;
+
     const lenY =
       optionHau === 0
         ? height - caoChan
         : optionHau === 1
         ? height - caoChan - DDTNoc
         : optionSauDay === 0
-        ? height - truBia
-        : height - caoChan - 0.5 * DDTNoc - 0.5 * DDTDay;
+        ? height - DDTNoc + ngamHau
+        : height - caoChan - DDTNoc - DDTDay + 2 * ngamHau;
 
+    hau.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau);
     const sizeHau = new THREE.Vector3();
     boundingBoxHau.getSize(sizeHau);
@@ -182,22 +130,18 @@ function App() {
 
   const settingBiaTrai = (bTrai) => {
     bTrai.position.z = 0 * -1;
-    if (optionHau === 0 || optionHau === 1) {
-      bTrai.position.x = DDTHau;
-    } else {
-      bTrai.position.x = 0;
-    }
-    if (optionDay === 0 || optionDay === 3) {
-      bTrai.position.y = 0;
-    } else {
-      bTrai.position.y = caoChan + DDTDay;
-    }
+
+    bTrai.position.y =
+      optionDay === 0 || optionDay === 3 ? 0 : caoChan + DDTDay;
+
+    bTrai.position.x = optionHau === 0 || optionHau === 1 ? DDTHau : 0;
 
     const lenZ = DDTBiaTrai;
+
     const lenX =
       (optionHau === 0 || optionHau === 1 ? depth - DDTHau : depth) +
-      (fixNoc >= 0 ? -fixNoc : 0) +
-      (fixBiaTrai >= 0 ? 0 : fixBiaTrai);
+      (fixBiaTrai >= 0 ? -fixBiaTrai : 0);
+
     const lenY =
       optionDay === 1 || optionDay === 2
         ? optionNoc === 0
@@ -219,22 +163,18 @@ function App() {
 
   const settingBiaPhai = (bPhai) => {
     bPhai.position.z = (width - DDTBiaPhai) * -1;
-    if (optionHau === 0 || optionHau === 1) {
-      bPhai.position.x = DDTHau;
-    } else {
-      bPhai.position.x = 0;
-    }
-    if (optionDay === 0 || optionDay === 2) {
-      bPhai.position.y = 0;
-    } else {
-      bPhai.position.y = caoChan + DDTDay;
-    }
+
+    bPhai.position.x = optionHau === 0 || optionHau === 1 ? DDTHau : 0;
+
+    bPhai.position.y =
+      optionDay === 0 || optionDay === 2 ? 0 : caoChan + DDTDay;
 
     const lenZ = DDTBiaPhai;
+
     const lenX =
       (optionHau === 0 || optionHau === 1 ? depth - DDTHau : depth) +
-      (fixNoc >= 0 ? -fixNoc : 0) +
-      (fixBiaPhai >= 0 ? 0 : fixBiaPhai);
+      (fixBiaPhai >= 0 ? -fixBiaPhai : 0);
+      
     const lenY =
       optionDay === 1 || optionDay === 3
         ? optionNoc === 0
@@ -255,13 +195,12 @@ function App() {
   };
 
   const settingChanTruoc = (cTruoc) => {
-    if (optionDay === 0 || optionDay === 3) {
-      cTruoc.position.z = DDTBiaTrai * -1;
-    } else {
-      cTruoc.position.z = 0 * -1;
-    }
+    cTruoc.position.z =
+      optionDay === 0 || optionDay === 3 ? DDTBiaTrai * -1 : 0 * -1;
+
     cTruoc.position.x =
-      depth - DDTCTruoc - luiChan + (fixDay >= 0 ? 0 : fixDay);
+      depth - DDTCTruoc - luiChan + (fixDay >= 0 ? -fixDay : 0);
+
     cTruoc.position.y = 0;
 
     const lenZ =
@@ -273,7 +212,9 @@ function App() {
         : optionDay == 3
         ? DDTBiaPhai
         : 0);
+
     const lenX = DDTCTruoc;
+
     const lenY = caoChan;
 
     cTruoc.scale.set(1, 1, 1);
@@ -287,13 +228,11 @@ function App() {
   };
 
   const settingChanSau = (cSau) => {
-    if (optionDay === 0 || optionDay === 3) {
-      cSau.position.z = DDTBiaTrai * -1;
-    } else {
-      cSau.position.z = 0 * -1;
-    }
+    cSau.position.z =
+      optionDay === 0 || optionDay === 3 ? DDTBiaTrai * -1 : 0 * -1;
+
     cSau.position.x = optionHau === 2 ? luiHau + DDTHau + 0.05 : 0.08;
-    // cSau.position.x = 0.08 ;
+
     cSau.position.y = 0;
 
     const lenZ =
@@ -305,7 +244,9 @@ function App() {
         : optionDay == 3
         ? DDTBiaPhai
         : 0);
+
     const lenX = DDTCSau;
+
     const lenY = caoChan;
 
     cSau.scale.set(1, 1, 1);
@@ -319,25 +260,17 @@ function App() {
   };
 
   const settingNoc = (noc) => {
-    if (optionNoc === 0) {
-      //LL
-      noc.position.z = DDTBiaTrai * -1;
-    } else {
-      //PB
-      noc.position.z = 0 * -1;
-    }
-    if (optionHau === 0) {
-      noc.position.x = DDTHau;
-    } else if (optionHau === 1) {
-      noc.position.x = 0;
-    } else {
-      noc.position.x = 0;
-    }
+    noc.position.z = optionNoc === 0 ? DDTBiaTrai * -1 : 0 * -1;
+
+    noc.position.x = optionHau === 0 ? DDTHau : 0;
+
     noc.position.y = height - DDTNoc;
 
     const lenZ = optionNoc === 0 ? width - DDTBiaTrai - DDTBiaPhai : width;
+
     const lenX =
-      (optionHau === 0 ? depth - DDTHau : depth) + (fixNoc >= 0 ? 0 : fixNoc);
+      (optionHau === 0 ? depth - DDTHau : depth) + (fixNoc >= 0 ? -fixNoc : 0);
+
     const lenY = DDTNoc;
 
     noc.scale.set(1, 1, 1);

@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import App2 from './App2';
+import TuAo from './TuAo';
+import TuAoCot from './TuAoCot';
+import TuBep from './TuBep';
+import TuAoTren from './TuAoTren';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App2 />
+    <TuAoCot />
   </React.StrictMode>,
   document.getElementById('root')
 );
