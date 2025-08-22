@@ -17,9 +17,9 @@ let truBia = 0.01;
 function App3() {
   const [gltfUuid, setGltfUuid] = useState(null);
 
-  const [width, setWidth] = useState(1.5);
+  const [width, setWidth] = useState(1);
   const [height, setHeight] = useState(0.89);
-  const [depth, setDepth] = useState(0.56);
+  const [depth, setDepth] = useState(0.35);
 
   const [luiHau, setLuiHau] = useState(0.01);
   const [ngamHau, setNgamHau] = useState(0.005);
@@ -48,20 +48,20 @@ function App3() {
   const [fixBiaPhai, setFixBiaPhai] = useState(0);
   const [fixDay, setFixDay] = useState(0);
 
-  const [rongK1, setRongK1] = useState(0.6);
-  const [rongK2, setRongK2] = useState(1);
+  const [rongK1, setRongK1] = useState(1.2);
+  const [rongK2, setRongK2] = useState(1.2);
   const [truHaoGoc, setTruHaoGoc] = useState(0.03);
 
   const [visibleBT, setVisibleBT] = useState(true);
   const [visibleBP, setVisibleBP] = useState(true);
 
   const settingDay1 = (day1) => {
-    day1.position.z = 0 * -1;
+    day1.position.z = DDTHau * -1;
+    day1.position.x = 0;
     day1.position.y = 0;
-    day1.position.x = DDTHau;
 
-    const lenZ = rongK1 + truHaoGoc;
-    const lenX = depth - DDTHau;
+    const lenZ = depth - DDTHau;
+    const lenX = rongK1;
     const lenY = DDTDay;
 
     day1.scale.set(1, 1, 1);
@@ -75,12 +75,12 @@ function App3() {
   };
 
   const settingDay2 = (day2) => {
-    day2.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
+    day2.position.z = (depth + DDTBia) * -1;
+    day2.position.x = DDTHau;
     day2.position.y = 0;
-    day2.position.x = 0;
 
-    const lenZ = depth - DDTHau;
-    const lenX = rongK2 + truHaoGoc;
+    const lenZ = rongK2 - depth - DDTBia;
+    const lenX = depth - DDTHau;
     const lenY = DDTDay;
 
     day2.scale.set(1, 1, 1);
@@ -92,32 +92,14 @@ function App3() {
     day2.scale.y = lenY / sizeDay.y;
     day2.scale.z = lenZ / sizeDay.z;
   };
-  // const settingDay2 = (day2) => {
-  //   day2.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
-  //   day2.position.y = 0;
-  //   day2.position.x = truHaoGoc;
-
-  //   const lenZ = depth - DDTHau;
-  //   const lenX = rongK2;
-  //   const lenY = DDTDay;
-
-  //   day2.scale.set(1, 1, 1);
-  //   let boundingBoxDay = new THREE.Box3().setFromObject(day2);
-  //   const sizeDay = new THREE.Vector3();
-  //   boundingBoxDay.getSize(sizeDay);
-
-  //   day2.scale.x = lenX / sizeDay.x;
-  //   day2.scale.y = lenY / sizeDay.y;
-  //   day2.scale.z = lenZ / sizeDay.z;
-  // };
 
   const settingHau1 = (hau1) => {
     hau1.position.z = 0 * -1;
-    hau1.position.x = 0;
+    hau1.position.x = truHaoGoc;
     hau1.position.y = 0;
 
-    const lenZ = rongK1;
-    const lenX = DDTHau;
+    const lenZ = DDTHau;
+    const lenX = rongK2 - truHaoGoc;
     const lenY = height;
 
     hau1.scale.set(1, 1, 1);
@@ -131,12 +113,12 @@ function App3() {
   };
 
   const settingHau2 = (hau2) => {
-    hau2.position.z = (rongK1 + truHaoGoc + DDTBia + depth - DDTHau) * -1;
-    hau2.position.x = truHaoGoc;
+    hau2.position.z = (depth + DDTBia + truHaoGoc) * -1;
+    hau2.position.x = 0;
     hau2.position.y = 0;
 
-    const lenZ = DDTHau;
-    const lenX = rongK2;
+    const lenZ = rongK2 - depth - DDTBia - truHaoGoc;
+    const lenX = DDTHau;
     const lenY = height;
 
     hau2.scale.set(1, 1, 1);
@@ -150,12 +132,12 @@ function App3() {
   };
 
   const settingNoc1 = (noc1) => {
-    noc1.position.z = 0 * -1;
-    noc1.position.x = DDTHau;
+    noc1.position.z = DDTHau * -1;
+    noc1.position.x = truHaoGoc;
     noc1.position.y = height - DDTNoc;
 
-    const lenZ = rongK1;
-    const lenX = depth - DDTHau;
+    const lenZ = depth - DDTHau;
+    const lenX = rongK1 - truHaoGoc;
     const lenY = DDTDay;
 
     noc1.scale.set(1, 1, 1);
@@ -169,12 +151,12 @@ function App3() {
   };
 
   const settingNoc2 = (noc2) => {
-    noc2.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
+    noc2.position.z = (depth + DDTBia + truHaoGoc) * -1;
+    noc2.position.x = DDTHau;
     noc2.position.y = height - DDTNoc;
-    noc2.position.x = truHaoGoc;
 
-    const lenZ = depth - DDTHau;
-    const lenX = rongK2;
+    const lenZ = rongK2 - depth - DDTBia - truHaoGoc;
+    const lenX = depth - DDTHau;
     const lenY = DDTDay;
 
     noc2.scale.set(1, 1, 1);
@@ -188,12 +170,12 @@ function App3() {
   };
 
   const settingBia1 = (bia1) => {
-    bia1.position.z = 0 * -1;
-    bia1.position.x = DDTHau;
+    bia1.position.z = DDTHau * -1;
+    bia1.position.x = rongK1 - DDTBia;
     bia1.position.y = DDTDay;
 
-    const lenZ = DDTBia;
-    const lenX = depth - DDTHau;
+    const lenZ = depth - DDTHau;
+    const lenX = DDTBia;
     const lenY = height - DDTDay - DDTNoc;
 
     bia1.scale.set(1, 1, 1);
@@ -207,12 +189,12 @@ function App3() {
   };
 
   const settingBia2 = (bia2) => {
-    bia2.position.z = (rongK1 - DDTBia) * -1;
-    bia2.position.x = DDTHau;
+    bia2.position.z = DDTHau * -1;
+    bia2.position.x = truHaoGoc;
     bia2.position.y = DDTDay;
 
-    const lenZ = DDTBia;
-    const lenX = depth - DDTHau;
+    const lenZ = depth - DDTHau;
+    const lenX = DDTBia;
     const lenY = height - DDTDay - DDTNoc;
 
     bia2.scale.set(1, 1, 1);
@@ -226,12 +208,12 @@ function App3() {
   };
 
   const settingBia3 = (bia3) => {
-    bia3.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
-    bia3.position.x = truHaoGoc;
+    bia3.position.z = (depth + DDTBia + truHaoGoc) * -1;
+    bia3.position.x = DDTHau;
     bia3.position.y = DDTDay;
 
-    const lenZ = depth - DDTHau;
-    const lenX = DDTBia;
+    const lenZ = DDTBia;
+    const lenX = depth - DDTHau;
     const lenY = height - DDTDay - DDTNoc;
 
     bia3.scale.set(1, 1, 1);
@@ -245,12 +227,12 @@ function App3() {
   };
 
   const settingBia4 = (bia4) => {
-    bia4.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
-    bia4.position.x = rongK2 + truHaoGoc - DDTBia;
+    bia4.position.z = (rongK2 - DDTBia) * -1;
+    bia4.position.x = DDTHau;
     bia4.position.y = DDTDay;
 
-    const lenZ = depth - DDTHau;
-    const lenX = DDTBia;
+    const lenZ = DDTBia;
+    const lenX = depth - DDTHau;
     const lenY = height - DDTDay - DDTNoc;
 
     bia4.scale.set(1, 1, 1);
@@ -263,27 +245,8 @@ function App3() {
     bia4.scale.z = lenZ / sizeBiaTrai.z;
   };
 
-  const settingMatCoDinh = (mcd) => {
-    mcd.position.z = (rongK1 + truHaoGoc) * -1;
-    mcd.position.x = 0;
-    mcd.position.y = 0;
-
-    const lenZ = DDTBia;
-    const lenX = depth + truHaoGoc + DDTBia;
-    const lenY = height;
-
-    mcd.scale.set(1, 1, 1);
-    let boundingBoxXSau = new THREE.Box3().setFromObject(mcd);
-    const sizeXSau = new THREE.Vector3();
-    boundingBoxXSau.getSize(sizeXSau);
-
-    mcd.scale.x = lenX / sizeXSau.x;
-    mcd.scale.y = lenY / sizeXSau.y;
-    mcd.scale.z = lenZ / sizeXSau.z;
-  };
-
   const settingBa = (ba) => {
-    ba.position.z = rongK1 * -1;
+    ba.position.z = (depth + DDTBia) * -1;
     ba.position.x = depth;
     ba.position.y = 0;
 
@@ -301,8 +264,28 @@ function App3() {
     ba.scale.z = lenZ / sizeXSau.z;
   };
 
+  const settingMatCoDinh = (mcd) => {
+    mcd.position.z = depth * -1;
+    mcd.position.x = 0;
+    mcd.position.y = 0;
+
+    const lenZ = DDTBia;
+    const lenX = depth + truHaoGoc + DDTBia;
+    const lenY = height;
+
+    mcd.scale.set(1, 1, 1);
+
+    let boundingBoxXSau = new THREE.Box3().setFromObject(mcd);
+    const sizeXSau = new THREE.Vector3();
+    boundingBoxXSau.getSize(sizeXSau);
+
+    mcd.scale.x = lenX / sizeXSau.x;
+    mcd.scale.y = lenY / sizeXSau.y;
+    mcd.scale.z = lenZ / sizeXSau.z;
+  };
+
   const settingXan = (xan) => {
-    xan.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
+    xan.position.z = (depth - 0.08) * -1;
     xan.position.x = depth + DDTBia + truHaoGoc - 0.008;
     xan.position.y = DDTDay;
 
@@ -342,7 +325,7 @@ function App3() {
           child.material.metalness = 0.4;
 
           // Thêm opacity
-          child.material.opacity = 0.7;
+          child.material.opacity = 1;
           child.material.transparent = true; // Bắt buộc phải có để opacity hoạt động
         }
       });

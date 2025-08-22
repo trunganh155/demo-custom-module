@@ -47,20 +47,20 @@ function App3() {
   const [fixBiaPhai, setFixBiaPhai] = useState(0);
   const [fixDay, setFixDay] = useState(0);
 
-  const [rongK1, setRongK1] = useState(0.6);
-  const [rongK2, setRongK2] = useState(1);
+  const [rongK1, setRongK1] = useState(1.4);
+  const [rongK2, setRongK2] = useState(1.4);
   const [truHaoGoc, setTruHaoGoc] = useState(0.03);
 
   const [visibleBT, setVisibleBT] = useState(true);
   const [visibleBP, setVisibleBP] = useState(true);
 
   const settingDay1 = (day1) => {
-    day1.position.z = 0 * -1;
+    day1.position.z = DDTHau * -1;
+    day1.position.x = depth + DDTBia + truHaoGoc;
     day1.position.y = caoChan;
-    day1.position.x = DDTHau;
 
-    const lenZ = rongK1;
-    const lenX = depth - DDTHau;
+    const lenZ = depth - DDTHau;
+    const lenX = rongK1 - depth - DDTBia - truHaoGoc;
     const lenY = DDTDay;
 
     day1.scale.set(1, 1, 1);
@@ -74,12 +74,12 @@ function App3() {
   };
 
   const settingDay2 = (day2) => {
-    day2.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
+    day2.position.z = truHaoGoc * -1;
+    day2.position.x = DDTHau;
     day2.position.y = caoChan;
-    day2.position.x = truHaoGoc;
 
-    const lenZ = depth - DDTHau;
-    const lenX = rongK2;
+    const lenZ = rongK2 - truHaoGoc;
+    const lenX = depth - DDTHau;
     const lenY = DDTDay;
 
     day2.scale.set(1, 1, 1);
@@ -94,11 +94,11 @@ function App3() {
 
   const settingHau1 = (hau1) => {
     hau1.position.z = 0 * -1;
-    hau1.position.x = 0;
+    hau1.position.x = depth + DDTBia + truHaoGoc;
     hau1.position.y = caoChan;
 
-    const lenZ = rongK1;
-    const lenX = DDTHau;
+    const lenZ = DDTHau;
+    const lenX = rongK1 - depth - DDTBia - truHaoGoc;
     const lenY = height - caoChan;
 
     hau1.scale.set(1, 1, 1);
@@ -112,12 +112,12 @@ function App3() {
   };
 
   const settingHau2 = (hau2) => {
-    hau2.position.z = (rongK1 + truHaoGoc + DDTBia + depth - DDTHau) * -1;
-    hau2.position.x = truHaoGoc;
+    hau2.position.z = truHaoGoc * -1;
+    hau2.position.x = 0;
     hau2.position.y = caoChan;
 
-    const lenZ = DDTHau;
-    const lenX = rongK2;
+    const lenZ = rongK2 - truHaoGoc;
+    const lenX = DDTHau;
     const lenY = height - caoChan;
 
     hau2.scale.set(1, 1, 1);
@@ -131,12 +131,12 @@ function App3() {
   };
 
   const settingBia1 = (bia1) => {
-    bia1.position.z = 0 * -1;
-    bia1.position.x = DDTHau;
+    bia1.position.z = DDTHau * -1;
+    bia1.position.x = rongK1 - DDTBia;
     bia1.position.y = caoChan + DDTDay;
 
-    const lenZ = DDTBia;
-    const lenX = depth - DDTHau;
+    const lenZ = depth - DDTHau;
+    const lenX = DDTBia;
     const lenY = height - caoChan - DDTDay;
 
     bia1.scale.set(1, 1, 1);
@@ -150,12 +150,12 @@ function App3() {
   };
 
   const settingBia2 = (bia2) => {
-    bia2.position.z = (rongK1 - DDTBia) * -1;
-    bia2.position.x = DDTHau;
+    bia2.position.z = DDTHau * -1;
+    bia2.position.x = depth + DDTBia + truHaoGoc;
     bia2.position.y = caoChan + DDTDay;
 
-    const lenZ = DDTBia;
-    const lenX = depth - DDTHau;
+    const lenZ = depth - DDTHau;
+    const lenX = DDTBia;
     const lenY = height - caoChan - DDTDay;
 
     bia2.scale.set(1, 1, 1);
@@ -169,12 +169,12 @@ function App3() {
   };
 
   const settingBia3 = (bia3) => {
-    bia3.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
-    bia3.position.x = truHaoGoc;
+    bia3.position.z = truHaoGoc * -1;
+    bia3.position.x = DDTHau;
     bia3.position.y = caoChan + DDTDay;
 
-    const lenZ = depth - DDTHau;
-    const lenX = DDTBia;
+    const lenZ = DDTBia;
+    const lenX = depth - DDTHau;
     const lenY = height - caoChan - DDTDay;
 
     bia3.scale.set(1, 1, 1);
@@ -188,12 +188,12 @@ function App3() {
   };
 
   const settingBia4 = (bia4) => {
-    bia4.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
-    bia4.position.x = rongK2 + truHaoGoc - DDTBia;
+    bia4.position.z = (rongK2 - DDTBia) * -1;
+    bia4.position.x = DDTHau;
     bia4.position.y = caoChan + DDTDay;
 
-    const lenZ = depth - DDTHau;
-    const lenX = DDTBia;
+    const lenZ = DDTBia;
+    const lenX = depth - DDTHau;
     const lenY = height - caoChan - DDTDay;
 
     bia4.scale.set(1, 1, 1);
@@ -207,12 +207,12 @@ function App3() {
   };
 
   const settingChanTruoc1 = (cTruoc1) => {
-    cTruoc1.position.z = 0 * -1;
-    cTruoc1.position.x = depth - DDTChan - luiChan;
+    cTruoc1.position.z = (depth - DDTBia) * -1;
+    cTruoc1.position.x = depth + DDTBia + truHaoGoc;
     cTruoc1.position.y = 0;
 
-    const lenZ = rongK1;
-    const lenX = DDTChan;
+    const lenZ = DDTChan;
+    const lenX = rongK1 - depth - DDTBia - truHaoGoc;
     const lenY = caoChan;
 
     cTruoc1.scale.set(1, 1, 1);
@@ -226,12 +226,12 @@ function App3() {
   };
 
   const settingChanTruoc2 = (cTruoc2) => {
-    cTruoc2.position.z = (rongK1 + truHaoGoc + DDTBia + luiChan) * -1;
-    cTruoc2.position.x = truHaoGoc;
+    cTruoc2.position.z = truHaoGoc * -1;
+    cTruoc2.position.x = depth - DDTBia;
     cTruoc2.position.y = 0;
 
-    const lenZ = DDTChan;
-    const lenX = rongK2;
+    const lenZ = rongK2 - truHaoGoc;
+    const lenX = DDTBia;
     const lenY = caoChan;
 
     cTruoc2.scale.set(1, 1, 1);
@@ -245,13 +245,12 @@ function App3() {
   };
 
   const settingNepTruoc1 = (nepTruoc1) => {
-    nepTruoc1.position.z = DDTBia * -1;
-    nepTruoc1.position.x = optionXTruoc === 0 ? depth - DDTXTruoc : depth;
-    nepTruoc1.position.y =
-      optionXTruoc === 0 ? height - caoXTruoc : height - DDTXTruoc;
+    nepTruoc1.position.z = (depth - DDTBia) * -1;
+    nepTruoc1.position.x = depth + 2 * DDTBia + truHaoGoc;
+    nepTruoc1.position.y = height - caoXTruoc;
 
-    const lenZ = rongK1 - 2 * DDTBia;
-    const lenX = DDTXTruoc;
+    const lenZ = DDTBia;
+    const lenX = rongK1 - depth - 3 * DDTBia - truHaoGoc;
     const lenY = caoXTruoc;
 
     nepTruoc1.scale.set(1, 1, 1);
@@ -265,32 +264,31 @@ function App3() {
   };
 
   const settingNepTruoc2 = (nepTruoc2) => {
-    nepTruoc2.position.z = DDTBia * -1;
-    nepTruoc2.position.x = depth - DDTXTruoc * 2;
+    nepTruoc2.position.z = (depth - 2 * DDTBia) * -1;
+    nepTruoc2.position.x = depth + 2 * DDTBia + truHaoGoc;
     nepTruoc2.position.y = height - caoXTruoc;
 
-    const lenZ = rongK1 - 2 * DDTBia;
-    const lenX = DDTXTruoc;
+    const lenZ = DDTBia;
+    const lenX = rongK1 - depth - 3 * DDTBia - truHaoGoc;
     const lenY = caoXTruoc;
 
     nepTruoc2.scale.set(1, 1, 1);
+    let boundingBoxXTruoc1 = new THREE.Box3().setFromObject(nepTruoc2);
+    const sizeXTruoc1 = new THREE.Vector3();
+    boundingBoxXTruoc1.getSize(sizeXTruoc1);
 
-    let boundingBoxXTruoc2 = new THREE.Box3().setFromObject(nepTruoc2);
-    const sizeXTruoc2 = new THREE.Vector3();
-    boundingBoxXTruoc2.getSize(sizeXTruoc2);
-
-    nepTruoc2.scale.x = lenX / sizeXTruoc2.x;
-    nepTruoc2.scale.y = lenY / sizeXTruoc2.y;
-    nepTruoc2.scale.z = lenZ / sizeXTruoc2.z;
+    nepTruoc2.scale.x = lenX / sizeXTruoc1.x;
+    nepTruoc2.scale.y = lenY / sizeXTruoc1.y;
+    nepTruoc2.scale.z = lenZ / sizeXTruoc1.z;
   };
 
   const settingNepTruoc3 = (nepTruoc3) => {
-    nepTruoc3.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
-    nepTruoc3.position.x = DDTBia + truHaoGoc;
+    nepTruoc3.position.z = (truHaoGoc + DDTBia) * -1;
+    nepTruoc3.position.x = depth - DDTBia;
     nepTruoc3.position.y = height - caoXTruoc;
 
-    const lenZ = DDTXTruoc;
-    const lenX = rongK2 - 2 * DDTBia;
+    const lenZ = rongK2 - truHaoGoc - 2 * DDTBia;
+    const lenX = DDTBia;
     const lenY = caoXTruoc;
 
     nepTruoc3.scale.set(1, 1, 1);
@@ -305,12 +303,12 @@ function App3() {
   };
 
   const settingNepTruoc4 = (nepTruoc4) => {
-    nepTruoc4.position.z = (rongK1 + truHaoGoc + DDTBia + DDTXTruoc) * -1;
-    nepTruoc4.position.x = DDTBia + truHaoGoc;
+    nepTruoc4.position.z = (truHaoGoc + DDTBia) * -1;
+    nepTruoc4.position.x = depth - 2 * DDTBia;
     nepTruoc4.position.y = height - caoXTruoc;
 
-    const lenZ = DDTXTruoc;
-    const lenX = rongK2 - 2 * DDTBia;
+    const lenZ = rongK2 - truHaoGoc - 2 * DDTBia;
+    const lenX = DDTBia;
     const lenY = caoXTruoc;
 
     nepTruoc4.scale.set(1, 1, 1);
@@ -325,51 +323,51 @@ function App3() {
   };
 
   const settingNepSau1 = (nepSau1) => {
-    nepSau1.position.z = DDTBia * -1;
-    nepSau1.position.x = optionHau === 0 ? DDTHau : DDTHau + luiHau;
-    nepSau1.position.y = height - caoXSau;
+    nepSau1.position.z = DDTHau * -1;
+    nepSau1.position.x = depth + 2 * DDTBia + truHaoGoc;
+    nepSau1.position.y = height - caoXTruoc;
 
-    const lenZ = rongK1 - 2 * DDTBia;
-    const lenX = DDTXSau;
-    const lenY = caoXSau;
+    const lenZ = DDTBia;
+    const lenX = rongK1 - depth - 3 * DDTBia - truHaoGoc;
+    const lenY = caoXTruoc;
 
     nepSau1.scale.set(1, 1, 1);
-    let boundingBoxXSau = new THREE.Box3().setFromObject(nepSau1);
-    const sizeXSau = new THREE.Vector3();
-    boundingBoxXSau.getSize(sizeXSau);
+    let boundingBoxXTruoc1 = new THREE.Box3().setFromObject(nepSau1);
+    const sizeXTruoc1 = new THREE.Vector3();
+    boundingBoxXTruoc1.getSize(sizeXTruoc1);
 
-    nepSau1.scale.x = lenX / sizeXSau.x;
-    nepSau1.scale.y = lenY / sizeXSau.y;
-    nepSau1.scale.z = lenZ / sizeXSau.z;
+    nepSau1.scale.x = lenX / sizeXTruoc1.x;
+    nepSau1.scale.y = lenY / sizeXTruoc1.y;
+    nepSau1.scale.z = lenZ / sizeXTruoc1.z;
   };
 
-  const settingNepSau2 = (nepSau2) => {
-    nepSau2.position.z =
-      (rongK1 + truHaoGoc + DDTBia + depth - DDTHau - DDTXSau) * -1;
-    nepSau2.position.x = DDTBia + truHaoGoc;
-    nepSau2.position.y = height - caoXSau;
+  const settingNepSau2 = (nepSau3) => {
+    nepSau3.position.z = (truHaoGoc + DDTBia) * -1;
+    nepSau3.position.x = DDTHau;
+    nepSau3.position.y = height - caoXTruoc;
 
-    const lenZ = DDTXSau;
-    const lenX = rongK2 - 2 * DDTBia;
-    const lenY = caoXSau;
+    const lenZ = rongK2 - truHaoGoc - 2 * DDTBia;
+    const lenX = DDTBia;
+    const lenY = caoXTruoc;
 
-    nepSau2.scale.set(1, 1, 1);
-    let boundingBoxXSau = new THREE.Box3().setFromObject(nepSau2);
-    const sizeXSau = new THREE.Vector3();
-    boundingBoxXSau.getSize(sizeXSau);
+    nepSau3.scale.set(1, 1, 1);
 
-    nepSau2.scale.x = lenX / sizeXSau.x;
-    nepSau2.scale.y = lenY / sizeXSau.y;
-    nepSau2.scale.z = lenZ / sizeXSau.z;
+    let boundingBoxXTruoc2 = new THREE.Box3().setFromObject(nepSau3);
+    const sizeXTruoc2 = new THREE.Vector3();
+    boundingBoxXTruoc2.getSize(sizeXTruoc2);
+
+    nepSau3.scale.x = lenX / sizeXTruoc2.x;
+    nepSau3.scale.y = lenY / sizeXTruoc2.y;
+    nepSau3.scale.z = lenZ / sizeXTruoc2.z;
   };
 
   const settingBa1 = (ba1) => {
-    ba1.position.z = rongK1 * -1;
-    ba1.position.x = depth;
+    ba1.position.z = depth * -1;
+    ba1.position.x = depth + DDTBia;
     ba1.position.y = 0;
 
-    const lenZ = truHaoGoc;
-    const lenX = DDTBia;
+    const lenZ = DDTBia;
+    const lenX = truHaoGoc;
     const lenY = height - 0.02;
 
     ba1.scale.set(1, 1, 1);
@@ -383,12 +381,12 @@ function App3() {
   };
 
   const settingMatCoDinh = (mcd) => {
-    mcd.position.z = (rongK1 + truHaoGoc) * -1;
-    mcd.position.x = truHaoGoc;
+    mcd.position.z = truHaoGoc * -1;
+    mcd.position.x = depth;
     mcd.position.y = 0;
 
-    const lenZ = DDTBia;
-    const lenX = depth + DDTBia;
+    const lenZ = depth + DDTBia;
+    const lenX = DDTBia;
     const lenY = height - 0.02;
 
     mcd.scale.set(1, 1, 1);
@@ -402,12 +400,12 @@ function App3() {
   };
 
   const settingXan1 = (xan1) => {
-    xan1.position.z = (rongK1 + truHaoGoc + DDTBia) * -1;
-    xan1.position.x = depth + DDTBia + truHaoGoc - 0.008;
+    xan1.position.z = (depth + DDTBia + truHaoGoc - 0.008) * -1;
+    xan1.position.x = depth - 0.08;
     xan1.position.y = caoChan + DDTDay;
 
-    const lenZ = 0.08;
-    const lenX = DDTBia;
+    const lenZ = DDTBia;
+    const lenX = 0.08;
     const lenY = height - caoChan - DDTDay - caoXTruoc;
 
     xan1.scale.set(1, 1, 1);
@@ -421,12 +419,12 @@ function App3() {
   };
 
   const settingXan2 = (xan2) => {
-    xan2.position.z = (rongK1 + truHaoGoc + DDTBia + 2 * DDTXTruoc) * -1;
-    xan2.position.x = depth + DDTBia + truHaoGoc - 0.008;
+    xan2.position.z = (depth + DDTBia + truHaoGoc - 0.008) * -1;
+    xan2.position.x = depth - 0.08;
     xan2.position.y = height - caoXTruoc;
 
-    const lenZ = 0.08 - 2 * DDTXTruoc;
-    const lenX = DDTBia;
+    const lenZ = DDTBia;
+    const lenX = 0.08 - 2 * DDTXTruoc;
     const lenY = caoXTruoc;
 
     xan2.scale.set(1, 1, 1);
