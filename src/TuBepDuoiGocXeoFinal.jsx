@@ -50,29 +50,41 @@ function App3() {
   const [rongK2, setRongK2] = useState(0.95);
   const [truHaoGoc, setTruHaoGoc] = useState(0.03);
   const [caoBa, setCaoBa] = useState(0.09);
-  // const [can2, setCan2] = useState(1.4142);
-  const [can2, setCan2] = useState(Math.sqrt(2));
+  // const [1.4142, setCan2] = useState(1.4142);
+  // const [1.4142, setCan2] = useState(Math.sqrt(2));
 
   const [visibleBT, setVisibleBT] = useState(true);
   const [visibleBP, setVisibleBP] = useState(true);
 
-  const [xan33, setXan33] = useState(DDTBia / can2 + truHaoGoc / can2);
-  const [xan26, setXan26] = useState(DDTBia + (xan33 - DDTBia * can2));
-  const [canhXeo, setCanhXeo] = useState(
-    (rongK1 - depth - xan26 - xan33 - truHaoGoc) * can2
-  );
+  // const [xan333, setXan33] = useState(DDTBia / 1.4142 + truHaoGoc / 1.4142);
+  // const [xan266, setXan26] = useState(
+  //   DDTBia + (DDTBia / 1.4142 + truHaoGoc / 1.4142 - DDTBia * 1.4142)
+  // ); // ((DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142)
+  // const [canhXeoO, setCanhXeo] = useState(
+  //   (rongK1 -
+  //     depth -
+  //     (DDTBia + (DDTBia / 1.4142 + truHaoGoc / 1.4142 - DDTBia * 1.4142)) -
+  //     (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+  //     truHaoGoc) *
+  //     1.4142
+  //   // ((rongK1 - depth - truHaoGoc) * 1.4142 - DDTBia * (1.4142 + 2 - 1.4142*1.4142) - 2*truHaoGoc)
+  // );
 
-  // const xan33 = DDTBia / can2 + truHaoGoc / can2; //~33
-  // const xan26 = DDTBia + (xan33 - DDTBia * can2); //~26
-  // const canhXeo = (rongK1 - depth - xan26 - xan33 - truHaoGoc) * can2; //~400
+  // const (DDTBia / 1.4142 + truHaoGoc / 1.4142) = DDTBia / 1.4142 + truHaoGoc / 1.4142; //~33
+  // const ((DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) = DDTBia + ((DDTBia / 1.4142 + truHaoGoc / 1.4142) - DDTBia * 1.4142); //~26
+  // const canhXeoO = (rongK1 - depth - ((DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) - (DDTBia / 1.4142 + truHaoGoc / 1.4142) - truHaoGoc) * 1.4142; //~400
 
   const settingDay1 = (day1) => {
     day1.position.z = truHaoGoc * -1;
     day1.position.x = truHaoGoc;
     day1.position.y = caoChan;
 
-    const lenZ = depth - truHaoGoc + xan26;
-    const lenX = rongK1 - xan33 - 2 * truHaoGoc;
+    const lenZ =
+      depth -
+      truHaoGoc +
+      (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142;
+    const lenX =
+      rongK1 - (DDTBia / 1.4142 + truHaoGoc / 1.4142) - 2 * truHaoGoc;
     const lenY = DDTBia;
 
     day1.scale.set(1, 1, 1);
@@ -86,12 +98,22 @@ function App3() {
   };
 
   const settingDay2 = (day2) => {
-    day2.position.z = (depth + xan26) * -1;
+    day2.position.z =
+      (depth + (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) *
+      -1;
     day2.position.x = truHaoGoc;
     day2.position.y = caoChan;
 
-    const lenZ = rongK2 - depth - xan26 - xan33 - truHaoGoc;
-    const lenX = depth - truHaoGoc + xan26;
+    const lenZ =
+      rongK2 -
+      depth -
+      (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142 -
+      (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+      truHaoGoc;
+    const lenX =
+      depth -
+      truHaoGoc +
+      (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142;
     const lenY = DDTBia;
 
     day2.scale.set(1, 1, 1);
@@ -105,12 +127,25 @@ function App3() {
   };
 
   const settingDay3 = (day3) => {
-    day3.position.z = (depth + xan26) * -1;
-    day3.position.x = depth + xan26;
+    day3.position.z =
+      (depth + (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) *
+      -1;
+    day3.position.x =
+      depth + (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142;
     day3.position.y = caoChan;
 
-    const lenZ = rongK2 - depth - xan26 - xan33 - truHaoGoc;
-    const lenX = rongK1 - depth - xan26 - xan33 - truHaoGoc;
+    const lenZ =
+      rongK2 -
+      depth -
+      (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142 -
+      (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+      truHaoGoc;
+    const lenX =
+      rongK1 -
+      depth -
+      (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142 -
+      (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+      truHaoGoc;
     const lenY = DDTBia;
 
     day3.scale.set(1, 1, 1);
@@ -129,7 +164,8 @@ function App3() {
     hau1.position.y = caoChan + DDTBia;
 
     const lenZ = DDTHau;
-    const lenX = rongK1 - 2 * truHaoGoc - DDTBia - xan33;
+    const lenX =
+      rongK1 - 2 * truHaoGoc - DDTBia - (DDTBia / 1.4142 + truHaoGoc / 1.4142);
     const lenY = height - caoChan - DDTBia;
 
     hau1.scale.set(1, 1, 1);
@@ -147,7 +183,12 @@ function App3() {
     hau2.position.x = truHaoGoc;
     hau2.position.y = caoChan + DDTBia;
 
-    const lenZ = rongK2 - 2 * truHaoGoc - DDTHau - DDTBia - xan33;
+    const lenZ =
+      rongK2 -
+      2 * truHaoGoc -
+      DDTHau -
+      DDTBia -
+      (DDTBia / 1.4142 + truHaoGoc / 1.4142);
     const lenX = DDTHau;
     const lenY = height - caoChan - DDTBia;
 
@@ -163,10 +204,14 @@ function App3() {
 
   const settingBia1 = (bia1) => {
     bia1.position.z = truHaoGoc * -1;
-    bia1.position.x = rongK1 - truHaoGoc - xan33 - DDTBia;
+    bia1.position.x =
+      rongK1 - truHaoGoc - (DDTBia / 1.4142 + truHaoGoc / 1.4142) - DDTBia;
     bia1.position.y = caoChan + DDTBia;
 
-    const lenZ = depth - truHaoGoc + xan26;
+    const lenZ =
+      depth -
+      truHaoGoc +
+      (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142;
     const lenX = DDTBia;
     const lenY = height - caoChan - DDTBia;
 
@@ -181,12 +226,17 @@ function App3() {
   };
 
   const settingBia2 = (bia2) => {
-    bia2.position.z = (rongK2 - truHaoGoc - xan33 - DDTBia) * -1;
+    bia2.position.z =
+      (rongK2 - truHaoGoc - (DDTBia / 1.4142 + truHaoGoc / 1.4142) - DDTBia) *
+      -1;
     bia2.position.x = truHaoGoc;
     bia2.position.y = caoChan + DDTBia;
 
     const lenZ = DDTBia;
-    const lenX = depth - truHaoGoc + xan26;
+    const lenX =
+      depth -
+      truHaoGoc +
+      (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142;
     const lenY = height - caoChan - DDTBia;
 
     bia2.scale.set(1, 1, 1);
@@ -200,12 +250,18 @@ function App3() {
   };
 
   const settingBa1 = (ba1) => {
-    ba1.position.z = (depth + xan26) * -1;
-    ba1.position.x = rongK1 - truHaoGoc - xan33;
+    ba1.position.z =
+      (depth + (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) *
+      -1;
+    ba1.position.x =
+      rongK1 - truHaoGoc - (DDTBia / 1.4142 + truHaoGoc / 1.4142);
     ba1.position.y = height - caoBa;
 
     const lenZ = DDTBia;
-    const lenX = canhXeo;
+    const lenX =
+      (rongK1 - depth - truHaoGoc) * 1.4142 -
+      DDTBia * (1.4142 + 2 - 1.4142 * 1.4142) -
+      2 * truHaoGoc;
     const lenY = caoBa;
 
     ba1.scale.set(1, 1, 1);
@@ -222,12 +278,23 @@ function App3() {
   };
 
   const settingBa2 = (ba2) => {
-    ba2.position.z = (depth + xan26 - DDTBia / can2) * -1;
-    ba2.position.x = rongK1 - truHaoGoc - xan33 - DDTBia / can2;
+    ba2.position.z =
+      (depth +
+        (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142 -
+        DDTBia / 1.4142) *
+      -1;
+    ba2.position.x =
+      rongK1 -
+      truHaoGoc -
+      (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+      DDTBia / 1.4142;
     ba2.position.y = height - caoBa;
 
     const lenZ = DDTBia;
-    const lenX = canhXeo;
+    const lenX =
+      (rongK1 - depth - truHaoGoc) * 1.4142 -
+      DDTBia * (1.4142 + 2 - 1.4142 * 1.4142) -
+      2 * truHaoGoc;
     const lenY = caoBa;
 
     ba2.scale.set(1, 1, 1);
@@ -263,8 +330,11 @@ function App3() {
   };
 
   const settingNep2 = (nep2) => {
-    nep2.position.z = (depth + xan26) * -1;
-    nep2.position.x = rongK1 - truHaoGoc - xan33;
+    nep2.position.z =
+      (depth + (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) *
+      -1;
+    nep2.position.x =
+      rongK1 - truHaoGoc - (DDTBia / 1.4142 + truHaoGoc / 1.4142);
     nep2.position.y = 0;
 
     const lenZ = DDTBia;
@@ -285,8 +355,10 @@ function App3() {
   };
 
   const settingNep3 = (nep3) => {
-    nep3.position.z = (rongK1 - truHaoGoc - xan33) * -1;
-    nep3.position.x = depth + xan26;
+    nep3.position.z =
+      (rongK1 - truHaoGoc - (DDTBia / 1.4142 + truHaoGoc / 1.4142)) * -1;
+    nep3.position.x =
+      depth + (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142;
     nep3.position.y = 0;
 
     const lenZ = truHaoGoc;
@@ -326,8 +398,11 @@ function App3() {
   };
 
   const settingXan1 = (xan1) => {
-    xan1.position.z = (depth + xan26) * -1;
-    xan1.position.x = rongK1 - truHaoGoc - xan33;
+    xan1.position.z =
+      (depth + (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) *
+      -1;
+    xan1.position.x =
+      rongK1 - truHaoGoc - (DDTBia / 1.4142 + truHaoGoc / 1.4142);
     xan1.position.y = caoChan + DDTBia;
 
     const lenZ = 0.08;
@@ -348,8 +423,16 @@ function App3() {
   };
 
   const settingXan2 = (xan2) => {
-    xan2.position.z = (depth + xan26 - (2 * DDTBia) / can2) * -1;
-    xan2.position.x = rongK1 - truHaoGoc - xan33 - (2 * DDTBia) / can2;
+    xan2.position.z =
+      (depth +
+        (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142 -
+        (2 * DDTBia) / 1.4142) *
+      -1;
+    xan2.position.x =
+      rongK1 -
+      truHaoGoc -
+      (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+      (2 * DDTBia) / 1.4142;
     xan2.position.y = height - caoBa;
 
     const lenZ = 0.08 - 2 * DDTBia;
@@ -370,12 +453,18 @@ function App3() {
   };
 
   const settingChan = (chan) => {
-    chan.position.z = (depth + xan26) * -1;
-    chan.position.x = rongK1 - truHaoGoc - xan33;
+    chan.position.z =
+      (depth + (DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) *
+      -1;
+    chan.position.x =
+      rongK1 - truHaoGoc - (DDTBia / 1.4142 + truHaoGoc / 1.4142);
     chan.position.y = 0;
 
     const lenZ = DDTBia;
-    const lenX = canhXeo;
+    const lenX =
+      (rongK1 - depth - truHaoGoc) * 1.4142 -
+      DDTBia * (1.4142 + 2 - 1.4142 * 1.4142) -
+      2 * truHaoGoc;
     const lenY = caoChan;
 
     chan.scale.set(1, 1, 1);
@@ -675,14 +764,14 @@ function App3() {
             onChange={(e) => {
               setRongK1(Number(e.target.value) / 1000);
               setRongK2(Number(e.target.value) / 1000);
-              setCanhXeo(
-                (Number(e.target.value) / 1000 -
-                  depth -
-                  xan26 -
-                  xan33 -
-                  truHaoGoc) *
-                  can2
-              );
+              // setCanhXeo(
+              //   (Number(e.target.value) / 1000 -
+              //     depth -
+              //     ((DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) -
+              //     (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+              //     truHaoGoc) *
+              //     1.4142
+              // );
             }}
           />
           <br />
@@ -699,14 +788,14 @@ function App3() {
               // setRongK2(Number(e.target.value) / 1000);
               setRongK1(Number(e.target.value) / 1000);
               setRongK2(Number(e.target.value) / 1000);
-              setCanhXeo(
-                (Number(e.target.value) / 1000 -
-                  depth -
-                  xan26 -
-                  xan33 -
-                  truHaoGoc) *
-                  can2
-              );
+              // setCanhXeo(
+              //   (Number(e.target.value) / 1000 -
+              //     depth -
+              //     ((DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) -
+              //     (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+              //     truHaoGoc) *
+              //     1.4142
+              // );
             }}
           />
           {/* <input
@@ -745,14 +834,14 @@ function App3() {
             defaultValue={depth * 1000}
             onChange={(e) => {
               setDepth(Number(e.target.value) / 1000);
-              setCanhXeo(
-                (rongK1 -
-                  Number(e.target.value) / 1000 -
-                  xan26 -
-                  xan33 -
-                  truHaoGoc) *
-                  can2
-              );
+              // setCanhXeo(
+              //   (rongK1 -
+              //     Number(e.target.value) / 1000 -
+              //     ((DDTBia * (1.4142 + 1 - 1.4142 * 1.4142) + truHaoGoc) / 1.4142) -
+              //     (DDTBia / 1.4142 + truHaoGoc / 1.4142) -
+              //     truHaoGoc) *
+              //     1.4142
+              // );
             }}
           />
           <br />

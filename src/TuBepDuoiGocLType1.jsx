@@ -37,7 +37,6 @@ function App3() {
   const [DDTBiaTrai, setDDTBiaTrai] = useState(0.017);
   const [DDTBiaPhai, setDDTBiaPhai] = useState(0.017);
   const [DDTBia, setDDTBia] = useState(0.017);
-  const [DDTDay, setDDTDay] = useState(0.017);
   const [DDTHau, setDDTHau] = useState(0.008);
   const [DDTChan, setDDTChan] = useState(0.017);
   const [DDTXTruoc, setDDTXTruoc] = useState(0.017);
@@ -61,7 +60,7 @@ function App3() {
 
     const lenZ = depth - DDTHau;
     const lenX = rongK1 - depth - DDTBia - truHaoGoc;
-    const lenY = DDTDay;
+    const lenY = DDTBia;
 
     day1.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(day1);
@@ -80,7 +79,7 @@ function App3() {
 
     const lenZ = rongK2 - truHaoGoc;
     const lenX = depth - DDTHau;
-    const lenY = DDTDay;
+    const lenY = DDTBia;
 
     day2.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(day2);
@@ -133,11 +132,11 @@ function App3() {
   const settingBia1 = (bia1) => {
     bia1.position.z = DDTHau * -1;
     bia1.position.x = rongK1 - DDTBia;
-    bia1.position.y = caoChan + DDTDay;
+    bia1.position.y = caoChan + DDTBia;
 
     const lenZ = depth - DDTHau;
     const lenX = DDTBia;
-    const lenY = height - caoChan - DDTDay;
+    const lenY = height - caoChan - DDTBia;
 
     bia1.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia1);
@@ -152,11 +151,11 @@ function App3() {
   const settingBia2 = (bia2) => {
     bia2.position.z = DDTHau * -1;
     bia2.position.x = depth + DDTBia + truHaoGoc;
-    bia2.position.y = caoChan + DDTDay;
+    bia2.position.y = caoChan + DDTBia;
 
     const lenZ = depth - DDTHau;
     const lenX = DDTBia;
-    const lenY = height - caoChan - DDTDay;
+    const lenY = height - caoChan - DDTBia;
 
     bia2.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia2);
@@ -171,11 +170,11 @@ function App3() {
   const settingBia3 = (bia3) => {
     bia3.position.z = truHaoGoc * -1;
     bia3.position.x = DDTHau;
-    bia3.position.y = caoChan + DDTDay;
+    bia3.position.y = caoChan + DDTBia;
 
     const lenZ = DDTBia;
     const lenX = depth - DDTHau;
-    const lenY = height - caoChan - DDTDay;
+    const lenY = height - caoChan - DDTBia;
 
     bia3.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia3);
@@ -190,11 +189,11 @@ function App3() {
   const settingBia4 = (bia4) => {
     bia4.position.z = (rongK2 - DDTBia) * -1;
     bia4.position.x = DDTHau;
-    bia4.position.y = caoChan + DDTDay;
+    bia4.position.y = caoChan + DDTBia;
 
     const lenZ = DDTBia;
     const lenX = depth - DDTHau;
-    const lenY = height - caoChan - DDTDay;
+    const lenY = height - caoChan - DDTBia;
 
     bia4.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia4);
@@ -211,7 +210,7 @@ function App3() {
     cTruoc1.position.x = depth + DDTBia + truHaoGoc;
     cTruoc1.position.y = 0;
 
-    const lenZ = DDTChan;
+    const lenZ = DDTBia;
     const lenX = rongK1 - depth - DDTBia - truHaoGoc;
     const lenY = caoChan;
 
@@ -402,11 +401,11 @@ function App3() {
   const settingXan1 = (xan1) => {
     xan1.position.z = (depth + DDTBia + truHaoGoc - 0.008) * -1;
     xan1.position.x = depth - 0.08;
-    xan1.position.y = caoChan + DDTDay;
+    xan1.position.y = caoChan + DDTBia;
 
     const lenZ = DDTBia;
     const lenX = 0.08;
-    const lenY = height - caoChan - DDTDay - caoXTruoc;
+    const lenY = height - caoChan - DDTBia - caoXTruoc;
 
     xan1.scale.set(1, 1, 1);
     let boundingBoxXSau = new THREE.Box3().setFromObject(xan1);
@@ -424,7 +423,7 @@ function App3() {
     xan2.position.y = height - caoXTruoc;
 
     const lenZ = DDTBia;
-    const lenX = 0.08 - 2 * DDTXTruoc;
+    const lenX = 0.08 - 2 * DDTBia;
     const lenY = caoXTruoc;
 
     xan2.scale.set(1, 1, 1);
@@ -625,7 +624,7 @@ function App3() {
     luiChan,
     fixBiaTrai,
     fixBiaPhai,
-    DDTDay,
+    DDTBia,
     DDTHau,
     DDTBiaTrai,
     DDTBiaPhai,
@@ -869,17 +868,17 @@ function App3() {
             <option value={1}>Đáy Theo Hậu</option>
           </select>
           <br />
-          <label className="label" htmlFor="DDTDay">
+          <label className="label" htmlFor="DDTBia">
             Độ dày tấm đáy (mm):
           </label>
           <input
             className="input"
             type="number"
-            name="DDTDay"
-            id="DDTDay"
-            defaultValue={DDTDay * 1000}
+            name="DDTBia"
+            id="DDTBia"
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTDay(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
           <br />
