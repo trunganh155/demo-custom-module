@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import TuAo from './TuAo';
 import TuAoCot from './TuAoCot';
+import TuAoKhuyetCotDT from './TuAoKhuyetCotDT';
 import TuAoCotNgang from './TuAoCotNgang';
 import TuBep from './TuBep';
 import DaoBep from './DaoBep';
@@ -22,12 +23,28 @@ import TuBepDTGocLType3 from './TuBepDTGocLType3';
 import TuOpTuLanh from './TuOpTuLanh';
 import TuBonRua from './TuBonRua';
 
+import TuHutMui from './TuHutMui';
+import TuHutMuiType2 from './TuHutMuiType2';
+
+import TuAoGocBoCongPhaiCoHoc from './TuAoGocBoCongPhaiCoHoc';
+import TuAoGocPhaiCoHoc from './TuAoGocPhaiCoHoc';
+import TuAoGocBoCongPhai from './TuAoGocBoCongPhai';
+
+import TuAoGocBoCongTraiCoHoc from './TuAoGocBoCongTraiCoHoc';
+import TuAoGocTraiCoHoc from './TuAoGocTraiCoHoc';
+import TuAoGocBoCongTrai from './TuAoGocBoCongTrai';
+
+import TuAoGocBoCongPhaiDT from './TuAoGocBoCongPhaiDT';
+import TuAoGocBoCongTraiDT from './TuAoGocBoCongTraiDT';
+
+import TuBepDTCoBa from './TuBepDTCoBa';
+
 import TuAoDuoiGocLType1Full from './TuAoDuoiGocLType1Full';
 import TuAoDuoiGocLType2Full from './TuAoDuoiGocLType2Full';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TuBepDTGocLType3 />
+    <TuAoKhuyetCotDT />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -12,289 +12,216 @@ let display;
 
 let listBox = [];
 
-let truBia = 0.01;
-
-function App3() {
+function App() {
   const [gltfUuid, setGltfUuid] = useState(null);
 
-  const [width, setWidth] = useState(1);
-  const [height, setHeight] = useState(0.89);
-  const [depth, setDepth] = useState(0.35);
+  const [width, setWidth] = useState(0.5);
+  const [height, setHeight] = useState(2);
+  const [depth, setDepth] = useState(0.56);
 
   const [luiHau, setLuiHau] = useState(0.01);
   const [ngamHau, setNgamHau] = useState(0.005);
-  const [luiChan, setLuiChan] = useState(0.05);
+  const [luiChan, setLuiChan] = useState(0);
   const [caoChan, setCaoChan] = useState(0.1);
-  const [caoXTruoc, setCaoXTruoc] = useState(0.08);
-  const [caoXSau, setCaoXSau] = useState(0.08);
+  const [caoKhungHoc, setKhungHoc] = useState(0.8);
 
   const [optionDay, setOptionDay] = useState(0);
   const [optionSauDay, setOptionSauDay] = useState(0);
+  const [optionNoc, setOptionNoc] = useState(0);
   const [optionHau, setOptionHau] = useState(0);
-  const [optionXTruoc, setOptionXTruoc] = useState(0);
-  const [optionXSau, setOptionXSau] = useState(0);
-
 
   const [DDTBia, setDDTBia] = useState(0.017);
-  const [DDTHau, setDDTHau] = useState(0.008);
+  const [DDTHau, setDDTHau] = useState(0.017);
 
+  const [fixNoc, setFixNoc] = useState(0);
   const [fixBiaTrai, setFixBiaTrai] = useState(0);
   const [fixBiaPhai, setFixBiaPhai] = useState(0);
   const [fixDay, setFixDay] = useState(0);
 
-  const [rongK1, setRongK1] = useState(1);
-  const [rongK2, setRongK2] = useState(1);
-  const [truHaoGoc, setTruHaoGoc] = useState(0.03);
-
   const [visibleBT, setVisibleBT] = useState(true);
   const [visibleBP, setVisibleBP] = useState(true);
 
-  const settingDay1 = (day1) => {
-    day1.position.z = DDTHau * -1;
-    day1.position.x = 0;
-    day1.position.y = 0;
+  const settingDay = (day) => {
+    day.position.z = DDTBia * -1;
 
-    const lenZ = depth - DDTHau;
-    const lenX = rongK1;
-    const lenY = DDTBia;
+    day.position.y = caoChan;
 
-    day1.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(day1);
-    const sizeDay = new THREE.Vector3();
-    boundingBoxDay.getSize(sizeDay);
+    day.position.x = DDTHau;
 
-    day1.scale.x = lenX / sizeDay.x;
-    day1.scale.y = lenY / sizeDay.y;
-    day1.scale.z = lenZ / sizeDay.z;
-  };
+    const lenZ = width - 2 * DDTBia;
 
-  const settingDay2 = (day2) => {
-    day2.position.z = (depth + DDTBia) * -1;
-    day2.position.x = DDTHau;
-    day2.position.y = 0;
-
-    const lenZ = rongK2 - depth - DDTBia;
     const lenX = depth - DDTHau;
     const lenY = DDTBia;
 
-    day2.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(day2);
+    day.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(day);
     const sizeDay = new THREE.Vector3();
     boundingBoxDay.getSize(sizeDay);
 
-    day2.scale.x = lenX / sizeDay.x;
-    day2.scale.y = lenY / sizeDay.y;
-    day2.scale.z = lenZ / sizeDay.z;
+    day.scale.x = lenX / sizeDay.x;
+    day.scale.y = lenY / sizeDay.y;
+    day.scale.z = lenZ / sizeDay.z;
   };
 
-  const settingHau1 = (hau1) => {
-    hau1.position.z = 0 * -1;
-    hau1.position.x = truHaoGoc;
-    hau1.position.y = 0;
+  const settingHau = (hau) => {
+    hau.position.z = 0 * -1;
 
-    const lenZ = DDTHau;
-    const lenX = rongK2 - truHaoGoc;
-    const lenY = height;
+    hau.position.y = 0;
 
-    hau1.scale.set(1, 1, 1);
-    let boundingBoxHau = new THREE.Box3().setFromObject(hau1);
-    const sizeHau = new THREE.Vector3();
-    boundingBoxHau.getSize(sizeHau);
+    hau.position.x = 0;
 
-    hau1.scale.x = lenX / sizeHau.x;
-    hau1.scale.y = lenY / sizeHau.y;
-    hau1.scale.z = lenZ / sizeHau.z;
-  };
+    const lenZ = width;
 
-  const settingHau2 = (hau2) => {
-    hau2.position.z = (depth + DDTBia + truHaoGoc) * -1;
-    hau2.position.x = 0;
-    hau2.position.y = 0;
-
-    const lenZ = rongK2 - depth - DDTBia - truHaoGoc;
     const lenX = DDTHau;
-    const lenY = height;
 
-    hau2.scale.set(1, 1, 1);
-    let boundingBoxHau = new THREE.Box3().setFromObject(hau2);
+    const lenY = height - DDTBia;
+
+    hau.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(hau);
     const sizeHau = new THREE.Vector3();
     boundingBoxHau.getSize(sizeHau);
 
-    hau2.scale.x = lenX / sizeHau.x;
-    hau2.scale.y = lenY / sizeHau.y;
-    hau2.scale.z = lenZ / sizeHau.z;
+    hau.scale.x = lenX / sizeHau.x;
+    hau.scale.y = lenY / sizeHau.y;
+    hau.scale.z = lenZ / sizeHau.z;
   };
 
-  const settingNoc1 = (noc1) => {
-    noc1.position.z = DDTHau * -1;
-    noc1.position.x = truHaoGoc;
-    noc1.position.y = height - DDTBia;
+  const settingBiaTrai = (bTrai) => {
+    bTrai.position.z = 0 * -1;
 
-    const lenZ = depth - DDTHau;
-    const lenX = rongK1 - truHaoGoc;
+    bTrai.position.y = 0;
+
+    bTrai.position.x = DDTHau;
+
+    const lenZ = DDTBia;
+
+    const lenX = depth - DDTHau;
+
+    const lenY = height - DDTBia;
+
+    bTrai.scale.set(1, 1, 1);
+    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bTrai);
+    const sizeBiaTrai = new THREE.Vector3();
+    boundingBoxBiaTrai.getSize(sizeBiaTrai);
+
+    bTrai.scale.x = lenX / sizeBiaTrai.x;
+    bTrai.scale.y = lenY / sizeBiaTrai.y;
+    bTrai.scale.z = lenZ / sizeBiaTrai.z;
+  };
+
+  const settingBiaPhai = (bPhai) => {
+    bPhai.position.z = (width - DDTBia) * -1;
+
+    bPhai.position.x = DDTHau;
+
+    bPhai.position.y = 0;
+
+    const lenZ = DDTBia;
+
+    const lenX = depth - DDTHau;
+
+    const lenY = caoKhungHoc - DDTBia;
+
+    bPhai.scale.set(1, 1, 1);
+    let boundingBoxBiaPhai = new THREE.Box3().setFromObject(bPhai);
+    const sizeBiaPhai = new THREE.Vector3();
+    boundingBoxBiaPhai.getSize(sizeBiaPhai);
+
+    bPhai.scale.x = lenX / sizeBiaPhai.x;
+    bPhai.scale.y = lenY / sizeBiaPhai.y;
+    bPhai.scale.z = lenZ / sizeBiaPhai.z;
+  };
+
+  const settingChanTruoc = (cTruoc) => {
+    cTruoc.position.z = DDTBia * -1;
+
+    cTruoc.position.x = depth - DDTBia;
+
+    cTruoc.position.y = 0;
+
+    const lenZ = width - 2 * DDTBia;
+
+    const lenX = DDTBia;
+
+    const lenY = caoChan;
+
+    cTruoc.scale.set(1, 1, 1);
+    let boundingBoxChanTruoc = new THREE.Box3().setFromObject(cTruoc);
+    const sizeChanTruoc = new THREE.Vector3();
+    boundingBoxChanTruoc.getSize(sizeChanTruoc);
+
+    cTruoc.scale.x = lenX / sizeChanTruoc.x;
+    cTruoc.scale.y = lenY / sizeChanTruoc.y;
+    cTruoc.scale.z = lenZ / sizeChanTruoc.z;
+  };
+
+  const settingChanSau = (cSau) => {
+    cSau.position.z = DDTBia * -1;
+
+    cSau.position.x = DDTHau + 0.05;
+
+    cSau.position.y = 0;
+
+    const lenZ = width - 2 * DDTBia;
+
+    const lenX = DDTBia;
+
+    const lenY = caoChan;
+
+    cSau.scale.set(1, 1, 1);
+    let boundingBoxChanSau = new THREE.Box3().setFromObject(cSau);
+    const sizeChanSau = new THREE.Vector3();
+    boundingBoxChanSau.getSize(sizeChanSau);
+
+    cSau.scale.x = lenX / sizeChanSau.x;
+    cSau.scale.y = lenY / sizeChanSau.y;
+    cSau.scale.z = lenZ / sizeChanSau.z;
+  };
+
+  const settingNocBoCong = (nocBoCong) => {
+    nocBoCong.position.z = 0 * -1;
+
+    nocBoCong.position.x = 0;
+
+    nocBoCong.position.y = height - DDTBia;
+
+    const lenZ = width;
+
+    const lenX = depth;
+
     const lenY = DDTBia;
 
-    noc1.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(noc1);
-    const sizeDay = new THREE.Vector3();
-    boundingBoxDay.getSize(sizeDay);
+    nocBoCong.scale.set(1, 1, 1);
+    let boundingBoxNoc = new THREE.Box3().setFromObject(nocBoCong);
+    const sizeNoc = new THREE.Vector3();
+    boundingBoxNoc.getSize(sizeNoc);
 
-    noc1.scale.x = lenX / sizeDay.x;
-    noc1.scale.y = lenY / sizeDay.y;
-    noc1.scale.z = lenZ / sizeDay.z;
+    nocBoCong.scale.x = lenX / sizeNoc.x;
+    nocBoCong.scale.y = lenY / sizeNoc.y;
+    nocBoCong.scale.z = lenZ / sizeNoc.z;
   };
 
-  const settingNoc2 = (noc2) => {
-    noc2.position.z = (depth + DDTBia + truHaoGoc) * -1;
-    noc2.position.x = DDTHau;
-    noc2.position.y = height - DDTBia;
+  const settingNocHoc = (nocHoc) => {
+    nocHoc.position.z = DDTBia * -1;
 
-    const lenZ = rongK2 - depth - DDTBia - truHaoGoc;
+    nocHoc.position.x = DDTHau;
+
+    nocHoc.position.y = caoKhungHoc - DDTBia;
+
+    const lenZ = width - DDTBia;
+
     const lenX = depth - DDTHau;
+
     const lenY = DDTBia;
 
-    noc2.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(noc2);
-    const sizeDay = new THREE.Vector3();
-    boundingBoxDay.getSize(sizeDay);
+    nocHoc.scale.set(1, 1, 1);
+    let boundingBoxNoc = new THREE.Box3().setFromObject(nocHoc);
+    const sizeNoc = new THREE.Vector3();
+    boundingBoxNoc.getSize(sizeNoc);
 
-    noc2.scale.x = lenX / sizeDay.x;
-    noc2.scale.y = lenY / sizeDay.y;
-    noc2.scale.z = lenZ / sizeDay.z;
-  };
-
-  const settingBia1 = (bia1) => {
-    bia1.position.z = DDTHau * -1;
-    bia1.position.x = rongK1 - DDTBia;
-    bia1.position.y = DDTBia;
-
-    const lenZ = depth - DDTHau;
-    const lenX = DDTBia;
-    const lenY = height - DDTBia - DDTBia;
-
-    bia1.scale.set(1, 1, 1);
-    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia1);
-    const sizeBiaTrai = new THREE.Vector3();
-    boundingBoxBiaTrai.getSize(sizeBiaTrai);
-
-    bia1.scale.x = lenX / sizeBiaTrai.x;
-    bia1.scale.y = lenY / sizeBiaTrai.y;
-    bia1.scale.z = lenZ / sizeBiaTrai.z;
-  };
-
-  const settingBia2 = (bia2) => {
-    bia2.position.z = DDTHau * -1;
-    bia2.position.x = truHaoGoc;
-    bia2.position.y = DDTBia;
-
-    const lenZ = depth - DDTHau;
-    const lenX = DDTBia;
-    const lenY = height - DDTBia - DDTBia;
-
-    bia2.scale.set(1, 1, 1);
-    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia2);
-    const sizeBiaTrai = new THREE.Vector3();
-    boundingBoxBiaTrai.getSize(sizeBiaTrai);
-
-    bia2.scale.x = lenX / sizeBiaTrai.x;
-    bia2.scale.y = lenY / sizeBiaTrai.y;
-    bia2.scale.z = lenZ / sizeBiaTrai.z;
-  };
-
-  const settingBia3 = (bia3) => {
-    bia3.position.z = (depth + DDTBia + truHaoGoc) * -1;
-    bia3.position.x = DDTHau;
-    bia3.position.y = DDTBia;
-
-    const lenZ = DDTBia;
-    const lenX = depth - DDTHau;
-    const lenY = height - DDTBia - DDTBia;
-
-    bia3.scale.set(1, 1, 1);
-    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia3);
-    const sizeBiaTrai = new THREE.Vector3();
-    boundingBoxBiaTrai.getSize(sizeBiaTrai);
-
-    bia3.scale.x = lenX / sizeBiaTrai.x;
-    bia3.scale.y = lenY / sizeBiaTrai.y;
-    bia3.scale.z = lenZ / sizeBiaTrai.z;
-  };
-
-  const settingBia4 = (bia4) => {
-    bia4.position.z = (rongK2 - DDTBia) * -1;
-    bia4.position.x = DDTHau;
-    bia4.position.y = DDTBia;
-
-    const lenZ = DDTBia;
-    const lenX = depth - DDTHau;
-    const lenY = height - DDTBia - DDTBia;
-
-    bia4.scale.set(1, 1, 1);
-    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia4);
-    const sizeBiaTrai = new THREE.Vector3();
-    boundingBoxBiaTrai.getSize(sizeBiaTrai);
-
-    bia4.scale.x = lenX / sizeBiaTrai.x;
-    bia4.scale.y = lenY / sizeBiaTrai.y;
-    bia4.scale.z = lenZ / sizeBiaTrai.z;
-  };
-
-  const settingBa = (ba) => {
-    ba.position.z = (depth + DDTBia) * -1;
-    ba.position.x = depth;
-    ba.position.y = 0;
-
-    const lenZ = truHaoGoc;
-    const lenX = DDTBia;
-    const lenY = height;
-
-    ba.scale.set(1, 1, 1);
-    let boundingBoxXSau = new THREE.Box3().setFromObject(ba);
-    const sizeXSau = new THREE.Vector3();
-    boundingBoxXSau.getSize(sizeXSau);
-
-    ba.scale.x = lenX / sizeXSau.x;
-    ba.scale.y = lenY / sizeXSau.y;
-    ba.scale.z = lenZ / sizeXSau.z;
-  };
-
-  const settingMatCoDinh = (mcd) => {
-    mcd.position.z = depth * -1;
-    mcd.position.x = 0;
-    mcd.position.y = 0;
-
-    const lenZ = DDTBia;
-    const lenX = depth + truHaoGoc + DDTBia;
-    const lenY = height;
-
-    mcd.scale.set(1, 1, 1);
-
-    let boundingBoxXSau = new THREE.Box3().setFromObject(mcd);
-    const sizeXSau = new THREE.Vector3();
-    boundingBoxXSau.getSize(sizeXSau);
-
-    mcd.scale.x = lenX / sizeXSau.x;
-    mcd.scale.y = lenY / sizeXSau.y;
-    mcd.scale.z = lenZ / sizeXSau.z;
-  };
-
-  const settingXan = (xan) => {
-    xan.position.z = (depth - 0.08) * -1;
-    xan.position.x = depth + DDTBia + truHaoGoc - 0.008;
-    xan.position.y = DDTBia;
-
-    const lenZ = 0.08;
-    const lenX = DDTBia;
-    const lenY = height - DDTBia - DDTBia;
-
-    xan.scale.set(1, 1, 1);
-    let boundingBoxXSau = new THREE.Box3().setFromObject(xan);
-    const sizeXSau = new THREE.Vector3();
-    boundingBoxXSau.getSize(sizeXSau);
-
-    xan.scale.x = lenX / sizeXSau.x;
-    xan.scale.y = lenY / sizeXSau.y;
-    xan.scale.z = lenZ / sizeXSau.z;
+    nocHoc.scale.x = lenX / sizeNoc.x;
+    nocHoc.scale.y = lenY / sizeNoc.y;
+    nocHoc.scale.z = lenZ / sizeNoc.z;
   };
 
   useEffect(() => {
@@ -305,7 +232,8 @@ function App3() {
     const glftLoader = new GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
 
-    glftLoader.load('/glb/TBTGL1.glb', (gltfScene) => {
+    // glftLoader.load('/glb/box.glb', (gltfScene) => {
+    glftLoader.load('/glb/TUGOCBOCONGPHAI-COHOC.glb', (gltfScene) => {
       gltfScene.scene.scale.set(1, 1, 1);
       gltfScene.scene.position.set(0, 0, 0);
       gltfScene.scene.traverse((child) => {
@@ -317,10 +245,6 @@ function App3() {
           // child.receiveShadow = true;
           child.material.roughness = 0.8;
           child.material.metalness = 0.4;
-
-          // Thêm opacity
-          child.material.opacity = 1;
-          child.material.transparent = true; // Bắt buộc phải có để opacity hoạt động
         }
       });
 
@@ -380,40 +304,61 @@ function App3() {
       const md = display.scene.getObjectByProperty('uuid', gltfUuid);
       md.position.set(-depth / 2, -height / 2, width / 2);
 
-      const day1 = md.getObjectByName('G-DAY-1');
-      const day2 = md.getObjectByName('G-DAY-2');
-      const hau1 = md.getObjectByName('G-HAU-1');
-      const hau2 = md.getObjectByName('G-HAU-2');
-      const noc1 = md.getObjectByName('G-NOC-1');
-      const noc2 = md.getObjectByName('G-NOC-2');
-      const bia1 = md.getObjectByName('G-BIA-1');
-      const bia2 = md.getObjectByName('G-BIA-2');
-      const bia3 = md.getObjectByName('G-BIA-3');
-      const bia4 = md.getObjectByName('G-BIA-4');
-
-      const ba = md.getObjectByName('G-BA');
-      const xan = md.getObjectByName('G-XAN');
-      const matCoDinh = md.getObjectByName('G-MAT-CO-DINH');
+      const day = md.getObjectByName('DAY');
+      const nocBoCong = md.getObjectByName('NOC-BO-CONG');
+      const nocHoc = md.getObjectByName('NOC-HOC');
+      const hau = md.getObjectByName('HAU');
+      const bTrai = md.getObjectByName('BIA-TRAI');
+      const bPhai = md.getObjectByName('BIA-PHAI');
+      const cTruoc = md.getObjectByName('CHAN-TRUOC');
+      const cSau = md.getObjectByName('CHAN-SAU');
 
       listBox?.forEach((box) => {
         display.scene.remove(box);
       });
       listBox = [];
 
-      day1 && settingDay1(day1);
-      day2 && settingDay2(day2);
-      hau1 && settingHau1(hau1);
-      hau2 && settingHau2(hau2);
-      noc1 && settingNoc1(noc1);
-      noc2 && settingNoc2(noc2);
-      bia1 && settingBia1(bia1);
-      bia2 && settingBia2(bia2);
-      bia3 && settingBia3(bia3);
-      bia4 && settingBia4(bia4);
+      day && settingDay(day);
+      bTrai && settingBiaTrai(bTrai);
+      bPhai && settingBiaPhai(bPhai);
+      cTruoc && settingChanTruoc(cTruoc);
+      cSau && settingChanSau(cSau);
+      nocBoCong && settingNocBoCong(nocBoCong);
+      nocHoc && settingNocHoc(nocHoc);
+      hau && settingHau(hau);
 
-      ba && settingBa(ba);
-      xan && settingXan(xan);
-      matCoDinh && settingMatCoDinh(matCoDinh);
+      ///
+      const day1 = md.getObjectByName('DAY1');
+      const day2 = md.getObjectByName('DAY2');
+      const day3 = md.getObjectByName('DAY3');
+
+      const size1x = 0.56;
+      const size2x = 0.3;
+      const size3x = 0.56;
+
+      const size1z = 0.3;
+      const size2z = 0.3;
+      const size3z = 0.3;
+
+      const cotx = 0.1;
+      const cotz = 0.25;
+
+      const cotdz = 0.55;
+
+      if (day1 && day2 && day3) {
+        day1.scale.set(depth / size1x, 1, cotdz / size1z);
+        day1.position.x = 0;
+        day1.position.z = 0 * -1;
+
+        day2.scale.set((depth - cotx) / size2x, 1, cotz / size2z);
+        day2.position.x = cotx;
+        day2.position.z = cotdz * -1;
+
+        day3.scale.set(depth / size3x, 1, (width - cotdz - cotz) / size3z);
+        day3.position.x = 0;
+        day3.position.z = (cotdz + cotz) * -1;
+      }
+      ////
 
       const textureLoader = new THREE.TextureLoader();
       textureLoader.load('/images/TEXTURE.png', (newTexture) => {
@@ -440,33 +385,28 @@ function App3() {
 
       setTimeout(() => {
         handleResetBox();
-      }, 100);
+      }, 10);
     }
   }, [
     display,
+    optionNoc,
     optionDay,
     optionSauDay,
     optionHau,
-    optionXTruoc,
-    optionXSau,
-    rongK1,
-    rongK2,
-    truHaoGoc,
     width,
     height,
     depth,
     luiHau,
     ngamHau,
     caoChan,
-    caoXTruoc,
-    caoXSau,
+    fixNoc,
     fixDay,
     luiChan,
     fixBiaTrai,
     fixBiaPhai,
     DDTBia,
-    DDTHau,
     DDTBia,
+    DDTHau,
     DDTBia,
     DDTBia,
     DDTBia,
@@ -513,6 +453,54 @@ function App3() {
     });
   };
 
+  const handleResetBox2 = () => {
+    const md = display.scene.getObjectByProperty('uuid', gltfUuid);
+
+    const day = md.getObjectByName('DAY');
+    const noc = md.getObjectByName('NOC');
+    const hau = md.getObjectByName('HAU');
+    const bTrai = md.getObjectByName('BIA-TRAI');
+    const bPhai = md.getObjectByName('BIA-PHAI');
+    const cTruoc = md.getObjectByName('CHAN-TRUOC');
+    const cSau = md.getObjectByName('CHAN-SAU');
+
+    const meshes = [day, noc, hau, bTrai, bPhai, cTruoc, cSau];
+
+    meshes.forEach((mesh) => {
+      if (mesh) {
+        // Tạo Box3 để xác định kích thước của mesh
+        const box = new THREE.Box3().setFromObject(mesh);
+
+        // Tính toán kích thước và vị trí của khung
+        const size = new THREE.Vector3();
+        box.getSize(size);
+        const center = new THREE.Vector3();
+        box.getCenter(center);
+
+        // Tạo geometry cho khung
+        const geometry = new THREE.BoxGeometry(size.x, size.y, size.z);
+
+        // Tạo edges từ geometry
+        const edges = new THREE.EdgesGeometry(geometry);
+
+        // Tạo màu ngẫu nhiên cho khung viền
+        const randomColor = Math.random() * 0xffffff; // Màu ngẫu nhiên
+        const material = new THREE.LineBasicMaterial({ color: 0x000000 });
+
+        // Tạo LineSegments cho khung viền
+        const boundingBoxEdges = new THREE.LineSegments(edges, material);
+
+        // Đặt vị trí cho khung sao cho nó nằm khớp với mesh
+        boundingBoxEdges.position.copy(center);
+
+        listBox.push(boundingBoxEdges);
+
+        // Thêm khung vào scene
+        display.scene.add(boundingBoxEdges);
+      }
+    });
+  };
+
   const handleHide = (name, visible) => {
     const md = display.scene.getObjectByProperty('uuid', gltfUuid);
 
@@ -526,34 +514,10 @@ function App3() {
       <div className="container-option">
         <h5 className="header">Kích thước:</h5>
         <div>
-          <label className="label" htmlFor="rongK1">
-            Rộng K1 (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="rongK1"
-            id="rongK1"
-            defaultValue={rongK1 * 1000}
-            onChange={(e) => {
-              setRongK1(Number(e.target.value) / 1000);
-            }}
-          />
-          <br />
           <label className="label" htmlFor="width">
-            Rộng K2 (mm):
+            Dài (mm):
           </label>
           <input
-            className="input"
-            type="number"
-            name="rongK2"
-            id="rongK2"
-            defaultValue={rongK2 * 1000}
-            onChange={(e) => {
-              setRongK2(Number(e.target.value) / 1000);
-            }}
-          />
-          {/* <input
             className="input"
             type="number"
             name="width"
@@ -562,9 +526,9 @@ function App3() {
             onChange={(e) => {
               setWidth(Number(e.target.value) / 1000);
             }}
-          /> */}
+          />
           <br />
-          <label className="label" htmlFor="rongK2">
+          <label className="label" htmlFor="height">
             Cao (mm):
           </label>
           <input
@@ -591,101 +555,43 @@ function App3() {
               setDepth(Number(e.target.value) / 1000);
             }}
           />
-          <br />
-          <label className="label" htmlFor="truHaoGoc">
-            Trừ hao góc (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="truHaoGoc"
-            id="truHaoGoc"
-            defaultValue={truHaoGoc * 1000}
-            onChange={(e) => {
-              setTruHaoGoc(Number(e.target.value) / 1000);
-            }}
-          />
         </div>
 
-        <h5 className="header">Xương trước:</h5>
+        <h5 className="header">Nóc:</h5>
         <div>
           <select
             className="select"
-            onChange={(e) => setOptionXTruoc(Number(e.target.value))}
+            onChange={(e) => setOptionNoc(Number(e.target.value))}
           >
-            <option value={0}>2 Dọc</option>
-            <option value={1}>2 Ngang</option>
-            <option value={2}>1 Dọc, 1 Ngang</option>
+            <option value={0}>Nóc Lọt Lòng</option>
+            <option value={1}>Nóc Phủ Bì</option>
           </select>
-
           <br />
-          <label className="label" htmlFor="DDTHau">
-            Độ dày tấm xương trước (mm):
+          <label className="label" htmlFor="DDTNoc">
+            Độ dày tấm nóc (mm):
           </label>
           <input
             className="input"
             type="number"
-            name="DDTXuongTruoc"
-            id="DDTXuongTruoc"
+            name="DDTNoc"
+            id="DDTNoc"
             defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTXTruoc(Number(e.target.value) / 1000);
+              setDDTNoc(Number(e.target.value) / 1000);
             }}
           />
-
           <br />
-          <label className="label" htmlFor="caoChan">
-            Chiều cao xương trước (mm):
+          <label className="label" htmlFor="fixNoc">
+            Tăng/giảm nóc (mm):
           </label>
           <input
             className="input"
             type="number"
-            name="caoXTruoc"
-            id="caoXTruoc"
-            defaultValue={caoXTruoc * 1000}
+            name="fixNoc"
+            id="fixNoc"
+            defaultValue={fixNoc * 1000}
             onChange={(e) => {
-              setCaoXTruoc(Number(e.target.value) / 1000);
-            }}
-          />
-        </div>
-
-        <h5 className="header">Xương sau:</h5>
-        <div>
-          <select
-            className="select"
-            onChange={(e) => setOptionXSau(Number(e.target.value))}
-          >
-            <option value={0}>Dọc</option>
-            <option value={1}>Ngang</option>
-          </select>
-
-          <br />
-          <label className="label" htmlFor="DDTHau">
-            Độ dày tấm xương sau (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="DDTXuongSau"
-            id="DDTXuongSau"
-            defaultValue={DDTBia * 1000}
-            onChange={(e) => {
-              setDDTXSau(Number(e.target.value) / 1000);
-            }}
-          />
-
-          <br />
-          <label className="label" htmlFor="caoChan">
-            Chiều cao xương sau (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="caoXSau"
-            id="caoXSau"
-            defaultValue={caoXSau * 1000}
-            onChange={(e) => {
-              setCaoXSau(Number(e.target.value) / 1000);
+              setFixNoc(Number(e.target.value) / 1000);
             }}
           />
         </div>
@@ -696,16 +602,18 @@ function App3() {
             className="select"
             onChange={(e) => setOptionDay(Number(e.target.value))}
           >
-            <option value={0}>Phủ Bì</option>
-            <option value={1}>Lọt Lòng</option>
+            <option value={0}>Lọt Trong 2 Hông</option>
+            <option value={1}>Trùm 2 Hông</option>
+            <option value={2}>Trùm Trái Lọt Phải</option>
+            <option value={3}>Trùm Phải Lọt Trái</option>
           </select>
           <br />
           <select
             className="select"
             onChange={(e) => setOptionSauDay(Number(e.target.value))}
           >
-            <option value={0}>Đáy Theo Bìa</option>
-            <option value={1}>Đáy Theo Hậu</option>
+            <option value={0}>Đáy Theo Hậu</option>
+            <option value={1}>Đáy Theo Bìa</option>
           </select>
           <br />
           <label className="label" htmlFor="DDTDay">
@@ -743,8 +651,9 @@ function App3() {
             className="select"
             onChange={(e) => setOptionHau(Number(e.target.value))}
           >
-            <option value={0}>Hậu Phủ Bì</option>
-            <option value={1}>Hậu Âm Tủ</option>
+            <option value={0}>Hậu Phủ Bì Phủ Nóc</option>
+            <option value={1}>Hậu Phủ Bì Lọt Nóc</option>
+            <option value={2}>Hậu Âm Tủ</option>
           </select>
           <br />
           <label className="label" htmlFor="DDTHau">
@@ -760,7 +669,7 @@ function App3() {
               setDDTHau(Number(e.target.value) / 1000);
             }}
           />
-          {optionHau === 1 && (
+          {optionHau === 2 && (
             <div>
               <label className="label" htmlFor="luiHau">
                 Lùi Hậu (mm):
@@ -771,9 +680,6 @@ function App3() {
                 name="luiHau"
                 id="luiHau"
                 defaultValue={luiHau * 1000}
-                onChange={(e) => {
-                  setLuiHau(Number(e.target.value) / 1000);
-                }}
               />
               <br />
               <label className="label" htmlFor="ngamHau">
@@ -785,9 +691,6 @@ function App3() {
                 name="ngamHau"
                 id="ngamHau"
                 defaultValue={ngamHau * 1000}
-                onChange={(e) => {
-                  setNgamHau(Number(e.target.value) / 1000);
-                }}
               />
             </div>
           )}
@@ -795,18 +698,27 @@ function App3() {
 
         <h5 className="header">Chân:</h5>
         <div>
-          <label className="label" htmlFor="DDTChan">
-            Độ dày tấm chân (mm):
+          <label className="label" htmlFor="DDTCTruoc">
+            Độ dày tấm chân trước (mm):
           </label>
           <input
             className="input"
             type="number"
-            name="DDTChan"
-            id="DDTChan"
+            name="DDTCTruoc"
+            id="DDTCTruoc"
             defaultValue={DDTBia * 1000}
-            onChange={(e) => {
-              setDDTChan(Number(e.target.value) / 1000);
-            }}
+          />
+          <br />
+
+          <label className="label" htmlFor="DDTCSau">
+            Độ dày tấm chân sau (mm):
+          </label>
+          <input
+            className="input"
+            type="number"
+            name="DDTCSau"
+            id="DDTCSau"
+            defaultValue={DDTBia * 1000}
           />
           <br />
 
@@ -834,9 +746,6 @@ function App3() {
             name="luiChan"
             id="luiChan"
             defaultValue={luiChan * 1000}
-            onChange={(e) => {
-              setLuiChan(Number(e.target.value) / 1000);
-            }}
           />
         </div>
 
@@ -867,7 +776,7 @@ function App3() {
             id="DDTBiaTrai"
             defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTBiaTrai(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
           <br />
@@ -881,9 +790,6 @@ function App3() {
             name="fixBiaTrai"
             id="fixBiaTrai"
             defaultValue={fixBiaTrai * 1000}
-            onChange={(e) => {
-              setFixBiaTrai(Number(e.target.value) / 1000);
-            }}
           />
         </div>
 
@@ -913,9 +819,6 @@ function App3() {
             name="DDTBiaPhai"
             id="DDTBiaPhai"
             defaultValue={DDTBia * 1000}
-            onChange={(e) => {
-              setDDTBiaPhai(Number(e.target.value) / 1000);
-            }}
           />
           <br />
 
@@ -928,9 +831,6 @@ function App3() {
             name="fixBiaPhai"
             id="fixBiaPhai"
             defaultValue={fixBiaPhai * 1000}
-            onChange={(e) => {
-              setFixBiaPhai(Number(e.target.value) / 1000);
-            }}
           />
         </div>
       </div>
@@ -940,4 +840,4 @@ function App3() {
   );
 }
 
-export default App3;
+export default App;

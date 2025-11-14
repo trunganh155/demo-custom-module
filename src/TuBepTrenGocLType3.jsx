@@ -34,15 +34,8 @@ function App3() {
   const [optionXTruoc, setOptionXTruoc] = useState(0);
   const [optionXSau, setOptionXSau] = useState(0);
 
-  const [DDTBiaTrai, setDDTBiaTrai] = useState(0.017);
-  const [DDTBiaPhai, setDDTBiaPhai] = useState(0.017);
   const [DDTBia, setDDTBia] = useState(0.017);
-  const [DDTDay, setDDTDay] = useState(0.017);
-  const [DDTNoc, setDDTNoc] = useState(0.017);
   const [DDTHau, setDDTHau] = useState(0.017);
-  const [DDTChan, setDDTChan] = useState(0.017);
-  const [DDTXTruoc, setDDTXTruoc] = useState(0.017);
-  const [DDTXSau, setDDTXSau] = useState(0.017);
 
   const [fixBiaTrai, setFixBiaTrai] = useState(0);
   const [fixBiaPhai, setFixBiaPhai] = useState(0);
@@ -63,7 +56,7 @@ function App3() {
 
     const lenZ = depth - truHaoGoc;
     const lenX = rongK1 - depth;
-    const lenY = DDTDay;
+    const lenY = DDTBia;
 
     day1.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(day1);
@@ -82,7 +75,7 @@ function App3() {
 
     const lenZ = rongK2 - truHaoGoc;
     const lenX = depth - truHaoGoc;
-    const lenY = DDTDay;
+    const lenY = DDTBia;
 
     day2.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(day2);
@@ -97,11 +90,11 @@ function App3() {
   const settingHau1 = (hau1) => {
     hau1.position.z = truHaoGoc * -1;
     hau1.position.x = truHaoGoc;
-    hau1.position.y = DDTDay;
+    hau1.position.y = DDTBia;
 
     const lenZ = DDTHau;
     const lenX = rongK1 - truHaoGoc - DDTBia;
-    const lenY = height - DDTDay - DDTNoc;
+    const lenY = height - DDTBia - DDTBia;
 
     hau1.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau1);
@@ -116,11 +109,11 @@ function App3() {
   const settingHau2 = (hau2) => {
     hau2.position.z = (truHaoGoc + DDTBia) * -1;
     hau2.position.x = truHaoGoc;
-    hau2.position.y = DDTDay;
+    hau2.position.y = DDTBia;
 
     const lenZ = rongK2 - truHaoGoc - DDTHau - DDTBia;
     const lenX = DDTHau;
-    const lenY = height - DDTDay - DDTNoc;
+    const lenY = height - DDTBia - DDTBia;
 
     hau2.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau2);
@@ -135,11 +128,11 @@ function App3() {
   const settingBia1 = (bia1) => {
     bia1.position.z = truHaoGoc * -1;
     bia1.position.x = rongK1 - DDTBia;
-    bia1.position.y = DDTDay;
+    bia1.position.y = DDTBia;
 
     const lenZ = depth - truHaoGoc;
     const lenX = DDTBia;
-    const lenY = height - DDTDay - DDTNoc;
+    const lenY = height - DDTBia - DDTBia;
 
     bia1.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia1);
@@ -154,11 +147,11 @@ function App3() {
   const settingBia2 = (bia2) => {
     bia2.position.z = (rongK2 - DDTBia) * -1;
     bia2.position.x = truHaoGoc;
-    bia2.position.y = DDTDay;
+    bia2.position.y = DDTBia;
 
     const lenZ = DDTBia;
     const lenX = depth - truHaoGoc;
-    const lenY = height - DDTDay - DDTNoc;
+    const lenY = height - DDTBia - DDTBia;
 
     bia2.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bia2);
@@ -173,11 +166,11 @@ function App3() {
   const settingNoc1 = (noc1) => {
     noc1.position.z = truHaoGoc * -1;
     noc1.position.x = depth;
-    noc1.position.y = height - DDTNoc;
+    noc1.position.y = height - DDTBia;
 
     const lenZ = depth - truHaoGoc;
     const lenX = rongK1 - depth;
-    const lenY = DDTDay;
+    const lenY = DDTBia;
 
     noc1.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(noc1);
@@ -192,11 +185,11 @@ function App3() {
   const settingNoc2 = (noc2) => {
     noc2.position.z = truHaoGoc * -1;
     noc2.position.x = truHaoGoc;
-    noc2.position.y = height - DDTNoc;
+    noc2.position.y = height - DDTBia;
 
     const lenZ = rongK2 - truHaoGoc;
     const lenX = depth - truHaoGoc;
-    const lenY = DDTDay;
+    const lenY = DDTBia;
 
     noc2.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(noc2);
@@ -363,13 +356,13 @@ function App3() {
     luiChan,
     fixBiaTrai,
     fixBiaPhai,
-    DDTDay,
+    DDTBia,
     DDTHau,
-    DDTBiaTrai,
-    DDTBiaPhai,
-    DDTChan,
-    DDTXTruoc,
-    DDTXSau,
+    DDTBia,
+    DDTBia,
+    DDTBia,
+    DDTBia,
+    DDTBia,
     gltfUuid,
   ]);
 
@@ -526,7 +519,7 @@ function App3() {
             type="number"
             name="DDTXuongTruoc"
             id="DDTXuongTruoc"
-            defaultValue={DDTXTruoc * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
               setDDTXTruoc(Number(e.target.value) / 1000);
             }}
@@ -567,7 +560,7 @@ function App3() {
             type="number"
             name="DDTXuongSau"
             id="DDTXuongSau"
-            defaultValue={DDTXSau * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
               setDDTXSau(Number(e.target.value) / 1000);
             }}
@@ -615,7 +608,7 @@ function App3() {
             type="number"
             name="DDTDay"
             id="DDTDay"
-            defaultValue={DDTDay * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
               setDDTDay(Number(e.target.value) / 1000);
             }}
@@ -702,7 +695,7 @@ function App3() {
             type="number"
             name="DDTChan"
             id="DDTChan"
-            defaultValue={DDTChan * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
               setDDTChan(Number(e.target.value) / 1000);
             }}
@@ -764,7 +757,7 @@ function App3() {
             type="number"
             name="DDTBiaTrai"
             id="DDTBiaTrai"
-            defaultValue={DDTBiaTrai * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
               setDDTBiaTrai(Number(e.target.value) / 1000);
             }}
@@ -811,7 +804,7 @@ function App3() {
             type="number"
             name="DDTBiaPhai"
             id="DDTBiaPhai"
-            defaultValue={DDTBiaPhai * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
               setDDTBiaPhai(Number(e.target.value) / 1000);
             }}
