@@ -24,6 +24,7 @@ import TuOpTuLanh from './TuOpTuLanh';
 import TuBonRua from './TuBonRua';
 
 import TuHutMui from './TuHutMui';
+import TuHutMuiDT from './TuHutMuiDT';
 import TuHutMuiType2 from './TuHutMuiType2';
 
 import TuAoGocBoCongPhaiCoHoc from './TuAoGocBoCongPhaiCoHoc';
@@ -42,9 +43,13 @@ import TuBepDTCoBa from './TuBepDTCoBa';
 import TuAoDuoiGocLType1Full from './TuAoDuoiGocLType1Full';
 import TuAoDuoiGocLType2Full from './TuAoDuoiGocLType2Full';
 
+import TuBepDuoiKhuyetCot from './TuBepDuoiKhuyetCot';
+import TuBepTrenKhuyetCot from './TuBepTrenKhuyetCot';
+import TuBepDuoiGocLType1FullKhuyetCot from './TuBepDuoiGocLType1FullKhuyetCot';
+
 ReactDOM.render(
   <React.StrictMode>
-    <TuAoKhuyetCotDT />
+    <TuBepDuoiGocLType1FullKhuyetCot />
   </React.StrictMode>,
   document.getElementById('root')
 );

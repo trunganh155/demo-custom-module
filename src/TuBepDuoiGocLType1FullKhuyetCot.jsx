@@ -34,20 +34,23 @@ function App3() {
   const [optionXTruoc, setOptionXTruoc] = useState(0);
   const [optionXSau, setOptionXSau] = useState(0);
 
-  const [DDTBiaTrai, setDDTBiaTrai] = useState(0.017);
-  const [DDTBiaPhai, setDDTBiaPhai] = useState(0.017);
   const [DDTBia, setDDTBia] = useState(0.017);
   const [DDTHau, setDDTHau] = useState(0.008);
-  const [DDTChan, setDDTChan] = useState(0.017);
-  const [DDTXTruoc, setDDTXTruoc] = useState(0.017);
-  const [DDTXSau, setDDTXSau] = useState(0.017);
+  const [DDTMat, setDDTMat] = useState(0.02);
+  const [DDTVach, setDDTVach] = useState(0.005);
+
+  const [caoVach, setCaoVach] = useState(0.65);
+
+  const [KCCot, setKCCot] = useState(0);
+  const [dayCot, setDayCot] = useState(0.2);
+  const [rongCot, setRongCot] = useState(0.25);
 
   const [fixBiaTrai, setFixBiaTrai] = useState(0);
   const [fixBiaPhai, setFixBiaPhai] = useState(0);
   const [fixDay, setFixDay] = useState(0);
 
-  const [rongK1, setRongK1] = useState(1.4);
-  const [rongK2, setRongK2] = useState(1.4);
+  const [rongK1, setRongK1] = useState(1.2);
+  const [rongK2, setRongK2] = useState(1);
   const [truHaoGoc, setTruHaoGoc] = useState(0.03);
 
   const [visibleBT, setVisibleBT] = useState(true);
@@ -72,23 +75,42 @@ function App3() {
     day1.scale.z = lenZ / sizeDay.z;
   };
 
-  const settingDay2 = (day2) => {
-    day2.position.z = truHaoGoc * -1;
-    day2.position.x = DDTHau;
-    day2.position.y = caoChan;
+  const settingDay2_1 = (day2_1) => {
+    day2_1.position.z = truHaoGoc * -1;
+    day2_1.position.x = dayCot;
+    day2_1.position.y = caoChan;
 
-    const lenZ = rongK2 - truHaoGoc;
-    const lenX = depth - DDTHau;
+    const lenZ = rongCot - truHaoGoc;
+    const lenX = depth - dayCot;
     const lenY = DDTBia;
 
-    day2.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(day2);
+    day2_1.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(day2_1);
     const sizeDay = new THREE.Vector3();
     boundingBoxDay.getSize(sizeDay);
 
-    day2.scale.x = lenX / sizeDay.x;
-    day2.scale.y = lenY / sizeDay.y;
-    day2.scale.z = lenZ / sizeDay.z;
+    day2_1.scale.x = lenX / sizeDay.x;
+    day2_1.scale.y = lenY / sizeDay.y;
+    day2_1.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingDay2_2 = (day2_2) => {
+    day2_2.position.z = rongCot * -1;
+    day2_2.position.x = DDTHau;
+    day2_2.position.y = caoChan;
+
+    const lenZ = rongK2 - rongCot;
+    const lenX = depth - DDTHau;
+    const lenY = DDTBia;
+
+    day2_2.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(day2_2);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    day2_2.scale.x = lenX / sizeDay.x;
+    day2_2.scale.y = lenY / sizeDay.y;
+    day2_2.scale.z = lenZ / sizeDay.z;
   };
 
   const settingMatDa1 = (matDa1) => {
@@ -110,23 +132,42 @@ function App3() {
     matDa1.scale.z = lenZ / sizeDay.z;
   };
 
-  const settingMatDa2 = (matDa2) => {
-    matDa2.position.z = 0 * -1;
-    matDa2.position.x = 0;
-    matDa2.position.y = height;
+  const settingMatDa2_1 = (matDa2_1) => {
+    matDa2_1.position.z = 0 * -1;
+    matDa2_1.position.x = 0;
+    matDa2_1.position.y = height;
 
     const lenZ = rongK2;
     const lenX = depth + DDTMat;
     const lenY = DDTMat;
 
-    matDa2.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(matDa2);
+    matDa2_1.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa2_1);
     const sizeDay = new THREE.Vector3();
     boundingBoxDay.getSize(sizeDay);
 
-    matDa2.scale.x = lenX / sizeDay.x;
-    matDa2.scale.y = lenY / sizeDay.y;
-    matDa2.scale.z = lenZ / sizeDay.z;
+    matDa2_1.scale.x = lenX / sizeDay.x;
+    matDa2_1.scale.y = lenY / sizeDay.y;
+    matDa2_1.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingMatDa2_2 = (matDa2_2) => {
+    matDa2_2.position.z = 0 * -1;
+    matDa2_2.position.x = 0;
+    matDa2_2.position.y = height;
+
+    const lenZ = rongK2;
+    const lenX = depth + DDTMat;
+    const lenY = DDTMat;
+
+    matDa2_2.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa2_2);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    matDa2_2.scale.x = lenX / sizeDay.x;
+    matDa2_2.scale.y = lenY / sizeDay.y;
+    matDa2_2.scale.z = lenZ / sizeDay.z;
   };
 
   const settingVachBep1 = (vachBep1) => {
@@ -187,11 +228,11 @@ function App3() {
   };
 
   const settingHau2 = (hau2) => {
-    hau2.position.z = truHaoGoc * -1;
+    hau2.position.z = rongCot * -1;
     hau2.position.x = 0;
     hau2.position.y = caoChan;
 
-    const lenZ = rongK2 - truHaoGoc;
+    const lenZ = rongK2 - rongCot;
     const lenX = DDTHau;
     const lenY = height - caoChan;
 
@@ -245,11 +286,11 @@ function App3() {
 
   const settingBia3 = (bia3) => {
     bia3.position.z = truHaoGoc * -1;
-    bia3.position.x = DDTHau;
+    bia3.position.x = dayCot;
     bia3.position.y = caoChan + DDTBia;
 
     const lenZ = DDTBia;
-    const lenX = depth - DDTHau;
+    const lenX = depth - dayCot;
     const lenY = height - caoChan - DDTBia;
 
     bia3.scale.set(1, 1, 1);
@@ -279,6 +320,44 @@ function App3() {
     bia4.scale.x = lenX / sizeBiaTrai.x;
     bia4.scale.y = lenY / sizeBiaTrai.y;
     bia4.scale.z = lenZ / sizeBiaTrai.z;
+  };
+
+  const settingBiaCot1 = (biaCot1) => {
+    biaCot1.position.z = (truHaoGoc + DDTBia) * -1;
+    biaCot1.position.x = dayCot;
+    biaCot1.position.y = caoChan + DDTBia;
+
+    const lenZ = rongCot - truHaoGoc;
+    const lenX = DDTBia;
+    const lenY = height - caoChan - DDTBia;
+
+    biaCot1.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(biaCot1);
+    const sizeHau = new THREE.Vector3();
+    boundingBoxHau.getSize(sizeHau);
+
+    biaCot1.scale.x = lenX / sizeHau.x;
+    biaCot1.scale.y = lenY / sizeHau.y;
+    biaCot1.scale.z = lenZ / sizeHau.z;
+  };
+
+  const settingBiaCot2 = (biaCot2) => {
+    biaCot2.position.z = rongCot * -1;
+    biaCot2.position.x = DDTHau;
+    biaCot2.position.y = caoChan + DDTBia;
+
+    const lenZ = DDTBia;
+    const lenX = dayCot - DDTHau;
+    const lenY = height - caoChan - DDTBia;
+
+    biaCot2.scale.set(1, 1, 1);
+    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(biaCot2);
+    const sizeBiaTrai = new THREE.Vector3();
+    boundingBoxBiaTrai.getSize(sizeBiaTrai);
+
+    biaCot2.scale.x = lenX / sizeBiaTrai.x;
+    biaCot2.scale.y = lenY / sizeBiaTrai.y;
+    biaCot2.scale.z = lenZ / sizeBiaTrai.z;
   };
 
   const settingChanTruoc1 = (cTruoc1) => {
@@ -416,24 +495,24 @@ function App3() {
     nepSau1.scale.z = lenZ / sizeXTruoc1.z;
   };
 
-  const settingNepSau2 = (nepSau3) => {
-    nepSau3.position.z = (truHaoGoc + DDTBia) * -1;
-    nepSau3.position.x = DDTHau;
-    nepSau3.position.y = height - caoXTruoc;
+  const settingNepSau2 = (nepSau2) => {
+    nepSau2.position.z = (rongCot + DDTBia) * -1;
+    nepSau2.position.x = DDTHau;
+    nepSau2.position.y = height - caoXTruoc;
 
-    const lenZ = rongK2 - truHaoGoc - 2 * DDTBia;
+    const lenZ = rongK2 - rongCot - 2 * DDTBia;
     const lenX = DDTBia;
     const lenY = caoXTruoc;
 
-    nepSau3.scale.set(1, 1, 1);
+    nepSau2.scale.set(1, 1, 1);
 
-    let boundingBoxXTruoc2 = new THREE.Box3().setFromObject(nepSau3);
+    let boundingBoxXTruoc2 = new THREE.Box3().setFromObject(nepSau2);
     const sizeXTruoc2 = new THREE.Vector3();
     boundingBoxXTruoc2.getSize(sizeXTruoc2);
 
-    nepSau3.scale.x = lenX / sizeXTruoc2.x;
-    nepSau3.scale.y = lenY / sizeXTruoc2.y;
-    nepSau3.scale.z = lenZ / sizeXTruoc2.z;
+    nepSau2.scale.x = lenX / sizeXTruoc2.x;
+    nepSau2.scale.y = lenY / sizeXTruoc2.y;
+    nepSau2.scale.z = lenZ / sizeXTruoc2.z;
   };
 
   const settingBa1 = (ba1) => {
@@ -616,7 +695,7 @@ function App3() {
     const glftLoader = new GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
 
-    glftLoader.load('/glb/TBDGL1-FULL.glb', (gltfScene) => {
+    glftLoader.load('/glb/TUBEPL1FULLKC.glb', (gltfScene) => {
       gltfScene.scene.scale.set(1, 1, 1);
       gltfScene.scene.position.set(0, 0, 0);
       gltfScene.scene.traverse((child) => {
@@ -692,13 +771,16 @@ function App3() {
       md.position.set(-depth / 2, -height / 2, width / 2);
 
       const day1 = md.getObjectByName('DAY-1');
-      const day2 = md.getObjectByName('DAY-2');
+      const day2_1 = md.getObjectByName('DAY-2-1');
+      const day2_2 = md.getObjectByName('DAY-2-2');
       const hau1 = md.getObjectByName('HAU-1');
       const hau2 = md.getObjectByName('HAU-2');
       const bia1 = md.getObjectByName('BIA-1');
       const bia2 = md.getObjectByName('BIA-2');
       const bia3 = md.getObjectByName('BIA-3');
       const bia4 = md.getObjectByName('BIA-4');
+      const biaCot1 = md.getObjectByName('BIA-COT-1');
+      const biaCot2 = md.getObjectByName('BIA-COT-2');
       const cTruoc1 = md.getObjectByName('CHAN-TRUOC-1');
       const cTruoc2 = md.getObjectByName('CHAN-TRUOC-2');
 
@@ -721,19 +803,31 @@ function App3() {
       const cua2 = md.getObjectByName('DOOR-2');
       const cua3 = md.getObjectByName('DOOR-3');
 
+      const matDa1 = md.getObjectByName('MAT-DA-1');
+      const matDa2_1 = md.getObjectByName('MAT-DA-2-1');
+      const matDa2_2 = md.getObjectByName('MAT-DA-2-2');
+
+      const vachBep1 = md.getObjectByName('VACH-BEP-1');
+      const vachBep2 = md.getObjectByName('VACH-BEP-2');
+      const vachBepCot1 = md.getObjectByName('VACH-BEP-COT-1');
+      const vachBepCot2 = md.getObjectByName('VACH-BEP-COT-2');
+
       listBox?.forEach((box) => {
         display.scene.remove(box);
       });
       listBox = [];
 
       day1 && settingDay1(day1);
-      day2 && settingDay2(day2);
+      day2_1 && settingDay2_1(day2_1);
+      day2_2 && settingDay2_2(day2_2);
       hau1 && settingHau1(hau1);
       hau2 && settingHau2(hau2);
       bia1 && settingBia1(bia1);
       bia2 && settingBia2(bia2);
       bia3 && settingBia3(bia3);
       bia4 && settingBia4(bia4);
+      biaCot1 && settingBiaCot1(biaCot1);
+      biaCot2 && settingBiaCot2(biaCot2);
 
       cTruoc1 && settingChanTruoc1(cTruoc1);
       cTruoc2 && settingChanTruoc2(cTruoc2);
@@ -756,6 +850,15 @@ function App3() {
       cua1 && settingCua1(cua1);
       cua2 && settingCua2(cua2);
       cua3 && settingCua3(cua3);
+
+      matDa1 && settingMatDa1(matDa1);
+      matDa2_1 && settingMatDa2_1(matDa2_1);
+      matDa2_2 && settingMatDa2_2(matDa2_2);
+
+      vachBep1 && settingVachBep1(vachBep1);
+      vachBep2 && settingVachBep2(vachBep2);
+      // vachBepCot1 && settingVachBepCot1(vachBepCot1);
+      // vachBepCot2 && settingVachBepCot2(vachBepCot2);
 
       const textureLoader = new THREE.TextureLoader();
       textureLoader.load('/images/TEXTURE.png', (newTexture) => {
@@ -808,11 +911,11 @@ function App3() {
     fixBiaPhai,
     DDTBia,
     DDTHau,
-    DDTBiaTrai,
-    DDTBiaPhai,
-    DDTChan,
-    DDTXTruoc,
-    DDTXSau,
+    DDTBia,
+    DDTBia,
+    DDTBia,
+    DDTBia,
+    DDTBia,
     gltfUuid,
   ]);
 
@@ -969,9 +1072,9 @@ function App3() {
             type="number"
             name="DDTXuongTruoc"
             id="DDTXuongTruoc"
-            defaultValue={DDTXTruoc * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTXTruoc(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
 
@@ -1010,9 +1113,9 @@ function App3() {
             type="number"
             name="DDTXuongSau"
             id="DDTXuongSau"
-            defaultValue={DDTXSau * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTXSau(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
 
@@ -1145,9 +1248,9 @@ function App3() {
             type="number"
             name="DDTChan"
             id="DDTChan"
-            defaultValue={DDTChan * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTChan(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
           <br />
@@ -1207,9 +1310,9 @@ function App3() {
             type="number"
             name="DDTBiaTrai"
             id="DDTBiaTrai"
-            defaultValue={DDTBiaTrai * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTBiaTrai(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
           <br />
@@ -1254,9 +1357,9 @@ function App3() {
             type="number"
             name="DDTBiaPhai"
             id="DDTBiaPhai"
-            defaultValue={DDTBiaPhai * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTBiaPhai(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
           <br />
