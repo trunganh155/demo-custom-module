@@ -34,13 +34,12 @@ function App3() {
   const [optionXTruoc, setOptionXTruoc] = useState(0);
   const [optionXSau, setOptionXSau] = useState(0);
 
-  const [DDTBiaTrai, setDDTBiaTrai] = useState(0.017);
-  const [DDTBiaPhai, setDDTBiaPhai] = useState(0.017);
   const [DDTBia, setDDTBia] = useState(0.017);
   const [DDTHau, setDDTHau] = useState(0.017);
-  const [DDTChan, setDDTChan] = useState(0.017);
-  const [DDTXTruoc, setDDTXTruoc] = useState(0.017);
-  const [DDTXSau, setDDTXSau] = useState(0.017);
+  const [DDTMat, setDDTMat] = useState(0.02);
+  const [DDTVach, setDDTVach] = useState(0.005);
+
+  const [caoVach, setCaoVach] = useState(0.65);
 
   const [fixBiaTrai, setFixBiaTrai] = useState(0);
   const [fixBiaPhai, setFixBiaPhai] = useState(0);
@@ -396,6 +395,82 @@ function App3() {
     cua2.scale.z = lenZ / sizeXSau.z;
   };
 
+  const settingMatDa1 = (matDa1) => {
+    matDa1.position.z = 0 * -1;
+    matDa1.position.x = depth + DDTMat;
+    matDa1.position.y = height;
+
+    const lenZ = depth + DDTMat;
+    const lenX = rongK1 - depth - DDTMat;
+    const lenY = DDTMat;
+
+    matDa1.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa1);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    matDa1.scale.x = lenX / sizeDay.x;
+    matDa1.scale.y = lenY / sizeDay.y;
+    matDa1.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingMatDa2 = (matDa2) => {
+    matDa2.position.z = 0 * -1;
+    matDa2.position.x = 0;
+    matDa2.position.y = height;
+
+    const lenZ = rongK2;
+    const lenX = depth + DDTMat;
+    const lenY = DDTMat;
+
+    matDa2.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa2);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    matDa2.scale.x = lenX / sizeDay.x;
+    matDa2.scale.y = lenY / sizeDay.y;
+    matDa2.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingVachBep1 = (vachBep1) => {
+    vachBep1.position.z = 0 * -1;
+    vachBep1.position.x = 0;
+    vachBep1.position.y = height + DDTMat;
+
+    const lenZ = DDTVach;
+    const lenX = rongK1;
+    const lenY = caoVach;
+
+    vachBep1.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(vachBep1);
+    const sizeHau = new THREE.Vector3();
+    boundingBoxHau.getSize(sizeHau);
+
+    vachBep1.scale.x = lenX / sizeHau.x;
+    vachBep1.scale.y = lenY / sizeHau.y;
+    vachBep1.scale.z = lenZ / sizeHau.z;
+  };
+
+  const settingVachBep2 = (vachBep2) => {
+    vachBep2.position.z = DDTVach * -1;
+    vachBep2.position.x = 0;
+    vachBep2.position.y = height + DDTMat;
+
+    const lenZ = rongK2 - DDTVach;
+    const lenX = DDTVach;
+    const lenY = caoVach;
+
+    vachBep2.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(vachBep2);
+    const sizeHau = new THREE.Vector3();
+    boundingBoxHau.getSize(sizeHau);
+
+    vachBep2.scale.x = lenX / sizeHau.x;
+    vachBep2.scale.y = lenY / sizeHau.y;
+    vachBep2.scale.z = lenZ / sizeHau.z;
+  };
+
   useEffect(() => {
     display = new SceneInit('myThreeJsCanvas');
     display.initialize();
@@ -500,6 +575,11 @@ function App3() {
       const xNgang1 = md.getObjectByName('XAN-NGANG-1');
       const xNgang2 = md.getObjectByName('XAN-NGANG-2');
 
+      const matDa1 = md.getObjectByName('MAT-DA-1');
+      const matDa2 = md.getObjectByName('MAT-DA-2');
+      const vachBep1 = md.getObjectByName('VACH-BEP-1');
+      const vachBep2 = md.getObjectByName('VACH-BEP-2');
+
       listBox?.forEach((box) => {
         display.scene.remove(box);
       });
@@ -524,6 +604,12 @@ function App3() {
       xNgang2 && settingXanNgang2(xNgang2);
       cua1 && settingCua1(cua1);
       cua2 && settingCua2(cua2);
+
+      matDa1 && settingMatDa1(matDa1);
+      matDa2 && settingMatDa2(matDa2);
+
+      vachBep1 && settingVachBep1(vachBep1);
+      vachBep2 && settingVachBep2(vachBep2);
 
       const textureLoader = new THREE.TextureLoader();
       textureLoader.load('/images/TEXTURE.png', (newTexture) => {
@@ -576,11 +662,11 @@ function App3() {
     fixBiaPhai,
     DDTBia,
     DDTHau,
-    DDTBiaTrai,
-    DDTBiaPhai,
-    DDTChan,
-    DDTXTruoc,
-    DDTXSau,
+    DDTBia,
+    DDTBia,
+    DDTBia,
+    DDTBia,
+    DDTBia,
     gltfUuid,
   ]);
 
@@ -737,9 +823,9 @@ function App3() {
             type="number"
             name="DDTXuongTruoc"
             id="DDTXuongTruoc"
-            defaultValue={DDTXTruoc * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTXTruoc(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
 
@@ -778,9 +864,9 @@ function App3() {
             type="number"
             name="DDTXuongSau"
             id="DDTXuongSau"
-            defaultValue={DDTXSau * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTXSau(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
 
@@ -913,9 +999,9 @@ function App3() {
             type="number"
             name="DDTChan"
             id="DDTChan"
-            defaultValue={DDTChan * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTChan(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
           <br />
@@ -975,9 +1061,9 @@ function App3() {
             type="number"
             name="DDTBiaTrai"
             id="DDTBiaTrai"
-            defaultValue={DDTBiaTrai * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTBiaTrai(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
           <br />
@@ -1022,9 +1108,9 @@ function App3() {
             type="number"
             name="DDTBiaPhai"
             id="DDTBiaPhai"
-            defaultValue={DDTBiaPhai * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
-              setDDTBiaPhai(Number(e.target.value) / 1000);
+              setDDTBia(Number(e.target.value) / 1000);
             }}
           />
           <br />

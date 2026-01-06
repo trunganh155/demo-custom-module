@@ -93,7 +93,7 @@ function App3() {
     hau1.position.y = 0;
 
     const lenZ = DDTHau;
-    const lenX = rongK2 - truHaoGoc;
+    const lenX = rongK1 - truHaoGoc;
     const lenY = height;
 
     hau1.scale.set(1, 1, 1);

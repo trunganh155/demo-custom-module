@@ -15,9 +15,9 @@ let listBox = [];
 function App2() {
   const [gltfUuid, setGltfUuid] = useState(null);
 
-  const [width, setWidth] = useState(1);
+  const [width, setWidth] = useState(0.8);
   const [height, setHeight] = useState(0.8);
-  const [depth, setDepth] = useState(0.56);
+  const [depth, setDepth] = useState(0.33);
 
   const [luiHau, setLuiHau] = useState(0.01);
   const [ngamHau, setNgamHau] = useState(0.005);
@@ -32,9 +32,9 @@ function App2() {
   const [DDTBia, setDDTBia] = useState(0.017);
   const [DDTHau, setDDTHau] = useState(0.008);
 
-  const [KCCot, setKCCot] = useState(0.4);
+  const [KCCot, setKCCot] = useState(0.2);
   const [dayCot, setDayCot] = useState(0.15);
-  const [rongCot, setRongCot] = useState(0.3);
+  const [rongCot, setRongCot] = useState(0.25);
 
   const [fixNoc, setFixNoc] = useState(0);
   const [fixBiaTrai, setFixBiaTrai] = useState(0);

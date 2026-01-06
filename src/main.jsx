@@ -46,10 +46,17 @@ import TuAoDuoiGocLType2Full from './TuAoDuoiGocLType2Full';
 import TuBepDuoiKhuyetCot from './TuBepDuoiKhuyetCot';
 import TuBepTrenKhuyetCot from './TuBepTrenKhuyetCot';
 import TuBepDuoiGocLType1FullKhuyetCot from './TuBepDuoiGocLType1FullKhuyetCot';
+import TuBepDuoiGocLType2FullKhuyetCot from './TuBepDuoiGocLType2FullKhuyetCot';
+import TuBepDuoiGocLType3FullKhuyetCot from './TuBepDuoiGocLType3FullKhuyetCot';
+import TuBepTrenGocLType1FullKhuyetCot from './TuBepTrenGocLType1FullKhuyetCot';
+import TuBepTrenGocLType2FullKhuyetCot from './TuBepTrenGocLType2FullKhuyetCot';
+import TuBepTrenGocLType3FullKhuyetCot from './TuBepTrenGocLType3FullKhuyetCot';
+
+import TuBepDungTranGocLType1FullKhuyetCot from './TuBepDungTranGocLType1FullKhuyetCot';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TuBepDuoiGocLType1FullKhuyetCot />
+    <TuBepTrenGocLType2 />
   </React.StrictMode>,
   document.getElementById('root')
 );

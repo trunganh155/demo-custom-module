@@ -205,6 +205,82 @@ function App3() {
     bia4.scale.z = lenZ / sizeBiaTrai.z;
   };
 
+  const settingMatDa1 = (matDa1) => {
+    matDa1.position.z = 0 * -1;
+    matDa1.position.x = depth + DDTMat;
+    matDa1.position.y = height;
+
+    const lenZ = depth + DDTMat;
+    const lenX = rongK1 - depth - DDTMat;
+    const lenY = DDTMat;
+
+    matDa1.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa1);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    matDa1.scale.x = lenX / sizeDay.x;
+    matDa1.scale.y = lenY / sizeDay.y;
+    matDa1.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingMatDa2 = (matDa2) => {
+    matDa2.position.z = 0 * -1;
+    matDa2.position.x = 0;
+    matDa2.position.y = height;
+
+    const lenZ = rongK2;
+    const lenX = depth + DDTMat;
+    const lenY = DDTMat;
+
+    matDa2.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa2);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    matDa2.scale.x = lenX / sizeDay.x;
+    matDa2.scale.y = lenY / sizeDay.y;
+    matDa2.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingVachBep1 = (vachBep1) => {
+    vachBep1.position.z = 0 * -1;
+    vachBep1.position.x = 0;
+    vachBep1.position.y = height + DDTMat;
+
+    const lenZ = DDTVach;
+    const lenX = rongK1;
+    const lenY = caoVach;
+
+    vachBep1.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(vachBep1);
+    const sizeHau = new THREE.Vector3();
+    boundingBoxHau.getSize(sizeHau);
+
+    vachBep1.scale.x = lenX / sizeHau.x;
+    vachBep1.scale.y = lenY / sizeHau.y;
+    vachBep1.scale.z = lenZ / sizeHau.z;
+  };
+
+  const settingVachBep2 = (vachBep2) => {
+    vachBep2.position.z = DDTVach * -1;
+    vachBep2.position.x = 0;
+    vachBep2.position.y = height + DDTMat;
+
+    const lenZ = rongK2 - DDTVach;
+    const lenX = DDTVach;
+    const lenY = caoVach;
+
+    vachBep2.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(vachBep2);
+    const sizeHau = new THREE.Vector3();
+    boundingBoxHau.getSize(sizeHau);
+
+    vachBep2.scale.x = lenX / sizeHau.x;
+    vachBep2.scale.y = lenY / sizeHau.y;
+    vachBep2.scale.z = lenZ / sizeHau.z;
+  };
+
   const settingChanTruoc1 = (cTruoc1) => {
     cTruoc1.position.z = (depth - DDTBia) * -1;
     cTruoc1.position.x = truHaoGoc;

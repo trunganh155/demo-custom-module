@@ -32,6 +32,10 @@ function App2() {
 
   const [DDTBia, setDDTBia] = useState(0.017);
   const [DDTHau, setDDTHau] = useState(0.008);
+  const [DDTMat, setDDTMat] = useState(0.02);
+  const [DDTVach, setDDTVach] = useState(0.005);
+
+  const [caoVach, setCaoVach] = useState(0.65);
 
   const [KCCot, setKCCot] = useState(0.3);
   const [dayCot, setDayCot] = useState(0.15);
@@ -103,16 +107,7 @@ function App2() {
         ? width - (KCCot > DDTBia ? KCCot : 0) - rongCot
         : 0;
 
-    const lenX =
-      KCCot < width - rongCot
-        ? (optionSauDay === 0
-            ? optionHau === 0 || optionHau === 1
-              ? depth - DDTHau
-              : depth - DDTHau - luiHau
-            : optionHau === 0 || optionHau === 1
-            ? depth - DDTHau
-            : depth) + (fixDay >= 0 ? -fixDay : 0)
-        : 0;
+    const lenX = KCCot < width - rongCot ? depth - DDTHau : 0;
 
     const lenY = KCCot < width - rongCot ? DDTBia : 0;
 
@@ -417,6 +412,202 @@ function App2() {
     xuongSau2.scale.z = lenZ / sizeDay.z;
   };
 
+  const settingMatDa1 = (matDa1) => {
+    matDa1.position.z = 0 * -1;
+
+    matDa1.position.y = height;
+
+    matDa1.position.x = 0;
+
+    const lenZ = KCCot > DDTBia ? KCCot : 0;
+
+    const lenX = KCCot > DDTBia ? depth + DDTMat : 0;
+
+    const lenY = KCCot > DDTBia ? DDTMat : 0;
+
+    matDa1.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa1);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    matDa1.scale.x = lenX / sizeDay.x;
+    matDa1.scale.y = lenY / sizeDay.y;
+    matDa1.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingMatDa2 = (matDa2) => {
+    matDa2.position.z = KCCot > DDTBia ? KCCot * -1 : 0;
+
+    matDa2.position.y = height;
+
+    matDa2.position.x = dayCot;
+
+    const lenZ = rongCot;
+
+    const lenX = depth - dayCot + DDTMat;
+
+    const lenY = DDTMat;
+
+    matDa2.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa2);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    matDa2.scale.x = lenX / sizeDay.x;
+    matDa2.scale.y = lenY / sizeDay.y;
+    matDa2.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingMatDa3 = (matDa3) => {
+    matDa3.position.z = ((KCCot > DDTBia ? KCCot : 0) + rongCot) * -1;
+
+    matDa3.position.y = height;
+
+    matDa3.position.x = 0;
+
+    const lenZ =
+      KCCot < width - rongCot
+        ? width - (KCCot > DDTBia ? KCCot : 0) - rongCot
+        : 0;
+
+    const lenX = KCCot < width - rongCot ? depth + DDTMat : 0;
+
+    const lenY = KCCot < width - rongCot ? DDTMat : 0;
+
+    matDa3.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(matDa3);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    matDa3.scale.x = lenX / sizeDay.x;
+    matDa3.scale.y = lenY / sizeDay.y;
+    matDa3.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingVachBep1 = (vachBep1) => {
+    vachBep1.position.z = 0 * -1;
+
+    vachBep1.position.x = 0;
+
+    vachBep1.position.y = height + DDTMat;
+
+    const lenZ = KCCot > DDTBia ? KCCot : 0;
+
+    const lenX = KCCot > DDTBia ? DDTVach : 0;
+
+    const lenY = KCCot > DDTBia ? caoVach : 0;
+
+    vachBep1.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(vachBep1);
+    const sizeHau = new THREE.Vector3();
+    boundingBoxHau.getSize(sizeHau);
+
+    vachBep1.scale.x = lenX / sizeHau.x;
+    vachBep1.scale.y = lenY / sizeHau.y;
+    vachBep1.scale.z = lenZ / sizeHau.z;
+  };
+
+  const settingVachBep2 = (vachBep2) => {
+    vachBep2.position.z = KCCot > DDTBia ? (KCCot - DDTVach) * -1 : 0 * -1;
+
+    vachBep2.position.x = DDTVach;
+
+    vachBep2.position.y = height + DDTMat;
+
+    const lenZ = KCCot > DDTBia ? DDTVach : 0;
+
+    const lenX = KCCot > DDTBia ? dayCot - DDTVach : 0;
+
+    const lenY = caoVach;
+
+    vachBep2.scale.set(1, 1, 1);
+    let boundingBoxBia2 = new THREE.Box3().setFromObject(vachBep2);
+    const sizeBiaTrai = new THREE.Vector3();
+    boundingBoxBia2.getSize(sizeBiaTrai);
+
+    vachBep2.scale.x = lenX / sizeBiaTrai.x;
+    vachBep2.scale.y = lenY / sizeBiaTrai.y;
+    vachBep2.scale.z = lenZ / sizeBiaTrai.z;
+  };
+
+  const settingVachBep3 = (vachBep3) => {
+    vachBep3.position.z = KCCot > DDTBia ? (KCCot - DDTVach) * -1 : 0;
+
+    vachBep3.position.x = dayCot;
+
+    vachBep3.position.y = height + DDTMat;
+
+    const lenZ =
+      KCCot > DDTBia
+        ? KCCot < width - rongCot
+          ? rongCot + DDTVach + DDTVach
+          : rongCot + DDTVach
+        : rongCot + DDTVach;
+
+    const lenX = DDTVach;
+
+    const lenY = caoVach;
+
+    vachBep3.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(vachBep3);
+    const sizeHau = new THREE.Vector3();
+    boundingBoxHau.getSize(sizeHau);
+
+    vachBep3.scale.x = lenX / sizeHau.x;
+    vachBep3.scale.y = lenY / sizeHau.y;
+    vachBep3.scale.z = lenZ / sizeHau.z;
+  };
+
+  const settingVachBep4 = (vachBep4) => {
+    vachBep4.position.z =
+      KCCot > DDTBia ? (KCCot + rongCot) * -1 : rongCot * -1;
+
+    vachBep4.position.x = DDTVach;
+
+    vachBep4.position.y = height + DDTMat;
+
+    const lenZ = KCCot < width - rongCot ? DDTVach : 0;
+
+    const lenX = KCCot < width - rongCot ? dayCot - DDTVach : 0;
+
+    const lenY = caoVach;
+
+    vachBep4.scale.set(1, 1, 1);
+    let boundingBoxBia2 = new THREE.Box3().setFromObject(vachBep4);
+    const sizeBiaTrai = new THREE.Vector3();
+    boundingBoxBia2.getSize(sizeBiaTrai);
+
+    vachBep4.scale.x = lenX / sizeBiaTrai.x;
+    vachBep4.scale.y = lenY / sizeBiaTrai.y;
+    vachBep4.scale.z = lenZ / sizeBiaTrai.z;
+  };
+
+  const settingVachBep5 = (vachBep5) => {
+    vachBep5.position.z = ((KCCot > DDTBia ? KCCot : 0) + rongCot) * -1;
+
+    vachBep5.position.x = 0;
+
+    vachBep5.position.y = height + DDTMat;
+
+    const lenZ =
+      KCCot < width - rongCot
+        ? width - (KCCot > DDTBia ? KCCot : 0) - rongCot
+        : 0;
+
+    const lenX = KCCot < width - rongCot ? DDTVach : 0;
+
+    const lenY = KCCot < width - rongCot ? caoVach : 0;
+
+    vachBep5.scale.set(1, 1, 1);
+    let boundingBoxHau = new THREE.Box3().setFromObject(vachBep5);
+    const sizeHau = new THREE.Vector3();
+    boundingBoxHau.getSize(sizeHau);
+
+    vachBep5.scale.x = lenX / sizeHau.x;
+    vachBep5.scale.y = lenY / sizeHau.y;
+    vachBep5.scale.z = lenZ / sizeHau.z;
+  };
+
   useEffect(() => {
     display = new SceneInit('myThreeJsCanvas');
     display.initialize();
@@ -439,7 +630,7 @@ function App2() {
           child.material.metalness = 0.4;
 
           // Thêm opacity
-          child.material.opacity = 0.8;
+          child.material.opacity = 0.4;
           child.material.transparent = true; // Bắt buộc phải có để opacity hoạt động
         }
       });
@@ -513,13 +704,23 @@ function App2() {
       const hau2 = md.getObjectByName('HAU-2');
       const hau3 = md.getObjectByName('HAU-3');
 
-      const xuongSau1 = md.getObjectByName('NOC-1');
-      const xuongSau2 = md.getObjectByName('NOC-3');
+      const xuongSau1 = md.getObjectByName('XUONG-SAU-1');
+      const xuongSau2 = md.getObjectByName('XUONG-SAU-2');
 
-      const xuongTruoc1 = md.getObjectByName('NOC-2');
-      const xuongTruoc2 = md.getObjectByName('CHAN-SAU');
+      const xuongTruoc1 = md.getObjectByName('XUONG-TRUOC-1');
+      const xuongTruoc2 = md.getObjectByName('XUONG-TRUOC-2');
 
-      const chan = md.getObjectByName('CHAN-TRUOC');
+      const chan = md.getObjectByName('CHAN');
+
+      const matDa1 = md.getObjectByName('MAT-DA-1');
+      const matDa2 = md.getObjectByName('MAT-DA-2');
+      const matDa3 = md.getObjectByName('MAT-DA-3');
+
+      const vachBep1 = md.getObjectByName('VACH-BEP-1');
+      const vachBep2 = md.getObjectByName('VACH-BEP-2');
+      const vachBep3 = md.getObjectByName('VACH-BEP-3');
+      const vachBep4 = md.getObjectByName('VACH-BEP-4');
+      const vachBep5 = md.getObjectByName('VACH-BEP-5');
 
       listBox?.forEach((box) => {
         display.scene.remove(box);
@@ -546,6 +747,16 @@ function App2() {
       xuongSau2 && settingXuongSau2(xuongSau2);
 
       chan && settingChan(chan);
+
+      matDa1 && settingMatDa1(matDa1);
+      matDa2 && settingMatDa2(matDa2);
+      matDa3 && settingMatDa3(matDa3);
+
+      vachBep1 && settingVachBep1(vachBep1);
+      vachBep2 && settingVachBep2(vachBep2);
+      vachBep3 && settingVachBep3(vachBep3);
+      vachBep4 && settingVachBep4(vachBep4);
+      vachBep5 && settingVachBep5(vachBep5);
 
       setTimeout(() => {
         handleResetBox();
