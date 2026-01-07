@@ -379,7 +379,7 @@ function App3() {
   const settingXanNgang1_1 = (xNgang1_1) => {
     xNgang1_1.position.z = DDTHau * -1;
     xNgang1_1.position.x = dayCot + truHaoGoc + DDTBia;
-    xNgang1_1.position.y = (height - caoChan - caoXTruoc) / 2 + caoChan;
+    xNgang1_1.position.y = height / 2;
 
     const lenZ = depth - DDTHau;
     const lenX = rongK1 - 2 * DDTBia - truHaoGoc - dayCot;
@@ -398,7 +398,7 @@ function App3() {
   const settingXanNgang1_2 = (xNgang1_2) => {
     xNgang1_2.position.z = (rongCot + truHaoGoc + DDTBia) * -1;
     xNgang1_2.position.x = truHaoGoc + DDTBia;
-    xNgang1_2.position.y = (height - caoChan - caoXTruoc) / 2 + caoChan;
+    xNgang1_2.position.y = height / 2;
 
     const lenZ = depth - rongCot - truHaoGoc - DDTBia;
     const lenX = dayCot;
@@ -417,7 +417,7 @@ function App3() {
   const settingXanNgang2 = (xNgang2) => {
     xNgang2.position.z = (depth + 2 * DDTBia + truHaoGoc) * -1;
     xNgang2.position.x = DDTHau;
-    xNgang2.position.y = (height - caoChan - caoXTruoc) / 2 + caoChan;
+    xNgang2.position.y = height / 2;
 
     const lenZ = rongK2 - depth - 3 * DDTBia - truHaoGoc;
     const lenX = depth - DDTHau;
