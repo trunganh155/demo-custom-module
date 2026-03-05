@@ -42,6 +42,11 @@ import TuBepDTCoBa from './TuBepDTCoBa';
 
 import TuAoDuoiGocLType1Full from './TuAoDuoiGocLType1Full';
 import TuAoDuoiGocLType2Full from './TuAoDuoiGocLType2Full';
+import TuAoDuoiGocLType3Full from './TuAoDuoiGocLType3Full';
+
+import TuAoDuoiGocLType1FullKhuyetCot from './TuAoDuoiGocLType1FullKhuyetCot';
+import TuAoDuoiGocLType2FullKhuyetCot from './TuAoDuoiGocLType2FullKhuyetCot';
+import TuAoDuoiGocLType3FullKhuyetCot from './TuAoDuoiGocLType3FullKhuyetCot';
 
 import TuBepDuoiKhuyetCot from './TuBepDuoiKhuyetCot';
 import TuBepTrenKhuyetCot from './TuBepTrenKhuyetCot';
@@ -54,9 +59,22 @@ import TuBepTrenGocLType3FullKhuyetCot from './TuBepTrenGocLType3FullKhuyetCot';
 
 import TuBepDungTranGocLType1FullKhuyetCot from './TuBepDungTranGocLType1FullKhuyetCot';
 
+import KhoiBoCongTrai from './KhoiBoCongTrai';
+import KhoiBoCongPhai from './KhoiBoCongPhai';
+
+import TuGiayDonNgoi from './TuGiayDonNgoi';
+import TuGiayDonNgoiBoCong from './TuGiayDonNgoiBoCong';
+import TuGiayDonNgoiBoCongVachLam from './TuGiayDonNgoiBoCongVachLam';
+import TuGiayDonNgoiBoCongVachLamVaGuong from './TuGiayDonNgoiBoCongVachLamVaGuong';
+import TuTVBoCong from './TuTVBoCong';
+import TuTVBoCongTreoTuong from './TuTVBoCongTreoTuong';
+
+import TuGiayDuoi from './TuGiayDuoi';
+import TuGiayTren from './TuGiayTren';
+
 ReactDOM.render(
   <React.StrictMode>
-    <TuBepTrenGocLType2 />
+    <TuAoDuoiGocLType3FullKhuyetCot />
   </React.StrictMode>,
   document.getElementById('root')
 );

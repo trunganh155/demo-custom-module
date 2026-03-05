@@ -297,6 +297,44 @@ function App3() {
     xan.scale.z = lenZ / sizeXSau.z;
   };
 
+  const settingXanNgang1 = (xNgang1) => {
+    xNgang1.position.z = DDTHau * -1;
+    xNgang1.position.x = depth + 2 * DDTBia + truHaoGoc;
+    xNgang1.position.y = height / 2;
+
+    const lenZ = depth - DDTHau;
+    const lenX = rongK1 - depth - 3 * DDTBia - truHaoGoc;
+    const lenY = DDTBia;
+
+    xNgang1.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(xNgang1);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    xNgang1.scale.x = lenX / sizeDay.x;
+    xNgang1.scale.y = lenY / sizeDay.y;
+    xNgang1.scale.z = lenZ / sizeDay.z;
+  };
+
+  const settingXanNgang2 = (xNgang2) => {
+    xNgang2.position.z = (truHaoGoc + DDTBia) * -1;
+    xNgang2.position.x = DDTHau;
+    xNgang2.position.y = height / 2;
+
+    const lenZ = rongK2 - truHaoGoc - 2 * DDTBia;
+    const lenX = depth - DDTHau;
+    const lenY = DDTBia;
+
+    xNgang2.scale.set(1, 1, 1);
+    let boundingBoxDay = new THREE.Box3().setFromObject(xNgang2);
+    const sizeDay = new THREE.Vector3();
+    boundingBoxDay.getSize(sizeDay);
+
+    xNgang2.scale.x = lenX / sizeDay.x;
+    xNgang2.scale.y = lenY / sizeDay.y;
+    xNgang2.scale.z = lenZ / sizeDay.z;
+  };
+
   useEffect(() => {
     display = new SceneInit('myThreeJsCanvas');
     display.initialize();
@@ -395,6 +433,9 @@ function App3() {
       const xan = md.getObjectByName('G-XAN');
       const matCoDinh = md.getObjectByName('G-MAT-CO-DINH');
 
+      const xNgang1 = md.getObjectByName('XAN-NGANG-1');
+      const xNgang2 = md.getObjectByName('XAN-NGANG-2');
+
       listBox?.forEach((box) => {
         display.scene.remove(box);
       });
@@ -414,6 +455,9 @@ function App3() {
       ba && settingBa(ba);
       xan && settingXan(xan);
       matCoDinh && settingMatCoDinh(matCoDinh);
+
+      xNgang1 && settingXanNgang1(xNgang1);
+      xNgang2 && settingXanNgang2(xNgang2);
 
       const textureLoader = new THREE.TextureLoader();
       textureLoader.load('/images/TEXTURE.png', (newTexture) => {
@@ -468,7 +512,7 @@ function App3() {
     DDTHau,
     DDTBia,
     DDTBia,
-     DDTBia,
+    DDTBia,
     DDTXTruoc,
     DDTXSau,
     gltfUuid,
@@ -803,7 +847,7 @@ function App3() {
             type="number"
             name="DDTChan"
             id="DDTChan"
-            defaultValue={ DDTBia * 1000}
+            defaultValue={DDTBia * 1000}
             onChange={(e) => {
               setDDTChan(Number(e.target.value) / 1000);
             }}
