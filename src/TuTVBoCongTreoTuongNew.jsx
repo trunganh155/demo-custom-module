@@ -15,21 +15,19 @@ let listBox = [];
 function App4() {
   const [gltfUuid, setGltfUuid] = useState(null);
 
-  const [width, setWidth] = useState(0.6);
-  const [height, setHeight] = useState(0.4);
-  const [depth, setDepth] = useState(0.35);
+  const [width, setWidth] = useState(1.4);
+  const [height, setHeight] = useState(0.5);
+  const [depth, setDepth] = useState(0.33);
 
   const [DDTBia, setDDTBia] = useState(0.017);
   const [DDTHau, setDDTHau] = useState(0.017);
 
-  const [caoChan, setCaoChan] = useState(0.1);
-  const [caoNem, setCaoNem] = useState(0.05);
-
-  const [rBo, setRBo] = useState(0.08);
+  const [rBo, setRBo] = useState(0.1);
   const [truHaoBoCong, setTruHaoBoCong] = useState(0.02);
+  // const [bct, setBCT] = useState(false);
+  // const [bcp, setBCP] = useState(false);
   const [bct, setBCT] = useState(true);
   const [bcp, setBCP] = useState(true);
-  const [coTamChan, setCoTamChan] = useState(true);
 
   //BO CONG TRAI
   const settingBCTHau = (hau) => {
@@ -43,7 +41,7 @@ function App4() {
 
     const lenX = bct ? DDTHau : 0;
 
-    const lenY = bct ? height - DDTBia - caoNem : 0;
+    const lenY = bct ? height - DDTBia : 0;
 
     hau.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau);
@@ -66,7 +64,7 @@ function App4() {
 
     const lenX = bct ? depth - rBo : 0;
 
-    const lenY = bct ? height - DDTBia - caoNem : 0;
+    const lenY = bct ? height - DDTBia : 0;
 
     bTrai.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bTrai);
@@ -89,7 +87,7 @@ function App4() {
 
     const lenX = bct ? depth - DDTBia : 0;
 
-    const lenY = bct ? height - DDTBia - caoNem : 0;
+    const lenY = bct ? height - DDTBia : 0;
 
     bPhai.scale.set(1, 1, 1);
     let boundingBoxBiaPhai = new THREE.Box3().setFromObject(bPhai);
@@ -112,7 +110,7 @@ function App4() {
 
     const lenX = bct ? rBo : 0;
 
-    const lenY = bct ? height - DDTBia - caoNem : 0;
+    const lenY = bct ? height - DDTBia : 0;
 
     dayBoCong.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(dayBoCong);
@@ -135,7 +133,7 @@ function App4() {
 
     const lenX = bct ? DDTBia : 0;
 
-    const lenY = bct ? height - DDTBia - caoNem : 0;
+    const lenY = bct ? height - DDTBia : 0;
 
     THBoCong.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(THBoCong);
@@ -150,7 +148,7 @@ function App4() {
   const settingBCTNoc1 = (noc1) => {
     noc1.position.z = 0 * -1;
 
-    noc1.position.y = height - DDTBia - caoNem;
+    noc1.position.y = height - DDTBia;
 
     noc1.position.x = depth - rBo;
 
@@ -173,7 +171,7 @@ function App4() {
   const settingBCTNoc3 = (noc3) => {
     noc3.position.z = 0 * -1;
 
-    noc3.position.y = height - DDTBia - caoNem;
+    noc3.position.y = height - DDTBia;
 
     noc3.position.x = 0;
 
@@ -265,17 +263,14 @@ function App4() {
 
   //KHOI CHINH
   const settingDay = (day) => {
-    day.position.z = (bct ? DDTBia + rBo + truHaoBoCong : DDTBia) * -1;
+    day.position.z = (bct ? rBo + truHaoBoCong : 0) * -1;
 
-    day.position.y = caoChan;
+    day.position.y = 0;
 
     day.position.x = 0;
 
     const lenZ =
-      width -
-      2 * DDTBia -
-      (bct ? rBo + truHaoBoCong : 0) -
-      (bcp ? rBo + truHaoBoCong : 0);
+      width - (bct ? rBo + truHaoBoCong : 0) - (bcp ? rBo + truHaoBoCong : 0);
 
     const lenX = depth - DDTBia;
 
@@ -294,7 +289,7 @@ function App4() {
   const settingHau = (hau) => {
     hau.position.z = (bct ? DDTBia + rBo + truHaoBoCong : DDTBia) * -1;
 
-    hau.position.y = caoChan + DDTBia;
+    hau.position.y = DDTBia;
 
     hau.position.x = 0;
 
@@ -306,7 +301,7 @@ function App4() {
 
     const lenX = DDTHau;
 
-    const lenY = height - caoChan - 2 * DDTBia - caoNem;
+    const lenY = height - 2 * DDTBia;
 
     hau.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau);
@@ -318,40 +313,10 @@ function App4() {
     hau.scale.z = lenZ / sizeHau.z;
   };
 
-  const settingChanTruoc = (cTruoc) => {
-    cTruoc.position.z = (bct ? rBo + truHaoBoCong + DDTBia : DDTBia) * -1;
-
-    cTruoc.position.x = depth - DDTBia - DDTBia;
-
-    cTruoc.position.y = 0;
-
-    const lenZ = coTamChan
-      ? width -
-        2 * DDTBia -
-        (bct ? rBo + truHaoBoCong : 0) -
-        (bcp ? rBo + truHaoBoCong : 0)
-      : 0;
-
-    const lenX = coTamChan ? DDTBia : 0;
-
-    const lenY = coTamChan ? caoChan : 0;
-
-    cTruoc.scale.set(1, 1, 1);
-    let boundingBoxChanTruoc = new THREE.Box3().setFromObject(cTruoc);
-    const sizeChanTruoc = new THREE.Vector3();
-    boundingBoxChanTruoc.getSize(sizeChanTruoc);
-
-    cTruoc.scale.x = lenX / sizeChanTruoc.x;
-    cTruoc.scale.y = lenY / sizeChanTruoc.y;
-    cTruoc.scale.z = lenZ / sizeChanTruoc.z;
-  };
-
   const settingBiaTrai = (bTrai) => {
-    bTrai.position.z = 0 * -1;
-
     bTrai.position.z = (bct ? rBo + truHaoBoCong : 0) * -1;
 
-    bTrai.position.y = 0;
+    bTrai.position.y = DDTBia;
 
     bTrai.position.x = 0;
 
@@ -359,7 +324,7 @@ function App4() {
 
     const lenX = depth - DDTBia;
 
-    const lenY = height - DDTBia - caoNem;
+    const lenY = height - 2 * DDTBia;
 
     bTrai.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bTrai);
@@ -377,13 +342,13 @@ function App4() {
 
     bPhai.position.x = 0;
 
-    bPhai.position.y = 0;
+    bPhai.position.y = DDTBia;
 
     const lenZ = DDTBia;
 
     const lenX = depth - DDTBia;
 
-    const lenY = height - DDTBia - caoNem;
+    const lenY = height - 2 * DDTBia;
 
     bPhai.scale.set(1, 1, 1);
     let boundingBoxBiaPhai = new THREE.Box3().setFromObject(bPhai);
@@ -400,7 +365,7 @@ function App4() {
 
     noc.position.x = 0;
 
-    noc.position.y = height - DDTBia - caoNem;
+    noc.position.y = height - DDTBia;
 
     const lenZ = width - (bct ? rBo : 0) - (bcp ? rBo : 0);
 
@@ -419,146 +384,6 @@ function App4() {
   };
   //KHOI CHINH
 
-  //NEM NGOI
-  const settingNemNgoiDon = (nemNgoiDon) => {
-    nemNgoiDon.position.z = (bct ? rBo : 0) * -1;
-
-    nemNgoiDon.position.x = 0;
-
-    nemNgoiDon.position.y = height - caoNem;
-
-    const lenZ = bct || bcp ? 0 : width - (bct ? rBo : 0) - (bcp ? rBo : 0);
-
-    const lenX = bct || bcp ? 0 : depth;
-
-    const lenY = bct || bcp ? 0 : caoNem;
-
-    nemNgoiDon.scale.set(1, 1, 1);
-    let boundingBoxNoc = new THREE.Box3().setFromObject(nemNgoiDon);
-    const sizeNoc = new THREE.Vector3();
-    boundingBoxNoc.getSize(sizeNoc);
-
-    nemNgoiDon.scale.x = lenX / sizeNoc.x;
-    nemNgoiDon.scale.y = lenY / sizeNoc.y;
-    nemNgoiDon.scale.z = lenZ / sizeNoc.z;
-  };
-
-  const settingNemNgoi1 = (nemNgoi1) => {
-    nemNgoi1.position.z = (bct ? rBo : 0) * -1;
-
-    nemNgoi1.position.x = 0;
-
-    nemNgoi1.position.y = height - caoNem;
-
-    const lenZ = bct || bcp ? width - (bct ? rBo : 0) - (bcp ? rBo : 0) : 0;
-
-    const lenX = bct || bcp ? depth : 0;
-
-    const lenY = bct || bcp ? caoNem : 0;
-
-    nemNgoi1.scale.set(1, 1, 1);
-    let boundingBoxNoc = new THREE.Box3().setFromObject(nemNgoi1);
-    const sizeNoc = new THREE.Vector3();
-    boundingBoxNoc.getSize(sizeNoc);
-
-    nemNgoi1.scale.x = lenX / sizeNoc.x;
-    nemNgoi1.scale.y = lenY / sizeNoc.y;
-    nemNgoi1.scale.z = lenZ / sizeNoc.z;
-  };
-
-  const settingNemNgoiTrai1 = (nemNgoiTrai1) => {
-    nemNgoiTrai1.position.z = 0 * -1;
-
-    nemNgoiTrai1.position.y = height - caoNem;
-
-    nemNgoiTrai1.position.x = depth - rBo;
-
-    const lenZ = bct ? rBo : 0;
-
-    const lenX = bct ? rBo : 0;
-
-    const lenY = bct ? caoNem : 0;
-
-    nemNgoiTrai1.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(nemNgoiTrai1);
-    const sizeDay = new THREE.Vector3();
-    boundingBoxDay.getSize(sizeDay);
-
-    nemNgoiTrai1.scale.x = lenX / sizeDay.x;
-    nemNgoiTrai1.scale.y = lenY / sizeDay.y;
-    nemNgoiTrai1.scale.z = lenZ / sizeDay.z;
-  };
-
-  const settingNemNgoiTrai2 = (nemNgoiTrai2) => {
-    nemNgoiTrai2.position.z = 0 * -1;
-
-    nemNgoiTrai2.position.y = height - caoNem;
-
-    nemNgoiTrai2.position.x = 0;
-
-    const lenZ = bct ? rBo : 0;
-
-    const lenX = bct ? depth - rBo : 0;
-
-    const lenY = bct ? caoNem : 0;
-
-    nemNgoiTrai2.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(nemNgoiTrai2);
-    const sizeDay = new THREE.Vector3();
-    boundingBoxDay.getSize(sizeDay);
-
-    nemNgoiTrai2.scale.x = lenX / sizeDay.x;
-    nemNgoiTrai2.scale.y = lenY / sizeDay.y;
-    nemNgoiTrai2.scale.z = lenZ / sizeDay.z;
-  };
-
-  const settingNemNgoiPhai1 = (nemNgoiPhai1) => {
-    nemNgoiPhai1.position.z = (width - rBo) * -1;
-
-    nemNgoiPhai1.position.y = height - caoNem;
-
-    nemNgoiPhai1.position.x = depth - rBo;
-
-    const lenZ = bcp ? rBo : 0;
-
-    const lenX = bcp ? rBo : 0;
-
-    const lenY = bcp ? caoNem : 0;
-
-    nemNgoiPhai1.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(nemNgoiPhai1);
-    const sizeDay = new THREE.Vector3();
-    boundingBoxDay.getSize(sizeDay);
-
-    nemNgoiPhai1.scale.x = lenX / sizeDay.x;
-    nemNgoiPhai1.scale.y = lenY / sizeDay.y;
-    nemNgoiPhai1.scale.z = lenZ / sizeDay.z;
-  };
-
-  const settingNemNgoiPhai2 = (nemNgoiPhai2) => {
-    nemNgoiPhai2.position.z = (width - rBo) * -1;
-
-    nemNgoiPhai2.position.y = height - caoNem;
-
-    nemNgoiPhai2.position.x = 0;
-
-    const lenZ = bcp ? rBo : 0;
-
-    const lenX = bcp ? depth - rBo : 0;
-
-    const lenY = bcp ? caoNem : 0;
-
-    nemNgoiPhai2.scale.set(1, 1, 1);
-    let boundingBoxDay = new THREE.Box3().setFromObject(nemNgoiPhai2);
-    const sizeDay = new THREE.Vector3();
-    boundingBoxDay.getSize(sizeDay);
-
-    nemNgoiPhai2.scale.x = lenX / sizeDay.x;
-    nemNgoiPhai2.scale.y = lenY / sizeDay.y;
-    nemNgoiPhai2.scale.z = lenZ / sizeDay.z;
-  };
-  //NEM NGOI
-
   //BO CONG PHAI
   const settingBCPHau = (hau) => {
     hau.position.z = (width - rBo - truHaoBoCong + DDTBia) * -1;
@@ -571,7 +396,7 @@ function App4() {
 
     const lenX = bcp ? DDTHau : 0;
 
-    const lenY = bcp ? height - DDTBia - caoNem : 0;
+    const lenY = bcp ? height - DDTBia : 0;
 
     hau.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau);
@@ -594,7 +419,7 @@ function App4() {
 
     const lenX = bcp ? depth - DDTBia : 0;
 
-    const lenY = bcp ? height - DDTBia - caoNem : 0;
+    const lenY = bcp ? height - DDTBia : 0;
 
     bTrai.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bTrai);
@@ -617,7 +442,7 @@ function App4() {
 
     const lenX = bcp ? depth - rBo : 0;
 
-    const lenY = bcp ? height - DDTBia - caoNem : 0;
+    const lenY = bcp ? height - DDTBia : 0;
 
     bPhai.scale.set(1, 1, 1);
     let boundingBoxBiaPhai = new THREE.Box3().setFromObject(bPhai);
@@ -640,7 +465,7 @@ function App4() {
 
     const lenX = bcp ? rBo : 0;
 
-    const lenY = bcp ? height - DDTBia - caoNem : 0;
+    const lenY = bcp ? height - DDTBia : 0;
 
     dayBoCong.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(dayBoCong);
@@ -663,7 +488,7 @@ function App4() {
 
     const lenX = bcp ? DDTBia : 0;
 
-    const lenY = bcp ? height - DDTBia - caoNem : 0;
+    const lenY = bcp ? height - DDTBia : 0;
 
     THBoCong.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(THBoCong);
@@ -678,7 +503,7 @@ function App4() {
   const settingBCPNoc1 = (noc1) => {
     noc1.position.z = (width - rBo) * -1;
 
-    noc1.position.y = height - DDTBia - caoNem;
+    noc1.position.y = height - DDTBia;
 
     noc1.position.x = depth - rBo;
 
@@ -701,7 +526,7 @@ function App4() {
   const settingBCPNoc3 = (noc3) => {
     noc3.position.z = (width - rBo) * -1;
 
-    noc3.position.y = height - DDTBia - caoNem;
+    noc3.position.y = height - DDTBia;
 
     noc3.position.x = 0;
 
@@ -799,49 +624,45 @@ function App4() {
     const glftLoader = new GLTFLoader();
     const textureLoader = new THREE.TextureLoader();
 
-    // glftLoader.load('/glb/DON-NGOI-BO-CONG-UV-CO-CHAN.glb', (gltfScene) => {
-    glftLoader.load(
-      '/glb/DON-NGOI-BO-CONG-UV-CO-CHAN-VA-NEM-NGOI.glb',
-      (gltfScene) => {
-        gltfScene.scene.scale.set(1, 1, 1);
-        gltfScene.scene.position.set(0, 0, 0);
-        gltfScene.scene.traverse((child) => {
-          if (child.isMesh) {
-            const randomColor = Math.random() * 0xffffff;
-            // Gán màu cho vật liệu của mesh
-            // child.material.color.set(randomColor);
-            // child.castShadow = true;
-            // child.receiveShadow = true;
-            child.material.roughness = 0.8;
-            child.material.metalness = 0.4;
+    glftLoader.load('/glb/TU-TV-TREO-TUONG-BO-CONG-UV.glb', (gltfScene) => {
+      gltfScene.scene.scale.set(1, 1, 1);
+      gltfScene.scene.position.set(0, 0, 0);
+      gltfScene.scene.traverse((child) => {
+        if (child.isMesh) {
+          const randomColor = Math.random() * 0xffffff;
+          // Gán màu cho vật liệu của mesh
+          // child.material.color.set(randomColor);
+          // child.castShadow = true;
+          // child.receiveShadow = true;
+          child.material.roughness = 0.8;
+          child.material.metalness = 0.4;
+        }
+      });
+
+      textureLoader.load('/images/TEXTURE.png', (newTexture) => {
+        newTexture.offset.set(1, 1);
+        newTexture.wrapS = newTexture.wrapT = THREE.MirroredRepeatWrapping;
+        newTexture.repeat.set(1, 1);
+        // newTexture.repeat.set(module.scale.z, 1);
+
+        newTexture.mapping = THREE.UVMapping;
+
+        gltfScene.scene.traverse((node) => {
+          if (node.isMesh) {
+            const materials = Array.isArray(node.material)
+              ? node.material
+              : [node.material];
+            materials.forEach((material) => {
+              material.map = newTexture;
+            });
           }
         });
+      });
 
-        textureLoader.load('/images/TEXTURE.png', (newTexture) => {
-          newTexture.offset.set(1, 1);
-          newTexture.wrapS = newTexture.wrapT = THREE.MirroredRepeatWrapping;
-          newTexture.repeat.set(1, 1);
-          // newTexture.repeat.set(module.scale.z, 1);
+      setGltfUuid(gltfScene.scene.uuid);
 
-          newTexture.mapping = THREE.UVMapping;
-
-          gltfScene.scene.traverse((node) => {
-            if (node.isMesh) {
-              const materials = Array.isArray(node.material)
-                ? node.material
-                : [node.material];
-              materials.forEach((material) => {
-                material.map = newTexture;
-              });
-            }
-          });
-        });
-
-        setGltfUuid(gltfScene.scene.uuid);
-
-        display.scene.add(gltfScene.scene);
-      }
-    );
+      display.scene.add(gltfScene.scene);
+    });
 
     const pointer = new THREE.Vector2();
     const raycaster = new THREE.Raycaster();
@@ -933,38 +754,18 @@ function App4() {
       const hau = md.getObjectByName('HAU');
       const bTrai = md.getObjectByName('BIA-TRAI');
       const bPhai = md.getObjectByName('BIA-PHAI');
-      const chanTruoc = md.getObjectByName('CHAN-TRUOC');
 
       day && settingDay(day);
       bTrai && settingBiaTrai(bTrai);
       bPhai && settingBiaPhai(bPhai);
       noc && settingNoc(noc);
       hau && settingHau(hau);
-      chanTruoc && settingChanTruoc(chanTruoc);
       //KHOI CHINH
-
-      //NEM NGOI
-      const nemNgoiDon = md.getObjectByName('NEM-NGOI-DON');
-      const nemNgoi1 = md.getObjectByName('NEM-NGOI-1');
-      const nemNgoiTrai1 = md.getObjectByName('NEM-NGOI-TRAI-1');
-      const nemNgoiTrai2 = md.getObjectByName('NEM-NGOI-TRAI-2');
-      const nemNgoiPhai1 = md.getObjectByName('NEM-NGOI-PHAI-1');
-      const nemNgoiPhai2 = md.getObjectByName('NEM-NGOI-PHAI-2');
-
-      nemNgoiDon && settingNemNgoiDon(nemNgoiDon);
-      nemNgoi1 && settingNemNgoi1(nemNgoi1);
-      nemNgoiTrai1 && settingNemNgoiTrai1(nemNgoiTrai1);
-      nemNgoiTrai2 && settingNemNgoiTrai2(nemNgoiTrai2);
-      nemNgoiPhai1 && settingNemNgoiPhai1(nemNgoiPhai1);
-      nemNgoiPhai2 && settingNemNgoiPhai2(nemNgoiPhai2);
-      //NEM NGOI
 
       const textureLoader = new THREE.TextureLoader();
       textureLoader.load('/images/TEXTURE.png', (newTexture) => {
         md.traverse((node) => {
           if (node.isMesh) {
-            node.geometry.computeVertexNormals();
-
             const materials = Array.isArray(node.material)
               ? node.material
               : [node.material];
@@ -1020,21 +821,7 @@ function App4() {
         handleResetBox();
       }, 10);
     }
-  }, [
-    display,
-    width,
-    height,
-    depth,
-    DDTHau,
-    DDTBia,
-    coTamChan,
-    caoChan,
-    caoNem,
-    rBo,
-    bct,
-    bcp,
-    gltfUuid,
-  ]);
+  }, [display, width, height, depth, DDTHau, DDTBia, rBo, bct, bcp, gltfUuid]);
 
   const handleResetBox = () => {
     const md = display.scene.getObjectByProperty('uuid', gltfUuid);
@@ -1055,10 +842,6 @@ function App4() {
         child?.userData?.drawBorder !== false &&
         child?.userData?.requireBorder !== false
       ) {
-        if (child.name?.includes('NEM-NGOI')) {
-          return; // Bỏ qua các mesh có tên chứa "NEM-NGOI"
-        }
-
         // Vẽ theo đúng hình dạng geometry thực tếz
         const THRESH = 60; // threshold để bỏ các cạnh bo cong/mịn
         const edges = new THREE.EdgesGeometry(child.geometry, THRESH);
@@ -1185,16 +968,6 @@ function App4() {
               onChange={(e) => setBCP(e.target.checked)}
             />
             Bo cong phải
-          </label>
-
-          <br />
-          <label className="label">
-            <input
-              type="checkbox"
-              checked={coTamChan}
-              onChange={(e) => setCoTamChan(e.target.checked)}
-            />
-            Có tấm chân
           </label>
         </div>
       </div>

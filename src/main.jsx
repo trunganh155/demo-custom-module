@@ -66,15 +66,21 @@ import TuGiayDonNgoi from './TuGiayDonNgoi';
 import TuGiayDonNgoiBoCong from './TuGiayDonNgoiBoCong';
 import TuGiayDonNgoiBoCongVachLam from './TuGiayDonNgoiBoCongVachLam';
 import TuGiayDonNgoiBoCongVachLamVaGuong from './TuGiayDonNgoiBoCongVachLamVaGuong';
+
 import TuTVBoCong from './TuTVBoCong';
 import TuTVBoCongTreoTuong from './TuTVBoCongTreoTuong';
+
+import TuTVBoCongNew from './TuTVBoCongNew';
+import TuTVBoCongTreoTuongNew from './TuTVBoCongTreoTuongNew';
 
 import TuGiayDuoi from './TuGiayDuoi';
 import TuGiayTren from './TuGiayTren';
 
+import MocTreoTuGiay from './MocTreoTuGiay';
+
 ReactDOM.render(
   <React.StrictMode>
-    <TuAoDuoiGocLType3FullKhuyetCot />
+    <TuAoCotNgang />
   </React.StrictMode>,
   document.getElementById('root')
 );

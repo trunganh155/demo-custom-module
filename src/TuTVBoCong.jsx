@@ -112,7 +112,7 @@ function App4() {
 
     const lenX = bct ? rBo : 0;
 
-    const lenY = bct ? height - DDTBia- caoChanRoi : 0;
+    const lenY = bct ? height - DDTBia - caoChanRoi : 0;
 
     dayBoCong.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(dayBoCong);
@@ -303,7 +303,7 @@ function App4() {
 
     const lenX = DDTHau;
 
-    const lenY = height - caoChan - DDTBia- caoChanRoi;
+    const lenY = height - caoChan - DDTBia - caoChanRoi;
 
     hau.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau);
@@ -384,7 +384,7 @@ function App4() {
 
     const lenX = depth - DDTHau - (bct || bcp ? DDTBia : 0);
 
-    const lenY = height - DDTBia- caoChanRoi;
+    const lenY = height - DDTBia - caoChanRoi;
 
     bTrai.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bTrai);
@@ -408,7 +408,7 @@ function App4() {
 
     const lenX = depth - DDTHau - (bct || bcp ? DDTBia : 0);
 
-    const lenY = height - DDTBia- caoChanRoi;
+    const lenY = height - DDTBia - caoChanRoi;
 
     bPhai.scale.set(1, 1, 1);
     let boundingBoxBiaPhai = new THREE.Box3().setFromObject(bPhai);
@@ -456,7 +456,7 @@ function App4() {
 
     const lenX = bcp ? DDTHau : 0;
 
-    const lenY = bcp ? height - DDTBia- caoChanRoi : 0;
+    const lenY = bcp ? height - DDTBia - caoChanRoi : 0;
 
     hau.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau);
@@ -479,7 +479,7 @@ function App4() {
 
     const lenX = bcp ? depth - DDTBia : 0;
 
-    const lenY = bcp ? height - DDTBia- caoChanRoi : 0;
+    const lenY = bcp ? height - DDTBia - caoChanRoi : 0;
 
     bTrai.scale.set(1, 1, 1);
     let boundingBoxBiaTrai = new THREE.Box3().setFromObject(bTrai);
@@ -502,7 +502,7 @@ function App4() {
 
     const lenX = bcp ? depth - rBo : 0;
 
-    const lenY = bcp ? height - DDTBia- caoChanRoi: 0;
+    const lenY = bcp ? height - DDTBia - caoChanRoi : 0;
 
     bPhai.scale.set(1, 1, 1);
     let boundingBoxBiaPhai = new THREE.Box3().setFromObject(bPhai);
@@ -525,7 +525,7 @@ function App4() {
 
     const lenX = bcp ? rBo : 0;
 
-    const lenY = bcp ? height - DDTBia- caoChanRoi : 0;
+    const lenY = bcp ? height - DDTBia - caoChanRoi : 0;
 
     dayBoCong.scale.set(1, 1, 1);
     let boundingBoxDay = new THREE.Box3().setFromObject(dayBoCong);
@@ -548,7 +548,7 @@ function App4() {
 
     const lenX = bcp ? DDTBia : 0;
 
-    const lenY = bcp ? height - DDTBia- caoChanRoi : 0;
+    const lenY = bcp ? height - DDTBia - caoChanRoi : 0;
 
     THBoCong.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(THBoCong);

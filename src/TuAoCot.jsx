@@ -96,7 +96,11 @@ function App2() {
   };
 
   const settingDay3 = (day3) => {
-    day3.position.z = ((KCCot > DDTBia ? KCCot : 0) + rongCot + DDTBia) * -1;
+    day3.position.z =
+      ((KCCot > DDTBia && KCCot < width - rongCot ? KCCot : 0) +
+        rongCot +
+        DDTBia) *
+      -1;
 
     day3.position.y = caoChan;
 
@@ -365,7 +369,11 @@ function App2() {
   };
 
   const settingNoc3 = (noc3) => {
-    noc3.position.z = ((KCCot > DDTBia ? KCCot : 0) + rongCot + DDTBia) * -1;
+    noc3.position.z =
+      ((KCCot > DDTBia && KCCot < width - rongCot ? KCCot : 0) +
+        rongCot +
+        DDTBia) *
+      -1;
 
     noc3.position.y = height - DDTBia;
 

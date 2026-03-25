@@ -434,7 +434,7 @@ function App3() {
     xan1.scale.z = lenZ / sizeXSau.z;
   };
 
-  const settingXanNgang1_1 = (xNgang1_1) => {
+  const settingXanNgang1_1_1 = (xNgang1_1) => {
     xNgang1_1.position.z = DDTHau * -1;
     xNgang1_1.position.x = dayCot + DDTBia;
     xNgang1_1.position.y = (height - caoChan) / 2 + caoChan;
@@ -453,7 +453,7 @@ function App3() {
     xNgang1_1.scale.z = lenZ / sizeDay.z;
   };
 
-  const settingXanNgang1_2 = (xNgang1_2) => {
+  const settingXanNgang1_1_2 = (xNgang1_2) => {
     xNgang1_2.position.z = (rongCot + DDTBia) * -1;
     xNgang1_2.position.x = truHaoGoc + DDTBia;
     xNgang1_2.position.y = (height - caoChan) / 2 + caoChan;
@@ -694,8 +694,8 @@ function App3() {
       xan1 && settingXan1(xan1);
       matCoDinh && settingMatCoDinh(matCoDinh);
 
-      xNgang1_1_1 && settingXanNgang1_1(xNgang1_1_1);
-      xNgang1_1_2 && settingXanNgang1_2(xNgang1_1_2);
+      xNgang1_1_1 && settingXanNgang1_1_1(xNgang1_1_1);
+      xNgang1_1_2 && settingXanNgang1_1_2(xNgang1_1_2);
       xNgang2 && settingXanNgang2(xNgang2);
       cua1 && settingCua1(cua1);
       cua2 && settingCua2(cua2);

@@ -40,9 +40,8 @@ function App2() {
   const [DDTCSau, setDDTCSau] = useState(0.017);
 
   const [KCCot, setKCCot] = useState(0.4);
-  const [dayCot, setDayCot] = useState(0.15);
-  const [caoCot, setCaoCot] = useState(0.2);
-  const [rongCot, setRongCot] = useState(0.3);
+  const [dayDa, setDayDa] = useState(0.15);
+  const [caoDa, setCaoDa] = useState(0.2);
 
   const [fixNoc, setFixNoc] = useState(0);
   const [fixBiaTrai, setFixBiaTrai] = useState(0);
@@ -53,29 +52,15 @@ function App2() {
   const [visibleBP, setVisibleBP] = useState(true);
 
   const settingDay = (day) => {
-    day.position.z = optionDay === 0 ? 0 * -1 : DDTBiaTrai * -1;
+    day.position.z = 0 * -1;
 
     day.position.y = 0;
 
-    day.position.x =
-      optionSauDay === 0
-        ? optionHau === 0 || optionHau === 1
-          ? DDTHau
-          : DDTHau + luiHau
-        : optionHau === 0 || optionHau === 1
-        ? DDTHau
-        : 0;
+    day.position.x = DDTHau;
 
-    const lenZ = width - (optionDay === 0 ? 0 : DDTBiaTrai + DDTBiaPhai);
+    const lenZ = width;
 
-    const lenX =
-      (optionSauDay === 0
-        ? optionHau === 0 || optionHau === 1
-          ? depth - DDTHau
-          : depth - DDTHau - luiHau
-        : optionHau === 0 || optionHau === 1
-        ? depth - DDTHau
-        : depth) + (fixDay >= 0 ? -fixDay : 0);
+    const lenX = depth - DDTHau;
 
     const lenY = DDTDay;
 
@@ -92,15 +77,15 @@ function App2() {
   const settingHau1 = (hau1) => {
     hau1.position.z = 0;
 
-    hau1.position.x = dayCot;
+    hau1.position.x = dayDa;
 
-    hau1.position.y = height - caoCot;
+    hau1.position.y = height - caoDa;
 
     const lenZ = width;
 
     const lenX = 0.017;
 
-    const lenY = caoCot;
+    const lenY = caoDa;
 
     hau1.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau1);
@@ -120,8 +105,8 @@ function App2() {
       optionHau === 0 || optionHau === 1
         ? 0
         : optionSauDay === 0
-        ? 0
-        : DDTDay - ngamHau;
+          ? 0
+          : DDTDay - ngamHau;
 
     hau2.position.x = optionHau === 0 || optionHau === 1 ? 0 : luiHau;
 
@@ -134,12 +119,12 @@ function App2() {
 
     const lenY =
       optionHau === 0
-        ? height - caoCot
+        ? height - caoDa
         : optionHau === 1
-        ? height - caoCot - DDTNoc
-        : optionSauDay === 0
-        ? height - caoCot - DDTNoc + ngamHau
-        : height - caoCot - DDTNoc - DDTDay + 2 * ngamHau;
+          ? height - caoDa - DDTNoc
+          : optionSauDay === 0
+            ? height - caoDa - DDTNoc + ngamHau
+            : height - caoDa - DDTNoc - DDTDay + 2 * ngamHau;
 
     hau2.scale.set(1, 1, 1);
     let boundingBoxHau = new THREE.Box3().setFromObject(hau2);
@@ -154,13 +139,13 @@ function App2() {
   const settingBia1 = (bia1) => {
     bia1.position.z = 0 * -1;
 
-    bia1.position.x = dayCot + 0.017;
+    bia1.position.x = dayDa + 0.017;
 
     bia1.position.y = optionDay === 0 ? DDTDay : 0;
 
     const lenZ = DDTBiaTrai;
 
-    const lenX = depth - dayCot - 0.017 + (fixBiaTrai >= 0 ? -fixBiaTrai : 0);
+    const lenX = depth - dayDa - 0.017 + (fixBiaTrai >= 0 ? -fixBiaTrai : 0);
 
     const lenY =
       optionDay === 0
@@ -168,8 +153,8 @@ function App2() {
           ? height - DDTDay - DDTNoc
           : height - DDTDay
         : optionNoc === 0
-        ? height - DDTNoc
-        : height;
+          ? height - DDTNoc
+          : height;
 
     bia1.scale.set(1, 1, 1);
     let boundingBoxBia2 = new THREE.Box3().setFromObject(bia1);
@@ -191,7 +176,7 @@ function App2() {
     const lenZ = DDTBiaTrai;
 
     const lenX =
-      dayCot + 0.017 + (optionHau === 0 || optionHau === 1 ? -DDTHau : 0);
+      dayDa + 0.017 + (optionHau === 0 || optionHau === 1 ? -DDTHau : 0);
 
     const lenY =
       (optionDay === 0
@@ -199,8 +184,8 @@ function App2() {
           ? height - DDTDay - DDTNoc
           : height - DDTDay
         : optionNoc === 0
-        ? height - DDTNoc
-        : height) - caoCot;
+          ? height - DDTNoc
+          : height) - caoDa;
 
     bia2.scale.set(1, 1, 1);
     let boundingBoxBia2 = new THREE.Box3().setFromObject(bia2);
@@ -215,13 +200,13 @@ function App2() {
   const settingBia3 = (bia3) => {
     bia3.position.z = (width - DDTBiaPhai) * -1;
 
-    bia3.position.x = dayCot + 0.017;
+    bia3.position.x = dayDa + 0.017;
 
     bia3.position.y = optionDay === 0 ? DDTDay : 0;
 
     const lenZ = DDTBiaPhai;
 
-    const lenX = depth - dayCot - 0.017 + (fixBiaPhai >= 0 ? -fixBiaPhai : 0);
+    const lenX = depth - dayDa - 0.017 + (fixBiaPhai >= 0 ? -fixBiaPhai : 0);
 
     const lenY =
       optionDay === 0
@@ -229,8 +214,8 @@ function App2() {
           ? height - DDTDay - DDTNoc
           : height - DDTDay
         : optionNoc === 0
-        ? height - DDTNoc
-        : height;
+          ? height - DDTNoc
+          : height;
 
     bia3.scale.set(1, 1, 1);
     let boundingBoxBia2 = new THREE.Box3().setFromObject(bia3);
@@ -252,7 +237,7 @@ function App2() {
     const lenZ = DDTBiaPhai;
 
     const lenX =
-      dayCot + 0.017 + (optionHau === 0 || optionHau === 1 ? -DDTHau : 0);
+      dayDa + 0.017 + (optionHau === 0 || optionHau === 1 ? -DDTHau : 0);
 
     const lenY =
       (optionDay === 0
@@ -260,8 +245,8 @@ function App2() {
           ? height - DDTDay - DDTNoc
           : height - DDTDay
         : optionNoc === 0
-        ? height - DDTNoc
-        : height) - caoCot;
+          ? height - DDTNoc
+          : height) - caoDa;
 
     bia4.scale.set(1, 1, 1);
     let boundingBoxBia2 = new THREE.Box3().setFromObject(bia4);
@@ -276,13 +261,13 @@ function App2() {
   const settingNoc1 = (noc1) => {
     noc1.position.z = optionNoc === 0 ? 0 : DDTBiaTrai * -1;
 
-    noc1.position.x = dayCot + 0.017;
+    noc1.position.x = dayDa + 0.017;
 
     noc1.position.y = height - DDTNoc;
 
     const lenZ = width - (optionNoc === 0 ? 0 : DDTBiaTrai + DDTBiaPhai);
 
-    const lenX = depth - dayCot - 0.017 + (fixNoc >= 0 ? -fixNoc : 0);
+    const lenX = depth - dayDa - 0.017 + (fixNoc >= 0 ? -fixNoc : 0);
 
     const lenY = DDTNoc;
 
@@ -301,12 +286,12 @@ function App2() {
 
     noc2.position.x = optionHau === 0 || optionHau === 1 ? DDTHau : 0;
 
-    noc2.position.y = height - caoCot - DDTNoc;
+    noc2.position.y = height - caoDa - DDTNoc;
 
     const lenZ = width - (optionNoc === 0 ? 0 : DDTBiaTrai + DDTBiaPhai);
 
     const lenX =
-      dayCot + 0.017 + (optionHau === 0 || optionHau === 1 ? -DDTHau : 0);
+      dayDa + 0.017 + (optionHau === 0 || optionHau === 1 ? -DDTHau : 0);
 
     const lenY = DDTNoc;
 
@@ -526,73 +511,64 @@ function App2() {
     DDTCTruoc,
     DDTCSau,
     KCCot,
-    dayCot,
-    rongCot,
+    dayDa,
     gltfUuid,
   ]);
 
   const handleResetBox = () => {
-    display.scene.traverse((child) => {
-      if (child.isMesh) {
-        const scaledGeometry = child.geometry.clone();
-        scaledGeometry.scale(child.scale.x, child.scale.y, child.scale.z);
+    const md = display.scene.getObjectByProperty('uuid', gltfUuid);
 
-        const edges = new THREE.EdgesGeometry(scaledGeometry);
+    // Xóa tất cả box hiện tại
+    listBox?.forEach((box) => {
+      display.scene.remove(box);
+    });
+    listBox = [];
+
+    md.traverse((child) => {
+      if (
+        child.isMesh &&
+        child.visible &&
+        child.scale.x !== 0 &&
+        child.scale.y !== 0 &&
+        child.scale.z !== 0 &&
+        child?.userData?.drawBorder !== false &&
+        child?.userData?.requireBorder !== false
+      ) {
+        // Vẽ theo đúng hình dạng geometry thực tếz
+        const THRESH = 60; // threshold để bỏ các cạnh bo cong/mịn
+        const edges = new THREE.EdgesGeometry(child.geometry, THRESH);
         const material = new THREE.LineBasicMaterial({ color: 0x000000 });
-        const boundingBoxEdges = new THREE.LineSegments(edges, material);
+        const wireframe = new THREE.LineSegments(edges, material);
 
-        boundingBoxEdges.rotation.copy(child.rotation);
-        boundingBoxEdges.position.copy(child.position);
+        // Copy transform từ mesh gốc
+        wireframe.position.copy(child.position);
+        wireframe.rotation.copy(child.rotation);
+        wireframe.scale.copy(child.scale);
 
-        listBox.push(boundingBoxEdges);
+        // Apply world matrix nếu có parent transform
+        if (child.parent && child.parent !== display.scene) {
+          // Lấy world position thực tế
+          const worldPosition = new THREE.Vector3();
+          const worldQuaternion = new THREE.Quaternion();
+          const worldScale = new THREE.Vector3();
 
-        display.scene.add(boundingBoxEdges);
+          child.getWorldPosition(worldPosition);
+          child.getWorldQuaternion(worldQuaternion);
+          child.getWorldScale(worldScale);
+
+          wireframe.position.copy(worldPosition);
+          wireframe.quaternion.copy(worldQuaternion);
+          wireframe.scale.copy(worldScale);
+        }
+
+        // Loại bỏ khi raycast
+        wireframe.visibleForRaycast = false;
+
+        listBox.push(wireframe);
+        display.scene.add(wireframe);
       }
     });
   };
-
-  // const handleResetBox = () => {
-  //   const md = display.scene.getObjectByProperty('uuid', gltfUuid);
-
-  //   md.traverse((child) => {
-  //     console.log(child);
-  //     if (
-  //       child.isMesh &&
-  //       child.scale.x !== 0 &&
-  //       child.scale.y !== 0 &&
-  //       child.scale.z !== 0
-  //     ) {
-  //       const box = new THREE.Box3().setFromObject(md);
-  //       // Tính toán kích thước và vị trí của khung
-  //       const size = new THREE.Vector3();
-  //       box.getSize(size);
-  //       const center = new THREE.Vector3();
-  //       box.getCenter(center);
-
-  //       // Scale the geometry based on the parent scale
-  //       const scaledGeometry = child.geometry.clone();
-  //       scaledGeometry.scale(child.scale.x, child.scale.y, child.scale.z);
-
-  //       // Create edges from the scaled geometry
-  //       const edges = new THREE.EdgesGeometry(scaledGeometry);
-  //       const material = new THREE.LineBasicMaterial({ color: 0x000000 });
-
-  //       // Create LineSegments for the bounding box edges
-  //       const boundingBoxEdges = new THREE.LineSegments(edges, material);
-  //       // Position the bounding box edges to match the mesh
-  //       boundingBoxEdges.position.copy(child.position);
-  //       // boundingBoxEdges.position.set(
-  //       //   child.position.x - depth / 2,
-  //       //   child.position.y - height / 2,
-  //       //   child.position.z + width / 2
-  //       // );
-
-  //       listBox.push(boundingBoxEdges);
-  //       // Add the bounding box to the scene
-  //       display.scene.add(boundingBoxEdges);
-  //     }
-  //   });
-  // };
 
   const handleHide = (name, visible) => {
     const md = display.scene.getObjectByProperty('uuid', gltfUuid);
@@ -648,194 +624,6 @@ function App2() {
               setDepth(Number(e.target.value) / 1000);
             }}
           />
-        </div>
-
-        <h5 className="header">Cột:</h5>
-        <div>
-          <label className="label" htmlFor="rongCot">
-            Rộng (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="rongCot"
-            id="rongCot"
-            defaultValue={rongCot * 1000}
-            onChange={(e) => {
-              setRongCot(Number(e.target.value) / 1000);
-            }}
-          />
-          <br />
-          <label className="label" htmlFor="dayCot">
-            Dày (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="dayCot"
-            id="dayCot"
-            defaultValue={dayCot * 1000}
-            onChange={(e) => {
-              setDayCot(Number(e.target.value) / 1000);
-            }}
-          />
-          <br />
-          <label className="label" htmlFor="caoCot">
-            Cao (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="caoCot"
-            id="caoCot"
-            defaultValue={caoCot * 1000}
-            onChange={(e) => {
-              setCaoCot(Number(e.target.value) / 1000);
-            }}
-          />
-        </div>
-
-        <h5 className="header">Nóc:</h5>
-        <div>
-          <select
-            className="select"
-            onChange={(e) => setOptionNoc(Number(e.target.value))}
-          >
-            <option value={0}>Nóc Phủ Bì</option>
-            <option value={1}>Nóc Lọt Lòng</option>
-          </select>
-          <br />
-          <label className="label" htmlFor="DDTNoc">
-            Độ dày tấm nóc (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="DDTNoc"
-            id="DDTNoc"
-            defaultValue={DDTNoc * 1000}
-            onChange={(e) => {
-              setDDTNoc(Number(e.target.value) / 1000);
-            }}
-          />
-          <br />
-          <label className="label" htmlFor="fixNoc">
-            Tăng/giảm nóc (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="fixNoc"
-            id="fixNoc"
-            defaultValue={fixNoc * 1000}
-            onChange={(e) => {
-              setFixNoc(Number(e.target.value) / 1000);
-            }}
-          />
-        </div>
-
-        <h5 className="header">Đáy:</h5>
-        <div>
-          <select
-            className="select"
-            onChange={(e) => setOptionDay(Number(e.target.value))}
-          >
-            <option value={0}>Phủ bì</option>
-            <option value={1}>Lọt Lòng</option>
-          </select>
-          <br />
-          <select
-            className="select"
-            onChange={(e) => setOptionSauDay(Number(e.target.value))}
-          >
-            <option value={0}>Đáy Theo Hậu</option>
-            <option value={1}>Đáy Theo Bìa</option>
-          </select>
-          <br />
-          <label className="label" htmlFor="DDTDay">
-            Độ dày tấm đáy (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="DDTDay"
-            id="DDTDay"
-            defaultValue={DDTDay * 1000}
-            onChange={(e) => {
-              setDDTDay(Number(e.target.value) / 1000);
-            }}
-          />
-          <br />
-          <label className="label" htmlFor="fixDay">
-            Tăng/giảm đáy (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="fixDay"
-            id="fixDay"
-            defaultValue={fixDay * 1000}
-            onChange={(e) => {
-              setFixDay(Number(e.target.value) / 1000);
-            }}
-          />
-        </div>
-
-        <h5 className="header">Hậu:</h5>
-        <div>
-          <select
-            className="select"
-            onChange={(e) => setOptionHau(Number(e.target.value))}
-          >
-            <option value={0}>Hậu Phủ Bì Phủ Nóc</option>
-            <option value={1}>Hậu Phủ Bì Lọt Nóc</option>
-            <option value={2}>Hậu Âm Tủ</option>
-          </select>
-          <br />
-          <label className="label" htmlFor="DDTHau">
-            Độ dày tấm hậu (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="DDTHau"
-            id="DDTHau"
-            defaultValue={DDTHau * 1000}
-            onChange={(e) => {
-              setDDTHau(Number(e.target.value) / 1000);
-            }}
-          />
-          {optionHau === 2 && (
-            <div>
-              <label className="label" htmlFor="luiHau">
-                Lùi Hậu (mm):
-              </label>
-              <input
-                className="input"
-                type="number"
-                name="luiHau"
-                id="luiHau"
-                defaultValue={luiHau * 1000}
-                onChange={(e) => {
-                  setLuiHau(Number(e.target.value) / 1000);
-                }}
-              />
-              <br />
-              <label className="label" htmlFor="ngamHau">
-                Ngậm Hậu (mm):
-              </label>
-              <input
-                className="input"
-                type="number"
-                name="ngamHau"
-                id="ngamHau"
-                defaultValue={ngamHau * 1000}
-                onChange={(e) => {
-                  setNgamHau(Number(e.target.value) / 1000);
-                }}
-              />
-            </div>
-          )}
         </div>
 
         <h5 className="header">Chân:</h5>
@@ -896,100 +684,6 @@ function App2() {
             defaultValue={luiChan * 1000}
             onChange={(e) => {
               setLuiChan(Number(e.target.value) / 1000);
-            }}
-          />
-        </div>
-
-        <h5 className="header">Bìa Trái:</h5>
-        <div>
-          <label className="label" htmlFor="HideBiaTrai">
-            Ẩn/hiện:
-          </label>
-          <input
-            type="checkbox"
-            name="showLine"
-            id="HideBiaTrai"
-            checked={visibleBT}
-            onChange={() => {
-              handleHide('BIA-TRAI', !visibleBT);
-              setVisibleBT(!visibleBT);
-            }}
-          />
-          <br />
-
-          <label className="label" htmlFor="DDTBiaTrai">
-            Độ dày tấm bìa trái (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="DDTBiaTrai"
-            id="DDTBiaTrai"
-            defaultValue={DDTBiaTrai * 1000}
-            onChange={(e) => {
-              setDDTBiaTrai(Number(e.target.value) / 1000);
-            }}
-          />
-          <br />
-
-          <label className="label" htmlFor="fixBiaTrai">
-            Tăng/giảm bìa trái (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="fixBiaTrai"
-            id="fixBiaTrai"
-            defaultValue={fixBiaTrai * 1000}
-            onChange={(e) => {
-              setFixBiaTrai(Number(e.target.value) / 1000);
-            }}
-          />
-        </div>
-
-        <h5 className="header">Bìa Phải:</h5>
-        <div>
-          <label className="label" htmlFor="HideBiaPhai">
-            Ẩn/hiện:
-          </label>
-          <input
-            type="checkbox"
-            name="showLine"
-            id="HideBiaPhai"
-            checked={visibleBP}
-            onChange={() => {
-              handleHide('BIA-PHAI', !visibleBP);
-              setVisibleBP(!visibleBP);
-            }}
-          />
-          <br />
-
-          <label className="label" htmlFor="DDTBiaPhai">
-            Độ dày tấm bìa phải (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="DDTBiaPhai"
-            id="DDTBiaPhai"
-            defaultValue={DDTBiaPhai * 1000}
-            onChange={(e) => {
-              setDDTBiaPhai(Number(e.target.value) / 1000);
-            }}
-          />
-          <br />
-
-          <label className="label" htmlFor="fixBiaPhai">
-            Tăng/giảm bìa phải (mm):
-          </label>
-          <input
-            className="input"
-            type="number"
-            name="fixBiaPhai"
-            id="fixBiaPhai"
-            defaultValue={fixBiaPhai * 1000}
-            onChange={(e) => {
-              setFixBiaPhai(Number(e.target.value) / 1000);
             }}
           />
         </div>

@@ -412,12 +412,13 @@ function App2() {
     xuongSau2.scale.z = lenZ / sizeDay.z;
   };
 
+  // Mat da (+ DDTMat ) ở chiều sâu để đúng bên app 3d
   const settingMatDa1 = (matDa1) => {
     matDa1.position.z = 0 * -1;
 
     matDa1.position.y = height;
 
-    matDa1.position.x = 0;
+    matDa1.position.x = 0 + DDTMat;
 
     const lenZ = KCCot > DDTBia ? KCCot : 0;
 
@@ -440,7 +441,7 @@ function App2() {
 
     matDa2.position.y = height;
 
-    matDa2.position.x = dayCot;
+    matDa2.position.x = dayCot + DDTMat;
 
     const lenZ = rongCot;
 
@@ -463,7 +464,7 @@ function App2() {
 
     matDa3.position.y = height;
 
-    matDa3.position.x = 0;
+    matDa3.position.x = 0 + DDTMat;
 
     const lenZ =
       KCCot < width - rongCot

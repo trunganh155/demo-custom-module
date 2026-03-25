@@ -262,42 +262,80 @@ function App3() {
     biaCot2.scale.z = lenZ / sizeBiaTrai.z;
   };
 
-  const settingChan1 = (chan1) => {
-    chan1.position.z = (depth - DDTBia) * -1;
-    chan1.position.x = depth;
-    chan1.position.y = 0;
+  const settingChanTruoc1 = (chanTruoc1) => {
+    chanTruoc1.position.z = (depth - DDTBia) * -1;
+    chanTruoc1.position.x = depth;
+    chanTruoc1.position.y = 0;
 
     const lenZ = DDTBia;
-    const lenX = rongK1 - depth;
+    const lenX = rongK1 - depth - DDTBia;
     const lenY = caoChan;
 
-    chan1.scale.set(1, 1, 1);
-    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(chan1);
+    chanTruoc1.scale.set(1, 1, 1);
+    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(chanTruoc1);
     const sizeBiaTrai = new THREE.Vector3();
     boundingBoxBiaTrai.getSize(sizeBiaTrai);
 
-    chan1.scale.x = lenX / sizeBiaTrai.x;
-    chan1.scale.y = lenY / sizeBiaTrai.y;
-    chan1.scale.z = lenZ / sizeBiaTrai.z;
+    chanTruoc1.scale.x = lenX / sizeBiaTrai.x;
+    chanTruoc1.scale.y = lenY / sizeBiaTrai.y;
+    chanTruoc1.scale.z = lenZ / sizeBiaTrai.z;
   };
 
-  const settingChan2 = (chan2) => {
-    chan2.position.z = (depth - DDTBia) * -1;
-    chan2.position.x = depth - DDTBia;
-    chan2.position.y = 0;
+  const settingChanTruoc2 = (chanTruoc2) => {
+    chanTruoc2.position.z = (depth - DDTBia) * -1;
+    chanTruoc2.position.x = depth - DDTBia;
+    chanTruoc2.position.y = 0;
 
-    const lenZ = rongK2 - depth + DDTBia;
+    const lenZ = rongK2 - depth;
     const lenX = DDTBia;
     const lenY = caoChan;
 
-    chan2.scale.set(1, 1, 1);
-    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(chan2);
+    chanTruoc2.scale.set(1, 1, 1);
+    let boundingBoxBiaTrai = new THREE.Box3().setFromObject(chanTruoc2);
     const sizeBiaTrai = new THREE.Vector3();
     boundingBoxBiaTrai.getSize(sizeBiaTrai);
 
-    chan2.scale.x = lenX / sizeBiaTrai.x;
-    chan2.scale.y = lenY / sizeBiaTrai.y;
-    chan2.scale.z = lenZ / sizeBiaTrai.z;
+    chanTruoc2.scale.x = lenX / sizeBiaTrai.x;
+    chanTruoc2.scale.y = lenY / sizeBiaTrai.y;
+    chanTruoc2.scale.z = lenZ / sizeBiaTrai.z;
+  };
+
+  const settingChanSau1 = (cSau1) => {
+    cSau1.position.z = 0.15 * -1;
+    cSau1.position.x = dayCot + DDTBia;
+    cSau1.position.y = 0;
+
+    const lenZ = DDTBia;
+    const lenX = rongK1 - 2 * DDTBia - dayCot;
+    const lenY = caoChan;
+
+    cSau1.scale.set(1, 1, 1);
+    let boundingBoxChanTruoc = new THREE.Box3().setFromObject(cSau1);
+    const sizeChanTruoc = new THREE.Vector3();
+    boundingBoxChanTruoc.getSize(sizeChanTruoc);
+
+    cSau1.scale.x = lenX / sizeChanTruoc.x;
+    cSau1.scale.y = lenY / sizeChanTruoc.y;
+    cSau1.scale.z = lenZ / sizeChanTruoc.z;
+  };
+
+  const settingChanSau2 = (cSau2) => {
+    cSau2.position.z = (rongCot + DDTBia) * -1;
+    cSau2.position.x = 0.15;
+    cSau2.position.y = 0;
+
+    const lenZ = rongK2 - 2 * DDTBia - rongCot;
+    const lenX = DDTBia;
+    const lenY = caoChan;
+
+    cSau2.scale.set(1, 1, 1);
+    let boundingBoxChanTruoc = new THREE.Box3().setFromObject(cSau2);
+    const sizeChanTruoc = new THREE.Vector3();
+    boundingBoxChanTruoc.getSize(sizeChanTruoc);
+
+    cSau2.scale.x = lenX / sizeChanTruoc.x;
+    cSau2.scale.y = lenY / sizeChanTruoc.y;
+    cSau2.scale.z = lenZ / sizeChanTruoc.z;
   };
 
   const settingXanNgang1 = (xNgang1) => {
@@ -546,10 +584,10 @@ function App3() {
       bia1 && settingBia1(bia1);
       bia2 && settingBia2(bia2);
 
-      chanTruoc1 && settingChan1(chanTruoc1);
-      chanTruoc2 && settingChan2(chanTruoc2);
-      chanSau1 && settingChan1(chanSau1);
-      chanSau2 && settingChan2(chanSau2);
+      chanTruoc1 && settingChanTruoc1(chanTruoc1);
+      chanTruoc2 && settingChanTruoc2(chanTruoc2);
+      chanSau1 && settingChanSau1(chanSau1);
+      chanSau2 && settingChanSau2(chanSau2);
 
       biaCot1 && settingBiaCot1(biaCot1);
       biaCot2 && settingBiaCot2(biaCot2);

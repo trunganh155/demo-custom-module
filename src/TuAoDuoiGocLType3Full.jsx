@@ -372,23 +372,23 @@ function App3() {
     cua1.scale.z = lenZ / sizeXSau.z;
   };
 
-  const settingCua2 = (cua2) => {
-    cua2.position.z = (depth + DDTBia) * -1;
-    cua2.position.x = depth;
-    cua2.position.y = caoChan;
+  const settingCua4 = (cua4) => {
+    cua4.position.z = (depth + DDTBia) * -1;
+    cua4.position.x = depth;
+    cua4.position.y = caoChan;
 
     const lenZ = rongK2 - depth - DDTBia;
     const lenX = DDTBia;
     const lenY = height - caoChan;
 
-    cua2.scale.set(1, 1, 1);
-    let boundingBoxXSau = new THREE.Box3().setFromObject(cua2);
+    cua4.scale.set(1, 1, 1);
+    let boundingBoxXSau = new THREE.Box3().setFromObject(cua4);
     const sizeXSau = new THREE.Vector3();
     boundingBoxXSau.getSize(sizeXSau);
 
-    cua2.scale.x = lenX / sizeXSau.x;
-    cua2.scale.y = lenY / sizeXSau.y;
-    cua2.scale.z = lenZ / sizeXSau.z;
+    cua4.scale.x = lenX / sizeXSau.x;
+    cua4.scale.y = lenY / sizeXSau.y;
+    cua4.scale.z = lenZ / sizeXSau.z;
   };
 
   useEffect(() => {
@@ -492,7 +492,7 @@ function App3() {
       const chanSau2 = md.getObjectByName('CHAN-SAU-2');
 
       const cua1 = md.getObjectByName('DOOR-1');
-      const cua2 = md.getObjectByName('DOOR-2');
+      const cua4 = md.getObjectByName('DOOR-4');
       const xNgang1_1 = md.getObjectByName('XAN-NGANG-1-1');
       const xNgang1_2 = md.getObjectByName('XAN-NGANG-1-2');
       const xNgang2_1 = md.getObjectByName('XAN-NGANG-2-1');
@@ -526,7 +526,7 @@ function App3() {
       truHaoGoc && settingTruHaoGoc(truHaoGoc);
 
       cua1 && settingCua1(cua1);
-      cua2 && settingCua2(cua2);
+      cua4 && settingCua4(cua4);
 
       const textureLoader = new THREE.TextureLoader();
       textureLoader.load('/images/TEXTURE.png', (newTexture) => {
