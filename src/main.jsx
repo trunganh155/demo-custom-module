@@ -73,6 +73,9 @@ import TuTVBoCongTreoTuong from './TuTVBoCongTreoTuong';
 import TuTVBoCongNew from './TuTVBoCongNew';
 import TuTVBoCongTreoTuongNew from './TuTVBoCongTreoTuongNew';
 
+import TuTVBoCongNewKhuyetCot from './TuTVBoCongNewKhuyetCot';
+import TuTVBoCongTreoTuongNewKhuyetCot from './TuTVBoCongTreoTuongNewKhuyetCot';
+
 import TuGiayDuoi from './TuGiayDuoi';
 import TuGiayTren from './TuGiayTren';
 
@@ -80,7 +83,7 @@ import MocTreoTuGiay from './MocTreoTuGiay';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TuAoCotNgang />
+    <TuTVBoCongTreoTuongNewKhuyetCot />
   </React.StrictMode>,
   document.getElementById('root')
 );

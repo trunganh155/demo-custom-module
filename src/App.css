@@ -47,7 +47,7 @@ button {
   top: 50px;
   z-index: 1000;
   padding: 8px;
-  background-color: #fefdfa;
+  background-color: transparent;
 
   height: 90vh;
   overflow: auto;
