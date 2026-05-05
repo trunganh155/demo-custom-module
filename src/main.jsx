@@ -62,6 +62,9 @@ import TuBepDungTranGocLType1FullKhuyetCot from './TuBepDungTranGocLType1FullKhu
 import KhoiBoCongTrai from './KhoiBoCongTrai';
 import KhoiBoCongPhai from './KhoiBoCongPhai';
 
+import KhoiBoCongTraiCoMatDa from './KhoiBoCongTraiCoMatDa';
+import KhoiBoCongPhaiCoMatDa from './KhoiBoCongPhaiCoMatDa';
+
 import TuGiayDonNgoi from './TuGiayDonNgoi';
 import TuGiayDonNgoiBoCong from './TuGiayDonNgoiBoCong';
 import TuGiayDonNgoiBoCongVachLam from './TuGiayDonNgoiBoCongVachLam';
@@ -83,7 +86,7 @@ import MocTreoTuGiay from './MocTreoTuGiay';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TuTVBoCongTreoTuongNewKhuyetCot />
+    <KhoiBoCongPhaiCoMatDa />
   </React.StrictMode>,
   document.getElementById('root')
 );
