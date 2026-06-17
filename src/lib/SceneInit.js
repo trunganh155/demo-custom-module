@@ -49,6 +49,7 @@ export default class SceneInit {
     this.camera.position.z = 0;
 
     this.scene.background = new THREE.Color(0xffffff);
+    this.scene.background = new THREE.Color(0x000000);
 
     // NOTE: Specify a canvas which is already created in the HTML.
     const canvas = document.getElementById(this.canvasId);

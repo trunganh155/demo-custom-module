@@ -84,9 +84,14 @@ import TuGiayTren from './TuGiayTren';
 
 import MocTreoTuGiay from './MocTreoTuGiay';
 
+import GiuongBuc from './GiuongBuc';
+import GiuongBucKhoiChinh from './GiuongBucKhoiChinh';
+import GiuongBucKhoiPhuCoHocKeo from './GiuongBucKhoiPhuCoHocKeo';
+import GiuongBucKhoiPhuCoCanhLat from './GiuongBucKhoiPhuCoCanhLat';
+
 ReactDOM.render(
   <React.StrictMode>
-    <KhoiBoCongPhaiCoMatDa />
+    <GiuongBucKhoiPhuCoCanhLat />
   </React.StrictMode>,
   document.getElementById('root')
 );
