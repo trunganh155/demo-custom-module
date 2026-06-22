@@ -86,12 +86,14 @@ import MocTreoTuGiay from './MocTreoTuGiay';
 
 import GiuongBuc from './GiuongBuc';
 import GiuongBucKhoiChinh from './GiuongBucKhoiChinh';
+
+import GiuongBucKhoiPhu from './GiuongBucKhoiPhu';
 import GiuongBucKhoiPhuCoHocKeo from './GiuongBucKhoiPhuCoHocKeo';
 import GiuongBucKhoiPhuCoCanhLat from './GiuongBucKhoiPhuCoCanhLat';
 
 ReactDOM.render(
   <React.StrictMode>
-    <GiuongBucKhoiPhuCoCanhLat />
+    <GiuongBucKhoiChinh />
   </React.StrictMode>,
   document.getElementById('root')
 );

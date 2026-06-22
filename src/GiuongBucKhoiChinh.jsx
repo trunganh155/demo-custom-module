@@ -239,11 +239,12 @@ function App4() {
   };
 
   const settingCanhLat3 = (canhLat3) => {
-    canhLat3.position.z = 0.07 * -1;
+    canhLat3.position.z = qtyFlipDoor < 3 ? 0 : 0.07 * -1;
 
-    canhLat3.position.y = height - DDTBia;
+    canhLat3.position.y = qtyFlipDoor < 3 ? 0 : height - DDTBia;
 
-    canhLat3.position.x = depth - qtyFlipDoor * wFlipDoor + wFlipDoor * 2;
+    canhLat3.position.x =
+      qtyFlipDoor < 3 ? 0 : depth - qtyFlipDoor * wFlipDoor + wFlipDoor * 2;
 
     const lenZ = qtyFlipDoor < 3 ? 0 : width / 2 - 0.07;
 
@@ -308,11 +309,12 @@ function App4() {
   };
 
   const settingMatHoc3 = (matHoc3) => {
-    matHoc3.position.z = (width - DDTBia) * -1;
+    matHoc3.position.z = qtyDrawer < 3 ? 0 : (width - DDTBia) * -1;
 
-    matHoc3.position.y = 0;
+    matHoc3.position.y = qtyDrawer < 3 ? 0 : 0;
 
-    matHoc3.position.x = depth - qtyDrawer * wDrawer + wDrawer * 2;
+    matHoc3.position.x =
+      qtyDrawer < 3 ? 0 : depth - qtyDrawer * wDrawer + wDrawer * 2;
 
     const lenZ = qtyDrawer < 3 ? 0 : DDTBia;
 
@@ -470,12 +472,14 @@ function App4() {
   };
 
   const settingXuongNgang5 = (xuongNgang5) => {
-    xuongNgang5.position.z = DDTBia * -1;
+    xuongNgang5.position.z = qtyFlipDoor < 3 ? 0 : DDTBia * -1;
 
-    xuongNgang5.position.y = 0;
+    xuongNgang5.position.y = qtyFlipDoor < 3 ? 0 : 0;
 
     xuongNgang5.position.x =
-      depth - qtyFlipDoor * wFlipDoor + wFlipDoor * 2 - DDTBia;
+      qtyFlipDoor < 3
+        ? 0
+        : depth - qtyFlipDoor * wFlipDoor + wFlipDoor * 2 - DDTBia;
 
     const lenZ = qtyFlipDoor < 3 ? 0 : width / 2 - 2 * DDTBia;
 
@@ -540,11 +544,12 @@ function App4() {
   };
 
   const settingXuongNgang6 = (xuongNgang6) => {
-    xuongNgang6.position.z = (width / 2) * -1;
+    xuongNgang6.position.z = qtyDrawer < 3 ? 0 : (width / 2) * -1;
 
-    xuongNgang6.position.y = 0;
+    xuongNgang6.position.y = qtyDrawer < 3 ? 0 : 0;
 
-    xuongNgang6.position.x = depth - (qtyDrawer - 2) * wDrawer - DDTBia;
+    xuongNgang6.position.x =
+      qtyDrawer < 3 ? 0 : depth - (qtyDrawer - 2) * wDrawer - DDTBia;
 
     const lenZ = qtyDrawer < 3 ? 0 : width / 2 - DDTBia;
 
@@ -609,11 +614,12 @@ function App4() {
   };
 
   const settingXuongNgangNho3 = (xuongNgangNho3) => {
-    xuongNgangNho3.position.z = DDTBia * -1;
+    xuongNgangNho3.position.z = qtyFlipDoor < 3 ? 0 : DDTBia * -1;
 
-    xuongNgangNho3.position.y = height - DDTBia - 0.103;
+    xuongNgangNho3.position.y = qtyFlipDoor < 3 ? 0 : height - DDTBia - 0.103;
 
-    xuongNgangNho3.position.x = depth - qtyFlipDoor * wFlipDoor + wFlipDoor * 2;
+    xuongNgangNho3.position.x =
+      qtyFlipDoor < 3 ? 0 : depth - qtyFlipDoor * wFlipDoor + wFlipDoor * 2;
 
     const lenZ = qtyFlipDoor < 3 ? 0 : width / 2 - 2 * DDTBia;
 
@@ -961,11 +967,11 @@ function App4() {
 
   //HOC KEO 3
   const settingRayPhai3 = (rayPhai3) => {
-    rayPhai3.position.z = (width - DDTBia - 0.45) * -1;
+    rayPhai3.position.z = qtyDrawer < 3 ? 0 : (width - DDTBia - 0.45) * -1;
 
-    rayPhai3.position.y = 0.03;
+    rayPhai3.position.y = qtyDrawer < 3 ? 0 : 0.03;
 
-    rayPhai3.position.x = depth - (qtyDrawer - 2) * wDrawer;
+    rayPhai3.position.x = qtyDrawer < 3 ? 0 : depth - (qtyDrawer - 2) * wDrawer;
 
     const lenZ = qtyDrawer < 3 ? 0 : 0.45;
 
@@ -984,11 +990,12 @@ function App4() {
   };
 
   const settingMatPhai3 = (matPhai3) => {
-    matPhai3.position.z = (width - DDTBia - dDrawer) * -1;
+    matPhai3.position.z = qtyDrawer < 3 ? 0 : (width - DDTBia - dDrawer) * -1;
 
-    matPhai3.position.y = 0.02;
+    matPhai3.position.y = qtyDrawer < 3 ? 0 : 0.02;
 
-    matPhai3.position.x = depth - (qtyDrawer - 2) * wDrawer + 0.0135;
+    matPhai3.position.x =
+      qtyDrawer < 3 ? 0 : depth - (qtyDrawer - 2) * wDrawer + 0.0135;
 
     const lenZ = qtyDrawer < 3 ? 0 : dDrawer;
 
@@ -1007,11 +1014,12 @@ function App4() {
   };
 
   const settingRayTrai3 = (rayTrai3) => {
-    rayTrai3.position.z = (width - DDTBia - 0.45) * -1;
+    rayTrai3.position.z = qtyDrawer < 3 ? 0 : (width - DDTBia - 0.45) * -1;
 
-    rayTrai3.position.y = 0.03;
+    rayTrai3.position.y = qtyDrawer < 3 ? 0 : 0.03;
 
-    rayTrai3.position.x = depth - (qtyDrawer - 3) * wDrawer - DDTBia - 0.0135;
+    rayTrai3.position.x =
+      qtyDrawer < 3 ? 0 : depth - (qtyDrawer - 3) * wDrawer - DDTBia - 0.0135;
 
     const lenZ = qtyDrawer < 3 ? 0 : 0.45;
 
@@ -1030,12 +1038,14 @@ function App4() {
   };
 
   const settingMatTrai3 = (matTrai3) => {
-    matTrai3.position.z = (width - DDTBia - dDrawer) * -1;
+    matTrai3.position.z = qtyDrawer < 3 ? 0 : (width - DDTBia - dDrawer) * -1;
 
-    matTrai3.position.y = 0.02;
+    matTrai3.position.y = qtyDrawer < 3 ? 0 : 0.02;
 
     matTrai3.position.x =
-      depth - (qtyDrawer - 3) * wDrawer - DDTBia - 0.0135 - DDTBia;
+      qtyDrawer < 3
+        ? 0
+        : depth - (qtyDrawer - 3) * wDrawer - DDTBia - 0.0135 - DDTBia;
 
     const lenZ = qtyDrawer < 3 ? 0 : dDrawer;
 
@@ -1054,11 +1064,12 @@ function App4() {
   };
 
   const settingMatTruoc3 = (matTruoc3) => {
-    matTruoc3.position.z = (width - DDTBia - DDTBia) * -1;
+    matTruoc3.position.z = qtyDrawer < 3 ? 0 : (width - DDTBia - DDTBia) * -1;
 
-    matTruoc3.position.y = 0.02 + 0.012 + DDTHau;
+    matTruoc3.position.y = qtyDrawer < 3 ? 0 : 0.02 + 0.012 + DDTHau;
 
-    matTruoc3.position.x = depth - (qtyDrawer - 2) * wDrawer + DDTBia + 0.0135;
+    matTruoc3.position.x =
+      qtyDrawer < 3 ? 0 : depth - (qtyDrawer - 2) * wDrawer + DDTBia + 0.0135;
 
     const lenZ = qtyDrawer < 3 ? 0 : DDTBia;
 
@@ -1077,11 +1088,12 @@ function App4() {
   };
 
   const settingMatSau3 = (matSau3) => {
-    matSau3.position.z = (width - DDTBia - dDrawer) * -1;
+    matSau3.position.z = qtyDrawer < 3 ? 0 : (width - DDTBia - dDrawer) * -1;
 
-    matSau3.position.y = 0.02 + 0.012 + DDTHau;
+    matSau3.position.y = qtyDrawer < 3 ? 0 : 0.02 + 0.012 + DDTHau;
 
-    matSau3.position.x = depth - (qtyDrawer - 2) * wDrawer + DDTBia + 0.0135;
+    matSau3.position.x =
+      qtyDrawer < 3 ? 0 : depth - (qtyDrawer - 2) * wDrawer + DDTBia + 0.0135;
 
     const lenZ = qtyDrawer < 3 ? 0 : DDTBia;
 
@@ -1100,12 +1112,14 @@ function App4() {
   };
 
   const settingDayHocKeo3 = (dayHocKeo3) => {
-    dayHocKeo3.position.z = (width - DDTBia - dDrawer) * -1;
+    dayHocKeo3.position.z = qtyDrawer < 3 ? 0 : (width - DDTBia - dDrawer) * -1;
 
-    dayHocKeo3.position.y = 0.02 + 0.012;
+    dayHocKeo3.position.y = qtyDrawer < 3 ? 0 : 0.02 + 0.012;
 
     dayHocKeo3.position.x =
-      depth - (qtyDrawer - 2) * wDrawer + DDTBia + 0.0135 - DDTBia / 2;
+      qtyDrawer < 3
+        ? 0
+        : depth - (qtyDrawer - 2) * wDrawer + DDTBia + 0.0135 - DDTBia / 2;
 
     const lenZ = qtyDrawer < 3 ? 0 : dDrawer;
 
@@ -1231,9 +1245,9 @@ function App4() {
       const FLW_H_XUONG_NGANG_NHO_3 = md.getObjectByName(
         'FLW-H-XUONG-NGANG-NHO-3'
       );
-      const FGR_H_CANH_LAT_1 = md.getObjectByName('FGR-H-CANH-LAT-1');
-      const FGR_H_CANH_LAT_2 = md.getObjectByName('FGR-H-CANH-LAT-2');
-      const FGR_H_CANH_LAT_3 = md.getObjectByName('FGR-H-CANH-LAT-3');
+      const SGR_H_CANH_LAT_1 = md.getObjectByName('SGR-H-CANH-LAT-1');
+      const SGR_H_CANH_LAT_2 = md.getObjectByName('SGR-H-CANH-LAT-2');
+      const SGR_H_CANH_LAT_3 = md.getObjectByName('SGR-H-CANH-LAT-3');
       const SGR_H_VAT_PHAI = md.getObjectByName('SGR-H-VAT-PHAI');
       const SGR_H_VAT_TRAI_1_1 = md.getObjectByName('SGR-H-VAT-TRAI-1-1');
       const SGR_H_VAT_TRAI_1_2 = md.getObjectByName('SGR-H-VAT-TRAI-1-2');
@@ -1251,7 +1265,7 @@ function App4() {
       const SLW_H_MAT_HOC_2 = md.getObjectByName('SLW-H-MAT-HOC-2');
       const SLW_H_MAT_HOC_3 = md.getObjectByName('SLW-H-MAT-HOC-3');
 
-      const DAY_HK_1 = md.getObjectByName('DAY-HK-1');
+      const SGR_H_DAY_HK_1 = md.getObjectByName('SGR-H-DAY-HK-1');
       const MAT_PHAI_SLW_H_1 = md.getObjectByName('MAT-PHAI-SLW-H-1');
       const MAT_SAU_FLW_H_1 = md.getObjectByName('MAT-SAU-FLW-H-1');
       const MAT_TRAI_SLW_H_1 = md.getObjectByName('MAT-TRAI-SLW-H-1');
@@ -1259,7 +1273,7 @@ function App4() {
       const RAY_PHAI_1 = md.getObjectByName('RAY-PHAI-1');
       const RAY_TRAI_1 = md.getObjectByName('RAY-TRAI-1');
 
-      const DAY_HK_2 = md.getObjectByName('DAY-HK-2');
+      const SGR_H_DAY_HK_2 = md.getObjectByName('SGR-H-DAY-HK-2');
       const MAT_PHAI_SLW_H_2 = md.getObjectByName('MAT-PHAI-SLW-H-2');
       const MAT_SAU_FLW_H_2 = md.getObjectByName('MAT-SAU-FLW-H-2');
       const MAT_TRAI_SLW_H_2 = md.getObjectByName('MAT-TRAI-SLW-H-2');
@@ -1267,7 +1281,7 @@ function App4() {
       const RAY_PHAI_2 = md.getObjectByName('RAY-PHAI-2');
       const RAY_TRAI_2 = md.getObjectByName('RAY-TRAI-2');
 
-      const DAY_HK_3 = md.getObjectByName('DAY-HK-3');
+      const SGR_H_DAY_HK_3 = md.getObjectByName('SGR-H-DAY-HK-3');
       const MAT_PHAI_SLW_H_3 = md.getObjectByName('MAT-PHAI-SLW-H-3');
       const MAT_SAU_FLW_H_3 = md.getObjectByName('MAT-SAU-FLW-H-3');
       const MAT_TRAI_SLW_H_3 = md.getObjectByName('MAT-TRAI-SLW-H-3');
@@ -1282,9 +1296,9 @@ function App4() {
       SGR_H_VAT_TRAI_1_1 && settingVatTrai1_1(SGR_H_VAT_TRAI_1_1);
       SGR_H_VAT_TRAI_1_2 && settingVatTrai1_2(SGR_H_VAT_TRAI_1_2);
       SGR_H_VAT_PHAI && settingVatPhai(SGR_H_VAT_PHAI);
-      FGR_H_CANH_LAT_1 && settingCanhLat1(FGR_H_CANH_LAT_1);
-      FGR_H_CANH_LAT_2 && settingCanhLat2(FGR_H_CANH_LAT_2);
-      FGR_H_CANH_LAT_3 && settingCanhLat3(FGR_H_CANH_LAT_3);
+      SGR_H_CANH_LAT_1 && settingCanhLat1(SGR_H_CANH_LAT_1);
+      SGR_H_CANH_LAT_2 && settingCanhLat2(SGR_H_CANH_LAT_2);
+      SGR_H_CANH_LAT_3 && settingCanhLat3(SGR_H_CANH_LAT_3);
       SLW_H_MAT_HOC_1 && settingMatHoc1(SLW_H_MAT_HOC_1);
       SLW_H_MAT_HOC_2 && settingMatHoc2(SLW_H_MAT_HOC_2);
       SLW_H_MAT_HOC_3 && settingMatHoc3(SLW_H_MAT_HOC_3);
@@ -1302,7 +1316,7 @@ function App4() {
       FLW_H_XUONG_NGANG_NHO_3 && settingXuongNgangNho3(FLW_H_XUONG_NGANG_NHO_3);
       FLW_H_CHAN_GIUONG_1 && settingChanGiuong1(FLW_H_CHAN_GIUONG_1);
 
-      DAY_HK_1 && settingDayHocKeo1(DAY_HK_1);
+      SGR_H_DAY_HK_1 && settingDayHocKeo1(SGR_H_DAY_HK_1);
       MAT_PHAI_SLW_H_1 && settingMatPhai1(MAT_PHAI_SLW_H_1);
       MAT_SAU_FLW_H_1 && settingMatSau1(MAT_SAU_FLW_H_1);
       MAT_TRAI_SLW_H_1 && settingMatTrai1(MAT_TRAI_SLW_H_1);
@@ -1310,7 +1324,7 @@ function App4() {
       RAY_PHAI_1 && settingRayPhai1(RAY_PHAI_1);
       RAY_TRAI_1 && settingRayTrai1(RAY_TRAI_1);
 
-      DAY_HK_2 && settingDayHocKeo2(DAY_HK_2);
+      SGR_H_DAY_HK_2 && settingDayHocKeo2(SGR_H_DAY_HK_2);
       MAT_PHAI_SLW_H_2 && settingMatPhai2(MAT_PHAI_SLW_H_2);
       MAT_SAU_FLW_H_2 && settingMatSau2(MAT_SAU_FLW_H_2);
       MAT_TRAI_SLW_H_2 && settingMatTrai2(MAT_TRAI_SLW_H_2);
@@ -1318,7 +1332,7 @@ function App4() {
       RAY_PHAI_2 && settingRayPhai2(RAY_PHAI_2);
       RAY_TRAI_2 && settingRayTrai2(RAY_TRAI_2);
 
-      DAY_HK_3 && settingDayHocKeo3(DAY_HK_3);
+      SGR_H_DAY_HK_3 && settingDayHocKeo3(SGR_H_DAY_HK_3);
       MAT_PHAI_SLW_H_3 && settingMatPhai3(MAT_PHAI_SLW_H_3);
       MAT_SAU_FLW_H_3 && settingMatSau3(MAT_SAU_FLW_H_3);
       MAT_TRAI_SLW_H_3 && settingMatTrai3(MAT_TRAI_SLW_H_3);
